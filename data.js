@@ -50,7 +50,7 @@ window.SITE_DATA = {
     { label: '学会発表',               value: 12, unit: '件' },
     { label: '受賞',                   value: 3,  unit: '件' },
     { label: '運営したゲームジャム',   value: 4,  unit: '回', note: '＋予備実験' },
-    { label: 'ブラウザで遊べる公開作品', value: 24, unit: '本', note: 'PLAYCEより' }
+    { label: 'ブラウザで遊べる公開作品', value: 23, unit: '本', note: 'PLAYCEより' }
   ],
 
   /* ── 学会発表（§6・新しい順）───────────────────────────────
@@ -271,7 +271,7 @@ window.SITE_DATA = {
       title: 'PLAYCE（ゲーム制作・プログラミング学習アーカイブ）',
       kind: 'Webサイト',
       period: '2026〜',
-      image: '',
+      image: 'https://109mei.github.io/game-learning-archive/images/og-default.png',
       desc: '',
       url: 'https://109mei.github.io/game-learning-archive/'
     },
@@ -285,7 +285,7 @@ window.SITE_DATA = {
     {
       title: 'OneButtonGames ランチャー',
       kind: 'ゲーム',
-      image: '',
+      image: 'https://109mei.github.io/game-learning-archive/images/games/obg-launcher.png',
       desc: '高校生・大学生による1ボタンゲーム10作品を収録。IDERIA × 純真高等学校 × 九州情報大学。',
       url: ''
     },
