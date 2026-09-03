@@ -181,7 +181,7 @@ button{font:inherit}
 }
 .alti-read b{display:block; font-size:16px; color:var(--fg); font-variant-numeric:tabular-nums; letter-spacing:.02em}
 .alti-year{display:block; color:var(--accent); font-size:12px; min-height:1em}
-:root.summit .alti-fill{background:linear-gradient(180deg,var(--accent-2),#fff)}
+:root.at-summit .alti-fill{background:linear-gradient(180deg,var(--accent-2),#fff)}
 @media (max-width:1249px){
   .altimeter{right:12px; bottom:14px; top:auto; transform:none}
   .alti-rail{display:none}
@@ -401,8 +401,8 @@ a.card{text-decoration:none; color:inherit}
   display:inline-flex; align-items:center; gap:10px; font-size:13px; letter-spacing:.14em;
   color:var(--muted); border:1px dashed var(--line-2); border-radius:999px; padding:8px 18px;
 }
-:root.summit .summit-mark{color:var(--fg); border-style:solid; border-color:var(--accent-2)}
-:root.summit .summit-mark .star{color:var(--accent-2)}
+:root.at-summit .summit-mark{color:var(--fg); border-style:solid; border-color:var(--accent-2)}
+:root.at-summit .summit-mark .star{color:var(--accent-2)}
 
 .site-footer{border-top:1px solid var(--line); margin-top:36px; padding:24px 0 40px; font-size:12.5px; color:var(--muted)}
 .site-footer .wrap{display:flex; justify-content:space-between; gap:10px 20px; flex-wrap:wrap}
@@ -1177,7 +1177,7 @@ kbd{
     altFill.style.height = (alt / MAX_ALT * 100) + '%';
     altLayer.textContent = layerOf(alt);
     paintSky(alt);
-    root.classList.toggle('summit', alt >= MAX_ALT - 100);
+    root.classList.toggle('at-summit', alt >= MAX_ALT - 100);
 
     var year = '', line = window.innerHeight * 0.5;
     var tl = $('#timeline').getBoundingClientRect();
