@@ -41,7 +41,7 @@ window.SITE_DATA = {
      url を空にするとその項目は表示されません（リンク切れを作らないため）。 */
   links: {
     github:  { label: 'GitHub',       url: 'https://github.com/109mei' },
-    archive: { label: '学習アーカイブ', url: 'https://109mei.github.io/game-learning-archive/' },
+    archive: { label: 'PLAYCE（学習アーカイブ）', url: 'https://109mei.github.io/game-learning-archive/' },
     ideria:  { label: 'IDERIA公式',    url: 'https://109mei.github.io/ideria-official/' }
   },
 
@@ -50,7 +50,7 @@ window.SITE_DATA = {
     { label: '学会発表',               value: 12, unit: '件' },
     { label: '受賞',                   value: 3,  unit: '件' },
     { label: '運営したゲームジャム',   value: 4,  unit: '回', note: '＋予備実験' },
-    { label: 'ブラウザで遊べる公開作品', value: 24, unit: '本', note: '学習アーカイブより' }
+    { label: 'ブラウザで遊べる公開作品', value: 24, unit: '本', note: 'PLAYCEより' }
   ],
 
   /* ── 学会発表（§6・新しい順）───────────────────────────────
@@ -268,7 +268,7 @@ window.SITE_DATA = {
      url が空のものはリンクを出さない（リンク切れを作らないため） */
   works: [
     {
-      title: 'ゲーム制作・プログラミング学習アーカイブ',
+      title: 'PLAYCE（ゲーム制作・プログラミング学習アーカイブ）',
       kind: 'Webサイト',
       period: '2026〜',
       image: '',
@@ -302,7 +302,7 @@ window.SITE_DATA = {
      url が空のカードは表示しない（2件とも空ならセクションごと非表示） */
   relatedSites: [
     {
-      name: 'ゲーム制作・プログラミング学習アーカイブ',
+      name: 'PLAYCE（ゲーム制作・プログラミング学習アーカイブ）',
       desc: '制作した作品を遊んで・コードを見て学べるサイト',
       url: 'https://109mei.github.io/game-learning-archive/'
     },
@@ -402,7 +402,7 @@ window.SITE_DATA = {
       when: '2026-08〜',
       alt: 8550,
       type: 'work',
-      title: '学習アーカイブサイトを公開',
+      title: 'PLAYCE（学習アーカイブ）を公開',
       link: { label: 'サイトを見る', url: 'https://109mei.github.io/game-learning-archive/' }
     },
     {
