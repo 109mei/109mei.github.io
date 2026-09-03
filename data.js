@@ -7,6 +7,14 @@
  */
 window.SITE_DATA = {
 
+  /* ── サイト情報（§3-9 / §8-4）─────────────────────────────────
+     updated: フッターに出る最終更新日。内容を更新したらここも更新する */
+  siteMeta: {
+    updated: '2026-09-03',
+    siteUrl: 'https://109mei.github.io/',
+    ogImage: 'assets/og.png'
+  },
+
   /* ── プロフィール（§3-1 / §3-2） ───────────────────────────── */
   profile: {
     name: '永野 斗遠',
@@ -170,36 +178,42 @@ window.SITE_DATA = {
       title: 'ゲーム制作・プログラミング学習アーカイブ',
       kind: 'Webサイト',
       period: '2026〜',
+      image: '',
       desc: '',
       url: 'https://109mei.github.io/game-learning-archive/'
     },
     {
       title: 'チョコパキ！',
       kind: 'ゲーム',
+      image: '',
       desc: 'Python + Pygame の対戦ゲーム。おもちゃ化の試作も行った。',
       url: 'https://109mei.github.io/game-learning-archive/games/ideria-chokopaki/'
     },
     {
       title: 'OneButtonGames ランチャー',
       kind: 'ゲーム',
+      image: '',
       desc: '高校生・大学生による1ボタンゲーム10作品を収録。IDERIA × 純真高等学校 × 九州情報大学。',
       url: ''
     },
     {
       title: 'ハチ避け',
       kind: 'ゲーム',
+      image: '',
       desc: '十人十色ゲームコンテスト出品作。',
       url: 'https://109mei.github.io/game-learning-archive/games/contest-hachi-yoke/'
     },
     {
       title: 'IDERIAロゴ／ゲーム学会 第24回全国大会 テーマポスター',
       kind: 'デザイン',
+      image: '',
       desc: 'ロゴと大会テーマポスターのデザイン。',
       url: ''
     },
     {
       title: 'しまっぴー先生の覚えてクイズ／ひらがなUNO／オセロカードゲーム試作',
       kind: '教材・ゲーム',
+      image: '',
       desc: 'IDERIA制作。「しまっぴー先生の覚えてクイズ」は TyranoScript 製。',
       url: ''
     }
@@ -225,30 +239,35 @@ window.SITE_DATA = {
   timeline: [
     {
       when: '2024年度',
+      alt: 3000,
       type: 'activity',
       title: '十人十色ゲームコンテスト実施',
       detail: '九州情報大学'
     },
     {
       when: '2024年度',
+      alt: 3450,
       type: 'award',
       title: '「チョコパキ！」が第21回ゲームコンペ 優秀賞',
       detail: '表彰式 2024-03-02（第22回全国大会）'
     },
     {
       when: '2025-03-18',
+      alt: 3900,
       type: 'activity',
       title: '福岡県立嘉穂総合高等学校で1日完結型ゲームジャム試行',
       detail: '母校での予備実験'
     },
     {
       when: '2025-05〜07',
+      alt: 4400,
       type: 'activity',
       title: '九州情報大学 学部生対象ゲームジャムを2日程で実施',
       detail: '第1回・第2回'
     },
     {
       when: '2025-11',
+      alt: 4850,
       type: 'activity',
       title: '純真高等学校 eスポーツ部でゲームジャム実施',
       detail: '第3回・高大連携',
@@ -256,51 +275,60 @@ window.SITE_DATA = {
     },
     {
       when: '2025-12',
+      alt: 5300,
       type: 'activity',
       title: '純真高等学校 追加制作サポート'
     },
     {
       when: '2026-01-21',
+      alt: 5750,
       type: 'activity',
       title: '純真高等学校でVR 3Dモデル制作体験会'
     },
     {
       when: '2026-01-25',
+      alt: 6250,
       type: 'work',
       title: 'OneButtonGames プロジェクト始動',
       detail: '企画書'
     },
     {
       when: '2026-02-08',
+      alt: 6700,
       type: 'award',
       title: '令和の都だざいふ 世界に羽ばたく人材育成表彰',
       detail: '2年連続'
     },
     {
       when: '2026-02-28〜03-01',
+      alt: 7150,
       type: 'presentation',
       title: 'ゲーム学会 第24回全国大会で発表4件',
       detail: '九州情報大学開催'
     },
     {
       when: '2026-07-10',
+      alt: 7600,
       type: 'presentation',
       title: '「ゲームと健康科学」第2回研究会で発表'
     },
     {
       when: '2026-08-21',
+      alt: 8100,
       type: 'activity',
       title: '夏の集中講義「ゲームプログラミング」で第4回ゲームジャム実施',
       detail: '8-24 改良日'
     },
     {
       when: '2026-08〜',
+      alt: 8550,
       type: 'work',
       title: '学習アーカイブサイトを公開',
       link: { label: 'サイトを見る', url: 'https://109mei.github.io/game-learning-archive/' }
     },
     {
       when: '2026-09-05',
+      alt: 9000,
       type: 'presentation',
       title: '「ゲームと健康科学」第3回研究会で発表2件',
       upcomingUntil: '2026-09-05'

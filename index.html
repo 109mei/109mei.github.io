@@ -4,197 +4,300 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>永野 斗遠 — ポートフォリオ</title>
-<meta name="description" content="永野斗遠（九州情報大学大学院 荒平研究室／制作団体IDERIA代表）のポートフォリオ。教育用ゲームジャム研究・ゲーム制作・高大連携の記録。">
+<meta name="description" content="永野斗遠（九州情報大学大学院 荒平研究室／制作団体IDERIA代表）のポートフォリオ。教育用ゲームジャム研究・ゲーム制作・高大連携の記録。学会発表7件・受賞2件。">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#070c1f">
+<link rel="canonical" href="https://109mei.github.io/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="永野 斗遠 ポートフォリオ">
+<meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="永野 斗遠 — ポートフォリオ">
-<meta property="og:description" content="教育用ゲームジャム研究・ゲーム制作・高大連携。学会発表と制作物の記録。">
+<meta property="og:description" content="教育用ゲームジャム研究・ゲーム制作・高大連携。学会発表7件・受賞2件の記録。">
 <meta property="og:url" content="https://109mei.github.io/">
+<meta property="og:image" content="https://109mei.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="永野 斗遠 ポートフォリオ — 夜空を背景にしたタイトル画像">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="永野 斗遠 — ポートフォリオ">
+<meta name="twitter:description" content="教育用ゲームジャム研究・ゲーム制作・高大連携。学会発表7件・受賞2件の記録。">
+<meta name="twitter:image" content="https://109mei.github.io/assets/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070c1f'/%3E%3Cpath d='M16 6l2.2 6.4L25 14l-5.4 3.1L20.8 24 16 20.4 11.2 24l1.2-6.9L7 14l6.8-1.6z' fill='%23ffd479'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <style>
-/* ===== tokens ============================================================ */
+/* =========================================================================
+   0. トークン
+   ダーク基調。既定はOSの設定に従い、[data-theme] で上書きできる。
+   ========================================================================= */
 :root{
   --bg:#eef3fc; --bg-2:#ffffff; --bg-3:#e3eaf8;
-  --fg:#0f1a33; --muted:#4c5a7c; --line:rgba(15,26,51,.14); --line-2:rgba(15,26,51,.30);
-  --accent:#1f57c3; --accent-2:#9a6207; --ring:#1f57c3;
+  --fg:#0f1a33; --muted:#4c5a7c; --line:rgba(15,26,51,.16); --line-2:rgba(15,26,51,.32);
+  --accent:#1f57c3; --accent-2:#9a6207; --ring:#1f57c3; --on-accent:#fff;
+  --c-presentation:#17558f; --c-award:#7d4e05; --c-activity:#12604c; --c-work:#5f2f8c;
   --sky-1:#dbe7fb; --sky-2:#f4f7ff;
-  --c-presentation:#1f6fbf; --c-award:#9a6207; --c-activity:#1f7a63; --c-work:#7a3fb0;
+  --art-bg:#e6edfb; --art-line:rgba(15,26,51,.18);
   --shadow:0 1px 2px rgba(15,26,51,.06), 0 8px 24px rgba(15,26,51,.07);
-  --radius:14px; --maxw:1000px;
+  --radius:14px; --maxw:1000px; --hdr:60px;
+  --tap:44px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#070c1f; --bg-2:#0e1633; --bg-3:#131e42;
-    --fg:#e9edff; --muted:#9fabd2; --line:rgba(233,237,255,.14); --line-2:rgba(233,237,255,.30);
-    --accent:#8dc6ff; --accent-2:#ffd479; --ring:#8dc6ff;
-    --sky-1:#0a1130; --sky-2:#070c1f;
+    --fg:#e9edff; --muted:#a3aed3; --line:rgba(233,237,255,.16); --line-2:rgba(233,237,255,.32);
+    --accent:#8dc6ff; --accent-2:#ffd479; --ring:#8dc6ff; --on-accent:#08122b;
     --c-presentation:#8dc6ff; --c-award:#ffd479; --c-activity:#6fe0bf; --c-work:#d3aaff;
+    --sky-1:#0a1130; --sky-2:#070c1f;
+    --art-bg:#0b132c; --art-line:rgba(233,237,255,.18);
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
   }
 }
 :root[data-theme="dark"]{
   --bg:#070c1f; --bg-2:#0e1633; --bg-3:#131e42;
-  --fg:#e9edff; --muted:#9fabd2; --line:rgba(233,237,255,.14); --line-2:rgba(233,237,255,.30);
-  --accent:#8dc6ff; --accent-2:#ffd479; --ring:#8dc6ff;
-  --sky-1:#0a1130; --sky-2:#070c1f;
+  --fg:#e9edff; --muted:#a3aed3; --line:rgba(233,237,255,.16); --line-2:rgba(233,237,255,.32);
+  --accent:#8dc6ff; --accent-2:#ffd479; --ring:#8dc6ff; --on-accent:#08122b;
   --c-presentation:#8dc6ff; --c-award:#ffd479; --c-activity:#6fe0bf; --c-work:#d3aaff;
+  --sky-1:#0a1130; --sky-2:#070c1f;
+  --art-bg:#0b132c; --art-line:rgba(233,237,255,.18);
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
 }
 
-/* ===== base ============================================================== */
+/* =========================================================================
+   1. 基本
+   ========================================================================= */
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0; color:var(--fg);
-  background:linear-gradient(180deg,var(--sky-2) 0%,var(--sky-1) 45%,var(--bg) 100%) fixed, var(--bg);
+  margin:0; color:var(--fg); background:var(--bg);
   font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",Meiryo,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  font-size:16px; line-height:1.75; letter-spacing:.01em;
-  -webkit-font-smoothing:antialiased;
+  font-size:16px; line-height:1.75; letter-spacing:.01em; -webkit-font-smoothing:antialiased;
 }
-img{max-width:100%}
+/* 空（高度で色が変わる。JSが --sky-1/--sky-2 を書き換える） */
+#sky{
+  position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:linear-gradient(180deg, var(--sky-2) 0%, var(--sky-1) 55%, var(--bg) 100%);
+  transition:background .5s linear;
+}
+#stars{position:fixed; inset:0; z-index:-1; pointer-events:none; transition:opacity .4s ease}
+:root[data-theme="light"] #stars{opacity:0}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]) #stars{opacity:0} }
+
+img{max-width:100%; height:auto}
 a{color:var(--accent); text-decoration-thickness:1px; text-underline-offset:3px}
 a:hover{text-decoration-thickness:2px}
+a:active{opacity:.7}
 :focus-visible{outline:2px solid var(--ring); outline-offset:3px; border-radius:6px}
 h1,h2,h3{line-height:1.35; letter-spacing:.02em; margin:0}
 ul,ol{margin:0; padding:0; list-style:none}
 p{margin:0}
+button{font:inherit}
 .tnum{font-variant-numeric:tabular-nums}
+.vh{position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+.wrap{width:min(100% - 2rem, var(--maxw)); margin-inline:auto}
+/* grid/flex の子の min-width:auto を解除。280px幅でもカードが親を超えないようにする */
+.cards > *, .ach-list > *, .linklist > *, .stats > *, .tools > *,
+.ach > *, .card-body > *, .rel-card h3 > *, .tools-row > *{ min-width:0 }
+@media (min-width:480px){ .wrap{width:min(100% - 2.5rem, var(--maxw))} }
 
-#stars{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:1; transition:opacity .4s ease}
-:root[data-theme="light"] #stars{opacity:0}
-@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]) #stars{opacity:0} }
-
-.skip{position:absolute; left:-9999px; top:0; z-index:100; background:var(--bg-2); color:var(--fg); padding:10px 16px; border-radius:0 0 10px 0}
+.skip{position:absolute; left:-9999px; top:0; z-index:120; background:var(--bg-2); color:var(--fg); padding:12px 18px; border-radius:0 0 10px 0}
 .skip:focus{left:0}
 
-.wrap{width:min(100% - 2.5rem, var(--maxw)); margin-inline:auto}
+/* データ読み込み失敗の告知（§8-3） */
+.fatal{
+  margin:0; padding:18px 20px; background:var(--bg-2); border:1px solid var(--line-2);
+  border-left:4px solid var(--c-award); border-radius:var(--radius); font-size:15px; box-shadow:var(--shadow);
+}
+.fatal code{font-size:13px}
 
-/* ===== header ============================================================ */
+/* =========================================================================
+   2. ヘッダー / ナビ
+   ========================================================================= */
 .site-header{
-  position:sticky; top:0; z-index:40;
-  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  background:color-mix(in srgb, var(--bg) 78%, transparent);
+  position:sticky; top:0; z-index:60;
+  background:var(--bg);                                   /* フォールバック（§8-1）*/
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
   border-bottom:1px solid var(--line);
 }
-.site-header .wrap{display:flex; align-items:center; gap:14px; min-height:56px}
-.brand{font-weight:700; letter-spacing:.06em; white-space:nowrap; text-decoration:none; color:var(--fg)}
-.brand small{display:block; font-size:10px; font-weight:500; letter-spacing:.18em; color:var(--muted); line-height:1}
-.nav{flex:1; display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none}
-.nav::-webkit-scrollbar{display:none}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)){
+  .site-header{ backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px) }
+}
+.site-header .wrap{display:flex; align-items:center; gap:10px; min-height:var(--hdr)}
+.brand{display:flex; align-items:baseline; gap:10px; font-weight:700; letter-spacing:.05em;
+  white-space:nowrap; text-decoration:none; color:var(--fg); padding:6px 2px}
+.brand .en{font-size:12px; font-weight:600; letter-spacing:.16em; color:var(--muted); display:none}
+@media (min-width:900px){ .brand .en{display:inline} }
+
+.nav{flex:1; display:none; gap:2px; justify-content:flex-end}
 .nav a{
   color:var(--muted); text-decoration:none; font-size:13.5px; white-space:nowrap;
-  padding:7px 10px; border-radius:999px;
+  padding:10px 11px; border-radius:999px; display:inline-flex; align-items:center;
 }
-.nav a:hover,.nav a:focus-visible{color:var(--fg); background:var(--bg-3)}
-.theme-toggle{
-  flex:none; width:38px; height:38px; border-radius:50%; cursor:pointer;
-  border:1px solid var(--line); background:var(--bg-2); color:var(--fg); font-size:16px; line-height:1;
-}
-.theme-toggle:hover{border-color:var(--line-2)}
+.nav a:hover{color:var(--fg); background:var(--bg-3)}
+.nav a[aria-current="true"]{color:var(--fg); background:var(--bg-3); box-shadow:inset 0 0 0 1px var(--line-2)}
+@media (min-width:900px){ .nav{display:flex} }
 
-/* ===== altimeter ========================================================= */
+.icon-btn{
+  flex:none; width:var(--tap); height:var(--tap); border-radius:50%; cursor:pointer;
+  border:1px solid var(--line-2); background:var(--bg-2); color:var(--fg);
+  font-size:17px; line-height:1; display:inline-flex; align-items:center; justify-content:center;
+}
+.icon-btn:hover{border-color:var(--accent)}
+.icon-btn:active{transform:scale(.94)}
+#menuBtn{margin-left:auto}
+@media (min-width:900px){ #menuBtn{display:none} }
+
+/* スマホのメニューパネル（横スクロールで隠さない。§3-0） */
+.menu{
+  position:fixed; inset:var(--hdr) 0 auto 0; z-index:59;
+  background:var(--bg-2); border-bottom:1px solid var(--line-2); box-shadow:var(--shadow);
+  padding:10px max(1rem, calc((100% - var(--maxw))/2)) 16px;
+}
+.menu[hidden]{display:none}
+.menu ul{display:grid; gap:4px}
+.menu a{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  min-height:var(--tap); padding:8px 14px; border-radius:10px;
+  text-decoration:none; color:var(--fg); font-size:15px; font-weight:600;
+}
+.menu a:hover{background:var(--bg-3)}
+.menu a[aria-current="true"]{background:var(--bg-3); box-shadow:inset 0 0 0 1px var(--line-2)}
+.menu a .alt{font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+.menu-backdrop{position:fixed; inset:0; z-index:58; background:rgba(0,0,0,.35)}
+.menu-backdrop[hidden]{display:none}
+
+/* =========================================================================
+   3. 高度メーター / トップへ戻る
+   ========================================================================= */
 .altimeter{
-  position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:30;
+  position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:50;
   display:flex; align-items:center; gap:10px; pointer-events:none;
 }
-.alti-rail{width:3px; height:min(46vh,320px); border-radius:2px; background:var(--line); position:relative; overflow:hidden}
-.alti-fill{position:absolute; left:0; right:0; bottom:0; height:0%; background:linear-gradient(180deg,var(--accent),var(--accent-2)); transition:height .12s linear}
+.alti-rail{width:3px; height:min(44vh,300px); border-radius:2px; background:var(--line); position:relative; overflow:hidden}
+.alti-fill{position:absolute; left:0; right:0; bottom:0; height:0%; background:linear-gradient(180deg,var(--accent),var(--accent-2))}
 .alti-read{
-  text-align:right; font-size:11px; letter-spacing:.08em; color:var(--muted);
-  background:color-mix(in srgb, var(--bg) 72%, transparent); padding:6px 8px; border-radius:8px; border:1px solid var(--line);
+  text-align:right; font-size:12px; letter-spacing:.06em; color:var(--muted);
+  background:var(--bg-2);                                 /* フォールバック */
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  padding:7px 10px; border-radius:10px; border:1px solid var(--line);
 }
-.alti-read b{display:block; font-size:15px; color:var(--fg); font-variant-numeric:tabular-nums; letter-spacing:.02em}
-.alti-year{display:block; color:var(--accent); font-size:11px; min-height:1em}
+.alti-read b{display:block; font-size:16px; color:var(--fg); font-variant-numeric:tabular-nums; letter-spacing:.02em}
+.alti-year{display:block; color:var(--accent); font-size:12px; min-height:1em}
+:root.summit .alti-fill{background:linear-gradient(180deg,var(--accent-2),#fff)}
 @media (max-width:1249px){
-  /* 縦レールを置く余白がない幅では、右下の小さな1行表示に切り替える（本文に重ならないように） */
-  .altimeter{right:10px; bottom:10px; top:auto; transform:none}
+  .altimeter{right:12px; bottom:14px; top:auto; transform:none}
   .alti-rail{display:none}
   .alti-read{
-    display:flex; align-items:baseline; gap:7px; text-align:left;
-    font-size:10.5px; padding:4px 11px; border-radius:999px;
-    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    display:flex; align-items:baseline; gap:8px; text-align:left;
+    font-size:12px; padding:6px 12px; border-radius:999px;
+    background:var(--bg-2);
     background:color-mix(in srgb, var(--bg) 96%, transparent);
   }
-  .alti-read b{display:inline; font-size:12px}
+  .alti-read b{display:inline; font-size:13px}
   .alti-read #altLayer{display:none}
   .alti-year{display:inline}
 }
+#toTop{
+  position:fixed; right:16px; bottom:76px; z-index:50; opacity:0; visibility:hidden;
+  transition:opacity .25s ease, visibility .25s ease;
+}
+#toTop.show{opacity:1; visibility:visible}
+@media (min-width:1250px){ #toTop{bottom:24px} }
 
-/* ===== hero ============================================================== */
-.hero{min-height:min(88vh,780px); display:flex; flex-direction:column; justify-content:center; padding:64px 0 48px; position:relative}
+/* =========================================================================
+   4. ヒーロー
+   ========================================================================= */
+.hero{min-height:min(84vh,760px); display:flex; flex-direction:column; justify-content:center; padding:52px 0 44px; position:relative}
 .chip{
-  display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.14em;
+  display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.12em;
   color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:5px 12px;
 }
-.hero h1{font-size:clamp(2.4rem,8vw,4.4rem); font-weight:800; margin:22px 0 6px}
-.hero h1 .en{display:block; font-size:clamp(.85rem,2.6vw,1.05rem); font-weight:600; letter-spacing:.28em; color:var(--accent); margin-top:12px}
-.hero-reading{color:var(--muted); font-size:13.5px; letter-spacing:.1em}
-.hero-roles{margin-top:22px; display:flex; flex-wrap:wrap; gap:8px 18px; font-size:15px}
+.hero h1{font-size:clamp(2.3rem,7.6vw,4.2rem); font-weight:800; margin:20px 0 4px}
+.hero h1 .en{display:block; font-size:clamp(.85rem,2.5vw,1.05rem); font-weight:600; letter-spacing:.26em; color:var(--accent); margin-top:12px}
+.hero-reading{color:var(--muted); font-size:13.5px; letter-spacing:.08em}
+.hero-roles{margin-top:20px; display:flex; flex-wrap:wrap; gap:6px 18px; font-size:15px}
 .hero-roles li{position:relative; padding-left:16px}
 .hero-roles li::before{content:""; position:absolute; left:0; top:.72em; width:6px; height:6px; border-radius:50%; background:var(--accent-2)}
-.hero-keys{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px}
-.hero-keys li{font-size:12.5px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:4px 12px; background:var(--bg-2)}
-.hero-links{margin-top:30px; display:flex; flex-wrap:wrap; gap:10px}
+.hero-keys{margin-top:14px; display:flex; flex-wrap:wrap; gap:8px}
+.hero-keys li{font-size:12.5px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:5px 12px; background:var(--bg-2)}
+.hero-links{margin-top:26px; display:flex; flex-wrap:wrap; gap:10px}
 .btn{
-  display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-size:14px; font-weight:600;
-  padding:11px 18px; border-radius:999px; border:1px solid var(--line-2); color:var(--fg); background:var(--bg-2);
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:var(--tap);
+  text-decoration:none; font-size:14px; font-weight:600; padding:10px 18px; border-radius:999px;
+  border:1px solid var(--line-2); color:var(--fg); background:var(--bg-2); cursor:pointer;
   transition:transform .18s ease, border-color .18s ease;
 }
 .btn:hover{transform:translateY(-2px); border-color:var(--accent)}
-.btn-primary{background:var(--accent); color:var(--bg); border-color:transparent}
-:root[data-theme="dark"] .btn-primary, :root:not([data-theme="light"]) .btn-primary{color:#08122b}
-@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]) .btn-primary{color:#fff} }
-:root[data-theme="light"] .btn-primary{color:#fff}
-.scroll-hint{position:absolute; left:0; bottom:14px; font-size:11.5px; letter-spacing:.16em; color:var(--muted)}
-.scroll-hint span{display:inline-block; animation:bob 2.2s ease-in-out infinite}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary{background:var(--accent); color:var(--on-accent); border-color:transparent}
+/* ファーストビューの実績サマリ（§3-1） */
+.hero-summary{
+  margin-top:22px; display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline;
+  font-size:14px; color:var(--fg); padding-top:16px; border-top:1px solid var(--line);
+}
+.hero-summary b{font-size:19px; font-variant-numeric:tabular-nums; letter-spacing:.02em}
+.hero-summary span{color:var(--muted); font-size:13px}
+.hero-summary li{display:inline-flex; align-items:baseline; gap:5px}
+.scroll-hint{margin-top:26px; font-size:12px; letter-spacing:.14em; color:var(--muted)}
+.scroll-hint i{display:inline-block; font-style:normal; animation:bob 2.2s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
-/* ===== sections ========================================================== */
-.section{padding:72px 0; scroll-margin-top:70px}
-.section-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:28px; padding-bottom:12px; border-bottom:1px solid var(--line)}
+/* =========================================================================
+   5. セクション共通
+   ========================================================================= */
+.section{padding:68px 0; scroll-margin-top:calc(var(--hdr) + 12px)}
+.section:focus{outline:none}
+.section-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:26px; padding-bottom:12px; border-bottom:1px solid var(--line)}
 .section-head h2{font-size:clamp(1.25rem,3.4vw,1.6rem)}
-.section-head .en{font-size:11px; letter-spacing:.24em; color:var(--muted); text-transform:uppercase}
-.lead{max-width:60ch; color:var(--fg)}
+.section-head .en{font-size:12px; letter-spacing:.2em; color:var(--muted); text-transform:uppercase}
+.section-head .alt-tag{margin-left:auto; font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+.lead{max-width:60ch}
 .lead p + p{margin-top:14px}
+.note{font-size:12.5px; color:var(--muted)}
 
-.about-grid{display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:34px; align-items:start}
-@media (max-width:760px){ .about-grid{grid-template-columns:1fr; gap:26px} }
+.about-grid{display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:32px; align-items:start}
+@media (max-width:760px){ .about-grid{grid-template-columns:1fr; gap:24px} }
 .path{border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:20px 22px; box-shadow:var(--shadow)}
-.path h3{font-size:12px; letter-spacing:.18em; color:var(--muted); margin-bottom:14px}
+.path h3{font-size:12px; letter-spacing:.16em; color:var(--muted); margin-bottom:14px}
 .path li{position:relative; padding:0 0 16px 22px; font-size:14.5px}
 .path li:last-child{padding-bottom:0}
 .path li::before{content:""; position:absolute; left:3px; top:.62em; width:9px; height:9px; border-radius:50%; background:var(--bg-2); border:2px solid var(--accent)}
 .path li:not(:last-child)::after{content:""; position:absolute; left:7px; top:1.5em; bottom:0; width:1px; background:var(--line-2)}
 
-.stats{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
+.stats{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px}
 @media (max-width:820px){ .stats{grid-template-columns:repeat(2,minmax(0,1fr))} }
-.stat{border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:22px 20px; box-shadow:var(--shadow)}
-.stat .num{font-size:clamp(2.1rem,6vw,2.9rem); font-weight:800; line-height:1.1; font-variant-numeric:tabular-nums; color:var(--fg)}
+.stat{border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:20px 18px; box-shadow:var(--shadow)}
+.stat .num{font-size:clamp(2rem,5.6vw,2.8rem); font-weight:800; line-height:1.1; font-variant-numeric:tabular-nums}
 .stat .unit{font-size:.95rem; font-weight:600; color:var(--muted); margin-left:4px}
 .stat .label{margin-top:6px; font-size:13.5px; font-weight:600; word-break:auto-phrase}
-.stat .note{font-size:11.5px; color:var(--muted)}
+.stat .sub{font-size:12px; color:var(--muted)}
 
-/* ===== timeline ========================================================== */
-.timeline{position:relative; padding-left:34px}
-.timeline::before{content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg,var(--line),var(--accent) 60%,var(--accent-2))}
-.tl-item{position:relative; padding:0 0 26px}
+/* =========================================================================
+   6. 年表
+   ========================================================================= */
+.tl-year{
+  display:flex; align-items:center; gap:12px; margin:26px 0 14px; font-size:13px;
+  font-weight:700; letter-spacing:.14em; color:var(--muted);
+}
+.tl-year:first-child{margin-top:0}
+.tl-year::after{content:""; flex:1; height:1px; background:var(--line)}
+.timeline{position:relative; padding-left:32px}
+.timeline::before{content:""; position:absolute; left:9px; top:8px; bottom:8px; width:2px; background:linear-gradient(180deg,var(--line),var(--accent) 55%,var(--accent-2))}
+.tl-item{position:relative; padding:0 0 24px}
 .tl-item::before{
-  content:""; position:absolute; left:-30px; top:9px; width:12px; height:12px; border-radius:50%;
-  background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 0 4px color-mix(in srgb, var(--bg) 80%, transparent);
+  content:""; position:absolute; left:-28px; top:10px; width:12px; height:12px; border-radius:50%;
+  background:var(--bg); border:2px solid var(--accent);
 }
 .tl-item.t-award::before{border-color:var(--c-award)}
 .tl-item.t-presentation::before{border-color:var(--c-presentation)}
 .tl-item.t-activity::before{border-color:var(--c-activity)}
 .tl-item.t-work::before{border-color:var(--c-work)}
-.tl-meta{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
-.tl-when{font-size:12.5px; letter-spacing:.08em; color:var(--muted); font-variant-numeric:tabular-nums}
-.tl-alt{font-size:11px; letter-spacing:.06em; color:var(--muted); opacity:.72; font-variant-numeric:tabular-nums}
+.tl-meta{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+.tl-when{font-size:12.5px; letter-spacing:.04em; color:var(--muted); font-variant-numeric:tabular-nums}
+.tl-alt{font-size:12px; letter-spacing:.04em; color:var(--muted); font-variant-numeric:tabular-nums}
 .tl-title{font-size:15.5px; font-weight:650; margin-top:3px; word-break:auto-phrase}
 .tl-detail{font-size:13.5px; color:var(--muted)}
-.tl-item a{font-size:13px}
+.tl-item a{font-size:13.5px; display:inline-flex; align-items:center; min-height:26px; padding:2px 0}
 .badge{
-  font-size:11px; font-weight:700; letter-spacing:.1em; padding:2px 9px; border-radius:999px;
+  font-size:12px; font-weight:700; letter-spacing:.08em; padding:2px 9px; border-radius:999px;
   border:1px solid currentColor; white-space:nowrap;
 }
 .b-presentation{color:var(--c-presentation)}
@@ -203,76 +306,147 @@ p{margin:0}
 .b-work{color:var(--c-work)}
 .b-upcoming{color:var(--muted)}
 
-/* ===== achievements ====================================================== */
-.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
+/* =========================================================================
+   7. 業績一覧
+   ========================================================================= */
+.tools{display:grid; gap:12px; margin-bottom:18px}
+.filters{display:flex; flex-wrap:wrap; gap:8px}
 .filters button{
-  font:inherit; font-size:13px; font-weight:600; cursor:pointer;
-  padding:7px 16px; border-radius:999px; border:1px solid var(--line); background:var(--bg-2); color:var(--muted);
+  font-size:13px; font-weight:600; cursor:pointer; min-height:var(--tap);
+  padding:8px 16px; border-radius:999px; border:1px solid var(--line); background:var(--bg-2); color:var(--muted);
 }
+.filters button:hover{border-color:var(--line-2); color:var(--fg)}
+.filters button:active{transform:scale(.97)}
 .filters button[aria-pressed="true"]{background:var(--fg); color:var(--bg); border-color:var(--fg)}
+.tools-row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.search{
+  display:flex; align-items:center; gap:8px; flex:1 1 240px; min-width:0;
+  border:1px solid var(--line); border-radius:999px; background:var(--bg-2); padding:0 14px; min-height:var(--tap);
+}
+.search:focus-within{border-color:var(--accent)}
+.search input{
+  flex:1; min-width:0; border:0; background:transparent; color:var(--fg); font:inherit; font-size:14px;
+  padding:10px 0; outline:none;
+}
+.search input::placeholder{color:var(--muted)}
+.search .ico{color:var(--muted); font-size:14px}
+.count{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums}
 .ach-list{display:grid; gap:12px}
 .ach{
-  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:18px 20px; box-shadow:var(--shadow);
-  display:grid; gap:8px;
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:18px 20px;
+  box-shadow:var(--shadow); display:grid; gap:8px;
 }
 .ach.is-off{display:none}
-.ach-top{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.ach-top{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
 .ach-authors{font-size:13.5px; color:var(--muted)}
 .ach-authors .me{color:var(--fg); font-weight:700}
-.ach-authors .org{font-size:12px}
+.ach-authors .org{font-size:12.5px}
 .ach-title{font-size:15.5px; font-weight:650; word-break:auto-phrase}
 .ach-venue{font-size:13.5px; color:var(--muted)}
-.ach-kind{font-size:12.5px; letter-spacing:.08em; color:var(--muted)}
+.ach-kind{font-size:12.5px; letter-spacing:.06em; color:var(--muted)}
 .ach-actions{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:2px}
-.copy-btn{
-  font:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
-  padding:6px 13px; border-radius:999px; border:1px solid var(--line-2); background:transparent; color:var(--fg);
+.mini{
+  font-size:12.5px; font-weight:600; cursor:pointer; min-height:var(--tap);
+  padding:8px 14px; border-radius:999px; border:1px solid var(--line-2); background:transparent; color:var(--fg);
+  display:inline-flex; align-items:center; gap:6px;
 }
-.copy-btn:hover{border-color:var(--accent); color:var(--accent)}
+.mini:hover{border-color:var(--accent); color:var(--accent)}
+.mini:active{transform:scale(.97)}
+.empty{padding:22px; text-align:center; color:var(--muted); font-size:14px; border:1px dashed var(--line-2); border-radius:var(--radius)}
 
-/* ===== works ============================================================= */
-.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px}
+/* =========================================================================
+   8. 制作物 / 関連サイト / リンク
+   ========================================================================= */
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr)); gap:16px}
 .card{
-  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:22px; box-shadow:var(--shadow);
-  display:flex; flex-direction:column; gap:9px; transition:transform .2s ease, border-color .2s ease;
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); overflow:hidden;
+  box-shadow:var(--shadow); display:flex; flex-direction:column;
+  transition:transform .2s ease, border-color .2s ease;
+  scroll-margin-top:calc(var(--hdr) + 16px);
 }
 .card:hover{transform:translateY(-3px); border-color:var(--line-2)}
-.card .kind{font-size:11px; letter-spacing:.14em; color:var(--muted)}
+.card:active{transform:translateY(0)}
+.card:target{border-color:var(--accent); box-shadow:0 0 0 2px var(--accent)}
+.card-art{display:block; width:100%; aspect-ratio:16/9; background:var(--art-bg); border-bottom:1px solid var(--line)}
+.card-art img{width:100%; height:100%; object-fit:cover; display:block}
+.card-body{padding:18px 20px; display:flex; flex-direction:column; gap:8px; flex:1}
+.card .kind{font-size:12px; letter-spacing:.12em; color:var(--muted)}
 .card h3{font-size:15.5px; word-break:auto-phrase}
 .card p{font-size:13.5px; color:var(--muted); flex:1}
-.card .go{font-size:13px; font-weight:600}
+.card .go{font-size:13px; font-weight:600; color:var(--accent)}
+a.card{text-decoration:none; color:inherit}
 
-/* ===== related sites ===================================================== */
-.rel-cards{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.rel-card{gap:7px}
+.rel-cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.rel-card .card-body{gap:7px}
 .rel-card h3{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
-.rel-card h3 .arrow{color:var(--accent); font-size:16px; flex:none}
-.rel-card .u{font-size:11.5px; color:var(--muted); word-break:break-all}
+.rel-card .arrow{color:var(--accent); font-size:16px; flex:none}
+.rel-card .u{font-size:12px; color:var(--muted); word-break:break-all}
 
-/* ===== links / footer ==================================================== */
-.linklist{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+.linklist{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:14px}
 .linklist a{
   display:flex; justify-content:space-between; align-items:center; gap:12px; text-decoration:none;
-  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:18px 20px; color:var(--fg); box-shadow:var(--shadow);
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:18px 20px;
+  color:var(--fg); box-shadow:var(--shadow); min-height:var(--tap);
 }
 .linklist a:hover{border-color:var(--accent)}
-.linklist .u{font-size:11.5px; color:var(--muted); word-break:break-all}
+.linklist a:active{transform:scale(.99)}
+.linklist .u{font-size:12px; color:var(--muted); word-break:break-all}
 .linklist .arrow{color:var(--accent); font-size:18px}
-.site-footer{border-top:1px solid var(--line); margin-top:40px; padding:26px 0 40px; font-size:12.5px; color:var(--muted)}
-.site-footer .wrap{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+
+/* 到達点（§4-1） */
+.summit{
+  margin:8px auto 0; text-align:center; padding:26px 0 6px;
+}
+.summit-mark{
+  display:inline-flex; align-items:center; gap:10px; font-size:13px; letter-spacing:.14em;
+  color:var(--muted); border:1px dashed var(--line-2); border-radius:999px; padding:8px 18px;
+}
+:root.summit .summit-mark{color:var(--fg); border-style:solid; border-color:var(--accent-2)}
+:root.summit .summit-mark .star{color:var(--accent-2)}
+
+.site-footer{border-top:1px solid var(--line); margin-top:36px; padding:24px 0 40px; font-size:12.5px; color:var(--muted)}
+.site-footer .wrap{display:flex; justify-content:space-between; gap:10px 20px; flex-wrap:wrap}
+.site-footer .kbd-hint{background:none; border:0; color:var(--muted); cursor:pointer; text-decoration:underline;
+  min-height:var(--tap); padding:0 6px; display:inline-flex; align-items:center; gap:4px}
+.site-footer .kbd-hint:hover{color:var(--fg)}
 
 .toast{
-  position:fixed; left:50%; bottom:26px; transform:translate(-50%,14px); z-index:60;
-  background:var(--fg); color:var(--bg); font-size:13px; font-weight:600; padding:9px 18px; border-radius:999px;
-  opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;
+  position:fixed; left:50%; bottom:76px; transform:translate(-50%,14px); z-index:70;
+  background:var(--fg); color:var(--bg); font-size:13px; font-weight:600; padding:10px 18px; border-radius:999px;
+  opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease; max-width:calc(100% - 2rem);
 }
 .toast.show{opacity:1; transform:translate(-50%,0)}
+@media (min-width:1250px){ .toast{bottom:26px} }
 
-/* ===== reveal ============================================================ */
-.js .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
+/* ショートカット一覧 */
+.kbd-dialog{
+  position:fixed; inset:0; z-index:110; display:grid; place-items:center; padding:1rem;
+  background:rgba(0,0,0,.45);
+}
+.kbd-dialog[hidden]{display:none}
+.kbd-panel{
+  background:var(--bg-2); border:1px solid var(--line-2); border-radius:var(--radius);
+  padding:22px 24px; max-width:420px; width:100%; box-shadow:var(--shadow);
+}
+.kbd-panel h2{font-size:15px; margin-bottom:14px}
+.kbd-panel dl{display:grid; grid-template-columns:auto 1fr; gap:8px 14px; font-size:13.5px; margin:0}
+.kbd-panel dt{margin:0}
+.kbd-panel dd{margin:0; color:var(--muted)}
+kbd{
+  font:inherit; font-size:12px; font-weight:700; padding:2px 8px; border-radius:6px;
+  border:1px solid var(--line-2); background:var(--bg-3); color:var(--fg);
+}
+.kbd-panel .close{margin-top:18px; width:100%}
+
+/* =========================================================================
+   9. 出現アニメーション
+   ========================================================================= */
+.js .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
 .js .reveal.in{opacity:1; transform:none}
 
-/* ===== reduced motion ==================================================== */
+/* =========================================================================
+   10. 環境への配慮
+   ========================================================================= */
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{
@@ -281,10 +455,23 @@ p{margin:0}
   }
   .js .reveal{opacity:1 !important; transform:none !important}
   .btn:hover,.card:hover{transform:none}
-  .scroll-hint span{animation:none}
+}
+@media (prefers-contrast: more){
+  :root{--line:rgba(15,26,51,.4); --line-2:rgba(15,26,51,.6)}
+  :root[data-theme="dark"],:root:not([data-theme="light"]){--line:rgba(233,237,255,.45); --line-2:rgba(233,237,255,.7)}
+}
+@media (forced-colors: active){
+  .js .reveal{opacity:1 !important; transform:none !important}
+  #stars,#sky{display:none !important}
+  .card,.ach,.stat,.path,.linklist a,.alti-read,.menu,.kbd-panel{border:1px solid CanvasText !important; background:Canvas !important}
+  .badge,.chip{border:1px solid CanvasText !important}
+  .filters button[aria-pressed="true"]{outline:2px solid CanvasText}
+  .nav a[aria-current="true"]{outline:2px solid CanvasText}
 }
 
-/* ===== print ============================================================= */
+/* =========================================================================
+   11. 印刷（提出資料用）
+   ========================================================================= */
 @media print{
   :root{
     --bg:#fff; --bg-2:#fff; --bg-3:#fff; --fg:#000; --muted:#333;
@@ -292,34 +479,33 @@ p{margin:0}
     --c-presentation:#000; --c-award:#000; --c-activity:#000; --c-work:#000;
   }
   body{background:#fff !important; color:#000; font-size:10.5pt; line-height:1.6}
-  #stars,.site-header,.altimeter,.theme-toggle,.filters,.copy-btn,.scroll-hint,.toast,.skip,#works,#related{display:none !important}
+  #stars,#sky,.site-header,.menu,.menu-backdrop,.altimeter,#toTop,.tools,.toast,.skip,
+  .kbd-dialog,.scroll-hint,.summit,#works,#related,.note-screen,.ach-actions{display:none !important}
   .js .reveal{opacity:1 !important; transform:none !important}
-  .hero{min-height:0; padding:0 0 14px; page-break-after:avoid}
+  .hero{min-height:0; padding:0 0 12px; page-break-after:avoid}
   .hero h1{font-size:20pt; margin:0}
-  .hero h1 .en{font-size:9pt; letter-spacing:.16em; margin-top:2px}
+  .hero h1 .en{font-size:9pt; letter-spacing:.14em; margin-top:2px}
   .hero .chip,.hero-keys,.hero-links{display:none}
   .hero-roles{margin-top:6px; font-size:10pt}
-  .section{padding:14px 0; border:0}
+  .hero-summary{margin-top:8px; padding-top:8px; font-size:9.5pt; gap:4px 12px}
+  .hero-summary b{font-size:12pt}
+  .section{padding:12px 0}
   .section-head{margin-bottom:10px}
-  .section-head .en{display:none}
+  .section-head .en,.section-head .alt-tag{display:none}
   .about-grid{grid-template-columns:1fr 1fr; gap:16px}
   .stats{grid-template-columns:repeat(4,1fr); gap:8px}
   .stat{padding:8px 10px}
   .stat .num{font-size:16pt}
-  .ach,.card,.path,.stat,.tl-item{
-    border:1px solid #ccc; box-shadow:none; background:#fff;
-    break-inside:avoid; page-break-inside:avoid;
-  }
+  .ach,.path,.stat,.linklist a{border:1px solid #ccc; box-shadow:none; background:#fff; break-inside:avoid; page-break-inside:avoid}
   .ach{padding:8px 10px; margin-bottom:6px}
-  .note-screen{display:none}
-  .linklist{grid-template-columns:1fr 1fr; gap:8px}
-  .linklist a{padding:8px 10px}
-  .linklist .arrow{display:none}
-  .ach.is-off{display:grid !important}   /* 印刷時はフィルタに関わらず全件出す */
-  .tl-item{border:0; padding-bottom:10px}
+  .ach.is-off{display:grid !important}     /* 絞り込み中でも全件出す（§4-2） */
+  .tl-item{border:0; padding-bottom:10px; break-inside:avoid}
   .tl-alt{display:none}
   a{color:#000; text-decoration:none}
   #achievements a[href]::after{content:" <" attr(href) ">"; font-size:8.5pt; color:#444; word-break:break-all}
+  .linklist{grid-template-columns:1fr 1fr; gap:8px}
+  .linklist a{padding:8px 10px}
+  .linklist .arrow{display:none}
   .wrap{width:100%}
 }
 </style>
@@ -327,26 +513,24 @@ p{margin:0}
 <body>
 
 <a class="skip" href="#main">本文へスキップ</a>
+<div id="sky" aria-hidden="true"></div>
 <canvas id="stars" aria-hidden="true"></canvas>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="#top">永野 斗遠<small>TOWA NAGANO</small></a>
-    <nav class="nav" aria-label="セクション">
-      <a href="#about">About</a>
-      <a href="#stats">数字で見る</a>
-      <a href="#timeline">年表</a>
-      <a href="#achievements">業績</a>
-      <a href="#works">制作物</a>
-      <a href="#links">リンク</a>
-      <a href="#related" id="navRelated">関連サイト</a>
-    </nav>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"
+    <a class="brand" href="#top">永野 斗遠<span class="en" lang="en">Towa Nagano</span></a>
+    <nav class="nav" id="navDesktop" aria-label="セクション"></nav>
+    <button class="icon-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="メニューを開く">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <button class="icon-btn" id="themeToggle" type="button" aria-pressed="false"
             title="ダーク／ライト切替（既定はOSの設定に従います）">
       <span aria-hidden="true" id="themeIcon">☾</span>
     </button>
   </div>
 </header>
+<div class="menu-backdrop" id="menuBackdrop" hidden></div>
+<nav class="menu" id="menu" aria-label="セクション（メニュー）" hidden><ul id="menuList"></ul></nav>
 
 <aside class="altimeter" id="altimeter" aria-hidden="true">
   <div class="alti-read">
@@ -356,84 +540,125 @@ p{margin:0}
   </div>
   <div class="alti-rail"><div class="alti-fill" id="altFill"></div></div>
 </aside>
+<button class="icon-btn" id="toTop" type="button" aria-label="ページ先頭へ戻る"><span aria-hidden="true">↑</span></button>
 
 <main id="main">
   <div id="top"></div>
+  <div id="fatal" class="wrap" style="padding-top:24px" hidden></div>
 
-  <!-- 1. ヒーロー -->
-  <section class="hero wrap" aria-labelledby="heroName">
+  <!-- 1. ヒーロー（0 m） -->
+  <section class="hero wrap" id="hero" data-alt="0" aria-labelledby="heroName" tabindex="-1">
     <p><span class="chip">高度 0 m ／ 地上</span></p>
     <h1 id="heroName"></h1>
     <p class="hero-reading" id="heroReading"></p>
     <ul class="hero-roles" id="heroRoles"></ul>
     <ul class="hero-keys" id="heroKeys"></ul>
     <div class="hero-links" id="heroLinks"></div>
-    <p class="scroll-hint"><span>↓ SCROLL — 高度を上げる</span></p>
+    <ul class="hero-summary" id="heroSummary" aria-label="活動の要約"></ul>
+    <p class="scroll-hint"><i aria-hidden="true">↓</i> SCROLL — 高度を上げる</p>
   </section>
 
-  <!-- 2. About -->
-  <section class="section wrap" id="about" aria-labelledby="aboutH">
-    <div class="section-head"><h2 id="aboutH">About</h2><span class="en">自己紹介</span></div>
+  <!-- 2. About（1,000 m） -->
+  <section class="section wrap" id="about" data-alt="1000" aria-labelledby="aboutH" tabindex="-1">
+    <div class="section-head"><h2 id="aboutH">About</h2><span class="en" lang="en">自己紹介</span>
+      <span class="alt-tag">高度 1,000 m</span></div>
     <div class="about-grid reveal">
       <div class="lead" id="aboutText"></div>
       <div class="path"><h3>PATH</h3><ul id="aboutPath"></ul></div>
     </div>
   </section>
 
-  <!-- 3. 数字で見る活動 -->
-  <section class="section wrap" id="stats" aria-labelledby="statsH">
-    <div class="section-head"><h2 id="statsH">数字で見る活動</h2><span class="en">by the numbers</span></div>
+  <!-- 3. 数字で見る活動（2,000 m） -->
+  <section class="section wrap" id="stats" data-alt="2000" aria-labelledby="statsH" tabindex="-1">
+    <div class="section-head"><h2 id="statsH">数字で見る活動</h2><span class="en" lang="en">by the numbers</span>
+      <span class="alt-tag">高度 2,000 m</span></div>
     <ul class="stats reveal" id="statsList"></ul>
   </section>
 
-  <!-- 4. 年表 -->
-  <section class="section wrap" id="timeline" aria-labelledby="timelineH">
-    <div class="section-head">
-      <h2 id="timelineH">年表</h2><span class="en">ascending log</span>
+  <!-- 4. 年表（3,000〜9,000 m） -->
+  <section class="section wrap" id="timeline" aria-labelledby="timelineH" tabindex="-1">
+    <div class="section-head"><h2 id="timelineH">年表</h2><span class="en" lang="en">ascending log</span>
+      <span class="alt-tag">高度 3,000 → 9,000 m</span></div>
+    <p class="note" style="margin-bottom:22px">古い記録から順に、高度を上げながら積み上がります。</p>
+    <div class="reveal" id="timelineList"></div>
+  </section>
+
+  <!-- 5. 業績一覧（10,000 m） -->
+  <section class="section wrap" id="achievements" data-alt="10000" aria-labelledby="achH" tabindex="-1">
+    <div class="section-head"><h2 id="achH">業績一覧</h2><span class="en" lang="en">publications &amp; awards</span>
+      <span class="alt-tag">高度 10,000 m</span></div>
+    <div class="tools">
+      <div class="filters" id="filters" role="group" aria-label="業績の絞り込み"></div>
+      <div class="tools-row">
+        <label class="search" for="achSearch">
+          <span class="ico" aria-hidden="true">🔍</span>
+          <span class="vh">業績をキーワードで検索</span>
+          <input id="achSearch" type="search" placeholder="題目・著者・発表先で検索" autocomplete="off">
+        </label>
+        <button class="mini" type="button" id="copyAllCite">書誌を全件コピー</button>
+        <button class="mini" type="button" id="copyAllBib">BibTeXを全件コピー</button>
+        <button class="mini" type="button" id="printBtn">印刷 / PDF保存</button>
+      </div>
+      <p class="count" id="achCount" role="status" aria-live="polite"></p>
     </div>
-    <p class="lead" style="margin-bottom:26px; color:var(--muted); font-size:14px">古い記録から順に、高度を上げながら積み上がります。</p>
-    <ol class="timeline reveal" id="timelineList"></ol>
-  </section>
-
-  <!-- 5. 業績一覧 -->
-  <section class="section wrap" id="achievements" aria-labelledby="achH">
-    <div class="section-head"><h2 id="achH">業績一覧</h2><span class="en">publications &amp; awards</span></div>
-    <div class="filters" id="filters" role="group" aria-label="業績の絞り込み"></div>
     <div class="ach-list" id="achList"></div>
-    <p class="note-screen" style="margin-top:14px; font-size:12.5px; color:var(--muted)">学会発表は「書誌をコピー」で引用形式をコピーできます。印刷すると装飾のない一覧になります。</p>
+    <p id="achEmpty" class="empty" hidden>該当する業績がありません。キーワードを変えてお試しください。</p>
+    <p class="note note-screen" style="margin-top:14px">学会発表は「書誌をコピー」「BibTeX」で引用形式をコピーできます。印刷すると絞り込みに関わらず全件が白背景で出ます。</p>
   </section>
 
-  <!-- 6. 制作物ギャラリー -->
-  <section class="section wrap" id="works" aria-labelledby="worksH">
-    <div class="section-head"><h2 id="worksH">制作物</h2><span class="en">works</span></div>
+  <!-- 6. 制作物（11,000 m） -->
+  <section class="section wrap" id="works" data-alt="11000" aria-labelledby="worksH" tabindex="-1">
+    <div class="section-head"><h2 id="worksH">制作物</h2><span class="en" lang="en">works</span>
+      <span class="alt-tag">高度 11,000 m</span></div>
     <div class="cards reveal" id="worksList"></div>
   </section>
 
-  <!-- 7. リンク -->
-  <section class="section wrap" id="links" aria-labelledby="linksH">
-    <div class="section-head"><h2 id="linksH">リンク</h2><span class="en">links</span></div>
+  <!-- 7. リンク（12,000 m） -->
+  <section class="section wrap" id="links" data-alt="12000" aria-labelledby="linksH" tabindex="-1">
+    <div class="section-head"><h2 id="linksH">リンク</h2><span class="en" lang="en">links</span>
+      <span class="alt-tag">高度 12,000 m</span></div>
     <div class="linklist reveal" id="linkList"></div>
   </section>
 
-  <!-- 8. 関連サイト -->
-  <section class="section wrap" id="related" aria-labelledby="relatedH">
-    <div class="section-head"><h2 id="relatedH">関連サイト</h2><span class="en">related sites</span></div>
+  <!-- 8. 関連サイト（12,000 m） -->
+  <section class="section wrap" id="related" data-alt="12000" aria-labelledby="relatedH" tabindex="-1">
+    <div class="section-head"><h2 id="relatedH">関連サイト</h2><span class="en" lang="en">related sites</span></div>
     <div class="cards rel-cards reveal" id="relatedList"></div>
   </section>
+
+  <p class="summit wrap"><span class="summit-mark"><span class="star" aria-hidden="true">✦</span>成層圏 12,000 m — 到達</span></p>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
     <span id="footName"></span>
     <span>掲載内容の「正」は <code>docs/SITE_SPEC.md</code></span>
+    <span>最終更新 <span id="footUpdated"></span> ／
+      <button class="kbd-hint" type="button" id="kbdOpen">キーボード操作（<kbd>?</kbd>）</button></span>
   </div>
 </footer>
+
+<div class="kbd-dialog" id="kbdDialog" role="dialog" aria-modal="true" aria-labelledby="kbdTitle" hidden>
+  <div class="kbd-panel">
+    <h2 id="kbdTitle">キーボード操作</h2>
+    <dl>
+      <dt><kbd>j</kbd> / <kbd>k</kbd></dt><dd>次 / 前のセクションへ</dd>
+      <dt><kbd>g</kbd> / <kbd>G</kbd></dt><dd>先頭 / 末尾へ</dd>
+      <dt><kbd>/</kbd></dt><dd>業績を検索</dd>
+      <dt><kbd>t</kbd></dt><dd>ダーク / ライト切替</dd>
+      <dt><kbd>?</kbd></dt><dd>この一覧</dd>
+      <dt><kbd>Esc</kbd></dt><dd>閉じる</dd>
+    </dl>
+    <button class="btn close" type="button" id="kbdClose">閉じる</button>
+  </div>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <noscript>
   <div class="wrap" style="padding:24px 0">
-    このサイトは業績データ（<code>data.js</code>）を読み込んで表示します。JavaScript を有効にしてご覧ください。
+    <p class="fatal">このサイトは業績データ（<code>data.js</code>）を読み込んで表示します。お手数ですが JavaScript を有効にしてご覧ください。
+    掲載内容は <code>docs/SITE_SPEC.md</code> でも確認できます。</p>
   </div>
 </noscript>
 
@@ -441,69 +666,121 @@ p{margin:0}
 <script>
 (function () {
   'use strict';
-  var D = window.SITE_DATA;
   var root = document.documentElement;
   root.classList.add('js');
-  if (!D) { return; }
+  var D = window.SITE_DATA;
 
-  /* ---------- utils ---------- */
+  /* ---------- 共通ユーティリティ ---------- */
   var ESC = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' };
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return ESC[c]; }); }
-  function $(sel){ return document.querySelector(sel); }
+  function $(s, r){ return (r || document).querySelector(s); }
+  function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function nf(n){ return Number(n).toLocaleString('ja-JP'); }
   function pad(n){ return (n < 10 ? '0' : '') + n; }
-  function todayISO(){ var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
-  function isUpcoming(until){ return !!until && todayISO() < until; }
-  function nf(n){ return n.toLocaleString('ja-JP'); }
   var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+  var mqDark   = window.matchMedia('(prefers-color-scheme: dark)');
+  var mqWide   = window.matchMedia('(min-width: 900px)');
   function reduced(){ return mqReduce.matches; }
 
-  var TYPE_LABEL = { presentation:'発表', award:'受賞', activity:'活動', work:'制作' };
-  var revealEls = [];
+  /* データが無ければその旨を出して終了（§8-3） */
+  if (!D || !D.profile || !D.talks) {
+    var f = $('#fatal');
+    f.hidden = false;
+    f.innerHTML = '<p class="fatal">業績データ（<code>data.js</code>）を読み込めませんでした。' +
+      '通信環境を確認して再読み込みしてください。繰り返す場合はサイトの不具合です。</p>';
+    $$('main section').forEach(function(s){ s.hidden = true; });
+    return;
+  }
 
-  /* ---------- toast ---------- */
+  /* ---------- 日付の表示（データはISO、画面は日本語。§8-5） ---------- */
+  var WORDING = { '8-24 改良日':'8月24日に改良日', '企画書':'企画書を作成' };  /* §6 表示上の表記 */
+  function jpDate(str){
+    if (str == null) return '';
+    var s = String(str);
+    if (WORDING[s]) s = WORDING[s];
+    s = s.replace(/(\d{4})-(\d{1,2})-(\d{1,2})〜(\d{1,2})-(\d{1,2})/g,
+          function(_,y,m,d,m2,d2){ return y+'年'+(+m)+'月'+(+d)+'日〜'+(+m2)+'月'+(+d2)+'日'; });
+    s = s.replace(/(\d{4})-(\d{1,2})〜(\d{1,2})(?!\d)/g,
+          function(_,y,m,m2){ return y+'年'+(+m)+'月〜'+(+m2)+'月'; });
+    s = s.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/g,
+          function(_,y,m,d){ return y+'年'+(+m)+'月'+(+d)+'日'; });
+    s = s.replace(/(\d{4})-(\d{1,2})〜/g, function(_,y,m){ return y+'年'+(+m)+'月〜'; });
+    s = s.replace(/(\d{4})-(\d{1,2})(?!\d)/g, function(_,y,m){ return y+'年'+(+m)+'月'; });
+    s = s.replace(/(\d{4})〜/g, function(_,y){ return y+'年〜'; });
+    return s;
+  }
+  function todayISO(){ var d = new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function isUpcoming(until){ return !!until && todayISO() < until; }
+
+  var TYPE_LABEL = { presentation:'発表', award:'受賞', activity:'活動', work:'制作' };
+
+  /* ---------- トースト ---------- */
   var toastEl = $('#toast'), toastTimer;
   function toast(msg){
     toastEl.textContent = msg;
     toastEl.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2400);
   }
 
-  /* ---------- 1. hero ---------- */
+  /* ---------- クリップボード ---------- */
+  function copyText(text){
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function(resolve, reject){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly','');
+      ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error('copy failed'));
+    });
+  }
+  function copyAndTell(text, label){
+    copyText(text).then(function(){ toast(label + 'をコピーしました'); })
+                  .catch(function(){ toast('コピーできませんでした'); });
+  }
+
+  /* ---------- 1. ヒーロー ---------- */
   var p = D.profile;
-  $('#heroName').innerHTML = esc(p.name) + '<span class="en">' + esc(p.nameEn) + '</span>';
+  $('#heroName').innerHTML = esc(p.name) + '<span class="en" lang="en">' + esc(p.nameEn) + '</span>';
   $('#heroReading').textContent = p.reading + '　/　@' + p.handle;
-  $('#heroRoles').innerHTML = (p.roles || []).map(function(r){ return '<li>' + esc(r) + '</li>'; }).join('');
-  $('#heroKeys').innerHTML = (p.keywords || []).map(function(k){ return '<li>' + esc(k) + '</li>'; }).join('');
+  $('#heroRoles').innerHTML = (p.roles||[]).map(function(r){ return '<li>' + esc(r) + '</li>'; }).join('');
+  $('#heroKeys').innerHTML  = (p.keywords||[]).map(function(k){ return '<li>' + esc(k) + '</li>'; }).join('');
   $('#footName').textContent = p.name + '（' + p.nameEn + '）';
+  $('#footUpdated').textContent = jpDate((D.siteMeta && D.siteMeta.updated) || '');
   document.title = p.name + ' — ポートフォリオ';
 
-  /* リンクは url が空なら出さない（§3-7 / §7 リンク切れなし） */
-  var linkOrder = ['github', 'archive', 'ideria'];
-  var activeLinks = linkOrder.map(function(k){ return D.links[k]; })
-                             .filter(function(l){ return l && l.url; });
+  /* URLが空のリンクは出さない（§3-7） */
+  var activeLinks = ['github','archive','ideria'].map(function(k){ return D.links[k]; })
+                    .filter(function(l){ return l && l.url; });
   $('#heroLinks').innerHTML = activeLinks.map(function(l, i){
     return '<a class="btn' + (i === 0 ? ' btn-primary' : '') + '" href="' + esc(l.url) + '"' +
            (/^https?:/.test(l.url) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(l.label) + ' ↗</a>';
   }).join('');
 
-  /* ---------- 2. about ---------- */
-  $('#aboutText').innerHTML = (p.about || []).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('');
-  $('#aboutPath').innerHTML = (p.path || []).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('');
+  /* ファーストビューの実績サマリ（§3-1） */
+  $('#heroSummary').innerHTML = (D.stats||[]).map(function(s){
+    return '<li><b>' + nf(s.value) + '</b>' + esc(s.unit||'') + '<span>' + esc(s.label) + '</span></li>';
+  }).join('');
 
-  /* ---------- 3. stats ---------- */
-  $('#statsList').innerHTML = (D.stats || []).map(function(s){
+  /* ---------- 2. About ---------- */
+  $('#aboutText').innerHTML = (p.about||[]).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('');
+  $('#aboutPath').innerHTML = (p.path||[]).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('');
+
+  /* ---------- 3. 数字 ---------- */
+  $('#statsList').innerHTML = (D.stats||[]).map(function(s){
     return '<li class="stat">' +
       '<div><span class="num" data-count="' + esc(s.value) + '">0</span>' +
-      '<span class="unit">' + esc(s.unit || '') + '</span></div>' +
+      '<span class="unit">' + esc(s.unit||'') + '</span></div>' +
       '<div class="label">' + esc(s.label) + '</div>' +
-      (s.note ? '<div class="note">' + esc(s.note) + '</div>' : '') +
+      (s.note ? '<div class="sub">' + esc(s.note) + '</div>' : '') +
       '</li>';
   }).join('');
 
   function settle(el){
-    el.setAttribute('data-done', '1');
+    el.setAttribute('data-done','1');
     el.textContent = nf(Number(el.getAttribute('data-count')) || 0);
   }
   function countUp(el){
@@ -511,38 +788,44 @@ p{margin:0}
     if (reduced() || el.getAttribute('data-done')) { settle(el); return; }
     var start = null, dur = 1100;
     function step(ts){
-      if (el.getAttribute('data-done')) return;          /* 印刷時は即座に最終値へ */
+      if (el.getAttribute('data-done')) return;
       if (start === null) start = ts;
       var t = Math.min(1, (ts - start) / dur);
       el.textContent = nf(Math.round(target * (1 - Math.pow(1 - t, 3))));
-      if (t < 1) { requestAnimationFrame(step); } else { el.setAttribute('data-done', '1'); }
+      if (t < 1) { requestAnimationFrame(step); } else { el.setAttribute('data-done','1'); }
     }
     requestAnimationFrame(step);
   }
-  function settleAll(){
-    revealEls.forEach(function(el){ el.classList.add('in'); });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-count]'), settle);
-  }
 
-  /* ---------- 4. timeline ---------- */
-  $('#timelineList').innerHTML = (D.timeline || []).map(function(it){
+  /* ---------- 4. 年表（年で区切り・高度は固定値） ---------- */
+  var tlHTML = [], lastYear = null;
+  (D.timeline||[]).forEach(function(it){
+    var year = (String(it.when).match(/^\d{4}/) || [''])[0];
+    if (year && year !== lastYear) {
+      tlHTML.push('<h3 class="tl-year">' + esc(year) + '年</h3><ol class="timeline">');
+      if (lastYear !== null) tlHTML[tlHTML.length-1] = '</ol>' + tlHTML[tlHTML.length-1];
+      lastYear = year;
+    }
     var type = it.type || 'activity';
-    var badges = '<span class="badge b-' + esc(type) + '">' + esc(TYPE_LABEL[type] || type) + '</span>';
+    var badges = '<span class="badge b-' + esc(type) + '">' + esc(TYPE_LABEL[type]||type) + '</span>';
     if (isUpcoming(it.upcomingUntil)) badges += ' <span class="badge b-upcoming">予定</span>';
-    return '<li class="tl-item t-' + esc(type) + '" data-when="' + esc(it.when) + '">' +
-      '<div class="tl-meta">' + badges +
-        '<span class="tl-when">' + esc(it.when) + '</span>' +
-        '<span class="tl-alt"></span>' +
-      '</div>' +
-      '<div class="tl-title">' + esc(it.title) + '</div>' +
-      (it.detail ? '<div class="tl-detail">' + esc(it.detail) + '</div>' : '') +
-      (it.link ? '<a href="' + esc(it.link.url) + '" target="_blank" rel="noopener">' + esc(it.link.label) + ' ↗</a>' : '') +
-      '</li>';
-  }).join('');
+    tlHTML.push(
+      '<li class="tl-item t-' + esc(type) + '" data-when="' + esc(it.when) + '" data-alt="' + esc(it.alt||0) + '">' +
+        '<div class="tl-meta">' + badges +
+          '<span class="tl-when">' + esc(jpDate(it.when)) + '</span>' +
+          '<span class="tl-alt">高度 ' + nf(it.alt||0) + ' m</span>' +
+        '</div>' +
+        '<div class="tl-title">' + esc(it.title) + '</div>' +
+        (it.detail ? '<div class="tl-detail">' + esc(jpDate(it.detail)) + '</div>' : '') +
+        (it.link ? '<a href="' + esc(it.link.url) + '" target="_blank" rel="noopener">' + esc(it.link.label) + ' ↗</a>' : '') +
+      '</li>');
+  });
+  tlHTML.push('</ol>');
+  $('#timelineList').innerHTML = tlHTML.join('');
 
-  /* ---------- 5. achievements ---------- */
+  /* ---------- 5. 業績一覧 ---------- */
   function authorsHTML(list){
-    return (list || []).map(function(a){
+    return (list||[]).map(function(a){
       return (a.me ? '<b class="me">' + esc(a.name) + '</b>' : esc(a.name)) +
              (a.org ? '<span class="org">（' + esc(a.org) + '）</span>' : '');
     }).join('・');
@@ -550,7 +833,7 @@ p{margin:0}
   function venueText(t){
     var s = t.venue + (t.session ? ' ' + t.session : '');
     var paren = [];
-    if (t.dateLabel) paren.push(t.dateLabel);
+    if (t.dateLabel) paren.push(jpDate(t.dateLabel));
     if (t.place) paren.push(t.place);
     if (paren.length) s += '（' + paren.join('・') + '）';
     if (t.format) s += ' ' + t.format;
@@ -558,62 +841,85 @@ p{margin:0}
     return s;
   }
   function citation(t){
-    var names = (t.authors || []).map(function(a){ return a.name; }).join('・');
+    var names = (t.authors||[]).map(function(a){ return a.name; }).join('・');
     var head = names + '「' + t.title + '」' + t.venue + (t.session ? ' ' + t.session : '');
     if (t.format) head += '（' + t.format + '）';
     var tail = [];
-    if (t.dateLabel) tail.push(t.dateLabel);
+    if (t.dateLabel) tail.push(jpDate(t.dateLabel));
     if (t.place) tail.push(t.place);
     return head + (tail.length ? ', ' + tail.join(', ') : '') + '.';
   }
+  function bibtex(t, i){
+    var year = (String(t.date || t.dateLabel || '').match(/^\d{4}/) || ['0000'])[0];
+    var key = 'nagano' + year + '_' + (i + 1);
+    var rows = [
+      ['author', (t.authors||[]).map(function(a){ return a.name; }).join(' and ')],
+      ['title', t.title],
+      ['booktitle', t.venue + (t.session ? ' ' + t.session : '')],
+      ['year', year]
+    ];
+    if (t.place) rows.push(['address', t.place]);
+    var note = [];
+    if (t.format) note.push(t.format);
+    if (t.notes && t.notes.length) note.push(t.notes.join('・'));
+    if (t.dateLabel) note.push(jpDate(t.dateLabel));
+    if (note.length) rows.push(['note', note.join(', ')]);
+    return '@inproceedings{' + key + ',\n' +
+      rows.map(function(r){ return '  ' + r[0] + (Array(Math.max(1, 10 - r[0].length)).join(' ')) + '= {' + r[1] + '}'; }).join(',\n') +
+      '\n}';
+  }
 
-  var achHTML = [];
-
-  (D.talks || []).forEach(function(t, i){
+  var achItems = [];   /* {kind, html, text, cite, bib} */
+  (D.talks||[]).forEach(function(t, i){
     var soon = isUpcoming(t.upcomingUntil);
-    achHTML.push(
-      '<article class="ach" data-kind="talk">' +
-        '<div class="ach-top">' +
-          '<span class="badge b-presentation">学会発表</span>' +
-          (soon ? '<span class="badge b-upcoming">発表予定</span>' : '') +
-        '</div>' +
+    var cite = citation(t), bib = bibtex(t, i);
+    achItems.push({
+      kind:'talk',
+      text:[t.title, (t.authors||[]).map(function(a){return a.name;}).join(' '), t.venue, t.session||'', t.place||''].join(' '),
+      cite:cite, bib:bib,
+      html:'<article class="ach" data-kind="talk">' +
+        '<div class="ach-top"><span class="badge b-presentation">学会発表</span>' +
+          (soon ? '<span class="badge b-upcoming">発表予定</span>' : '') + '</div>' +
         '<div class="ach-authors">' + authorsHTML(t.authors) + '</div>' +
         '<h3 class="ach-title">' + esc(t.title) + '</h3>' +
         '<div class="ach-venue">' + esc(venueText(t)) + '</div>' +
         '<div class="ach-actions">' +
-          '<button class="copy-btn" type="button" data-cite="' + esc(citation(t)) + '">書誌をコピー</button>' +
-        '</div>' +
-      '</article>'
-    );
+          '<button class="mini" type="button" data-copy="cite" data-i="' + i + '" ' +
+            'aria-label="「' + esc(t.title) + '」の書誌をコピー">書誌をコピー</button>' +
+          '<button class="mini" type="button" data-copy="bib" data-i="' + i + '" ' +
+            'aria-label="「' + esc(t.title) + '」のBibTeXをコピー">BibTeX</button>' +
+        '</div></article>'
+    });
   });
-
-  (D.awards || []).forEach(function(a){
-    var who = (a.recipients || []).join('・') + (a.org ? '（' + a.org + '）' : '');
-    achHTML.push(
-      '<article class="ach" data-kind="award">' +
+  (D.awards||[]).forEach(function(a){
+    var who = (a.recipients||[]).join('・') + (a.org ? '（' + a.org + '）' : '');
+    achItems.push({
+      kind:'award',
+      text:[a.title, a.work||'', who].join(' '),
+      html:'<article class="ach" data-kind="award">' +
         '<div class="ach-top"><span class="badge b-award">受賞</span></div>' +
         '<h3 class="ach-title">' + esc(a.title) + '</h3>' +
         (a.work ? '<div class="ach-venue">' + esc(a.work) + '</div>' : '') +
         '<div class="ach-authors">' + esc(who) + '</div>' +
-        (a.dateLabel ? '<div class="ach-venue">' + esc(a.dateLabel) + '</div>' : '') +
-      '</article>'
-    );
+        (a.dateLabel ? '<div class="ach-venue">' + esc(jpDate(a.dateLabel)) + '</div>' : '') +
+        '</article>'
+    });
   });
-
-  (D.works || []).forEach(function(w){
-    achHTML.push(
-      '<article class="ach" data-kind="work">' +
+  /* 制作物は題目と種別だけ。説明はギャラリーに任せる（§3-5） */
+  (D.works||[]).forEach(function(w, i){
+    achItems.push({
+      kind:'work',
+      text:[w.title, w.kind||'', w.desc||''].join(' '),
+      html:'<article class="ach" data-kind="work">' +
         '<div class="ach-top"><span class="badge b-work">制作物</span>' +
-          (w.kind ? '<span class="ach-kind">' + esc(w.kind) + (w.period ? '・' + esc(w.period) : '') + '</span>' : '') +
-        '</div>' +
-        '<h3 class="ach-title">' + esc(w.title) + '</h3>' +
-        (w.desc ? '<div class="ach-venue">' + esc(w.desc) + '</div>' : '') +
-        (w.url ? '<div class="ach-actions"><a href="' + esc(w.url) + '" target="_blank" rel="noopener">アーカイブで見る ↗</a></div>' : '') +
-      '</article>'
-    );
+          (w.kind ? '<span class="ach-kind">' + esc(w.kind) + (w.period ? '・' + esc(w.period) : '') + '</span>' : '') + '</div>' +
+        '<p class="ach-title">' + esc(w.title) + '</p>' +
+        '<div class="ach-actions"><a href="#work-' + i + '">ギャラリーで見る ↓</a>' +
+          (w.url ? ' <a href="' + esc(w.url) + '" target="_blank" rel="noopener">アーカイブ ↗</a>' : '') +
+        '</div></article>'
+    });
   });
-
-  $('#achList').innerHTML = achHTML.join('');
+  $('#achList').innerHTML = achItems.map(function(a){ return a.html; }).join('');
 
   var FILTERS = [
     { key:'all',   label:'すべて' },
@@ -626,151 +932,275 @@ p{margin:0}
            esc(f.label) + '</button>';
   }).join('');
 
+  var achCards = $$('.ach'), state = { f:'all', q:'' };
+
+  function applyFilter(push){
+    var q = state.q.trim().toLowerCase();
+    var shown = 0;
+    achCards.forEach(function(card, i){
+      var it = achItems[i];
+      var okKind = state.f === 'all' || it.kind === state.f;
+      var okText = !q || it.text.toLowerCase().indexOf(q) >= 0;
+      var on = okKind && okText;
+      card.classList.toggle('is-off', !on);
+      if (on) shown++;
+    });
+    $$('#filters button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-filter') === state.f));
+    });
+    $('#achCount').textContent = '全' + achItems.length + '件中 ' + shown + '件を表示' +
+      (state.f !== 'all' ? '（' + (FILTERS.filter(function(f){return f.key===state.f;})[0]||{}).label + '）' : '') +
+      (q ? '／検索: ' + state.q : '');
+    $('#achEmpty').hidden = shown > 0;
+
+    /* URLに状態を残す（共有・戻る操作に対応。§3-5） */
+    var qs = [];
+    if (state.f !== 'all') qs.push('f=' + encodeURIComponent(state.f));
+    if (state.q) qs.push('q=' + encodeURIComponent(state.q));
+    /* 利用者の操作時だけ #achievements を付ける。ハッシュ移動を上書きしない */
+    var hash = push ? '#achievements' : (location.hash || '');
+    var url = location.pathname + (qs.length ? '?' + qs.join('&') : '') + hash;
+    try {
+      if (push) history.pushState({ f:state.f, q:state.q }, '', url);
+      else history.replaceState({ f:state.f, q:state.q }, '', url);
+    } catch (e) { /* file:// などでは無視 */ }
+  }
+
   $('#filters').addEventListener('click', function(e){
     var btn = e.target.closest('button[data-filter]');
     if (!btn) return;
-    var key = btn.getAttribute('data-filter');
-    Array.prototype.forEach.call(this.querySelectorAll('button'), function(b){
-      b.setAttribute('aria-pressed', String(b === btn));
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('.ach'), function(card){
-      card.classList.toggle('is-off', key !== 'all' && card.getAttribute('data-kind') !== key);
-    });
-    layoutAltitudes();
+    state.f = btn.getAttribute('data-filter');
+    applyFilter(true);
   });
-
-  function copyText(text){
-    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-    return new Promise(function(resolve, reject){
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.setAttribute('readonly', '');
-      ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
-      document.body.appendChild(ta);
-      ta.select();
-      var ok = false;
-      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
-      document.body.removeChild(ta);
-      ok ? resolve() : reject(new Error('copy failed'));
-    });
+  var searchTimer;
+  $('#achSearch').addEventListener('input', function(){
+    var v = this.value;
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function(){ state.q = v; applyFilter(true); }, 180);
+  });
+  window.addEventListener('popstate', function(){ readURL(); applyFilter(false); });
+  function readURL(){
+    var params = new URLSearchParams(location.search);
+    var f = params.get('f') || 'all';
+    state.f = FILTERS.some(function(x){ return x.key === f; }) ? f : 'all';
+    state.q = params.get('q') || '';
+    $('#achSearch').value = state.q;
   }
 
   $('#achList').addEventListener('click', function(e){
-    var btn = e.target.closest('.copy-btn');
+    var btn = e.target.closest('button[data-copy]');
     if (!btn) return;
-    copyText(btn.getAttribute('data-cite')).then(function(){
-      toast('書誌をコピーしました');
-    }).catch(function(){
-      toast('コピーできませんでした');
-    });
+    var i = Number(btn.getAttribute('data-i'));
+    var isBib = btn.getAttribute('data-copy') === 'bib';
+    var item = achItems[i];
+    copyAndTell(isBib ? item.bib : item.cite, isBib ? 'BibTeX' : '書誌');
   });
+  $('#copyAllCite').addEventListener('click', function(){
+    var t = achItems.filter(function(a){ return a.kind === 'talk'; })
+      .map(function(a, i){ return (i+1) + '. ' + a.cite; }).join('\n');
+    copyAndTell(t, '学会発表' + (D.talks||[]).length + '件の書誌');
+  });
+  $('#copyAllBib').addEventListener('click', function(){
+    var t = achItems.filter(function(a){ return a.kind === 'talk'; })
+      .map(function(a){ return a.bib; }).join('\n\n');
+    copyAndTell(t, 'BibTeX' + (D.talks||[]).length + '件');
+  });
+  $('#printBtn').addEventListener('click', function(){ window.print(); });
 
-  /* ---------- 6. works gallery ---------- */
-  $('#worksList').innerHTML = (D.works || []).map(function(w){
-    var inner =
+  /* ---------- 6. 制作物ギャラリー（見出し画像つき） ---------- */
+  var ART_COLOR = { 'Webサイト':'--c-presentation', 'ゲーム':'--c-activity', 'デザイン':'--c-work', '教材・ゲーム':'--c-award' };
+  function hash(str){ var h = 2166136261; for (var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = (h * 16777619) >>> 0; } return h; }
+  function rnd(seed){ var s = seed >>> 0; return function(){ s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+  /* 高度が上がる棒＝このサイトのモチーフ。作品の画面写真を装うものは作らない（§3-6） */
+  function cardArt(w){
+    var col = 'var(' + (ART_COLOR[w.kind] || '--accent') + ')';
+    var r = rnd(hash(w.title)), bars = [], n = 9;
+    for (var i=0;i<n;i++){
+      var base = 0.25 + 0.6 * (i / (n - 1));
+      var h = Math.max(0.12, Math.min(0.92, base + (r() - 0.5) * 0.3));
+      bars.push('<rect x="' + (10 + i * 20) + '" y="' + (100 - h * 88).toFixed(1) + '" width="12" rx="3" height="' + (h * 88).toFixed(1) + '"/>');
+    }
+    var starX = 150 + r() * 40, starY = 14 + r() * 16;
+    return '<svg class="card-art" viewBox="0 0 200 100" role="img" aria-label="' + esc(w.title) + 'のイメージ図形" focusable="false">' +
+      '<g fill="' + col + '" opacity=".55">' + bars.join('') + '</g>' +
+      '<line x1="0" y1="99" x2="200" y2="99" stroke="var(--art-line)" stroke-width="2"/>' +
+      '<circle cx="' + starX.toFixed(1) + '" cy="' + starY.toFixed(1) + '" r="2.6" fill="var(--accent-2)"/>' +
+      '</svg>';
+  }
+  $('#worksList').innerHTML = (D.works||[]).map(function(w, i){
+    var art = w.image
+      ? '<span class="card-art"><img src="' + esc(w.image) + '" alt="' + esc(w.title) + 'の画面" loading="lazy" decoding="async"></span>'
+      : cardArt(w);
+    var body = '<div class="card-body">' +
       (w.kind ? '<span class="kind">' + esc(w.kind) + (w.period ? '・' + esc(w.period) : '') + '</span>' : '') +
       '<h3>' + esc(w.title) + '</h3>' +
       (w.desc ? '<p>' + esc(w.desc) + '</p>' : '') +
-      (w.url ? '<span class="go">アーカイブで見る ↗</span>' : '');
+      (w.url ? '<span class="go">アーカイブで見る ↗</span>' : '') + '</div>';
     return w.url
-      ? '<a class="card" href="' + esc(w.url) + '" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">' + inner + '</a>'
-      : '<div class="card">' + inner + '</div>';
+      ? '<a class="card" id="work-' + i + '" href="' + esc(w.url) + '" target="_blank" rel="noopener">' + art + body + '</a>'
+      : '<div class="card" id="work-' + i + '">' + art + body + '</div>';
   }).join('');
 
-  /* ---------- 7. links ---------- */
+  /* ---------- 7. リンク / 8. 関連サイト ---------- */
   $('#linkList').innerHTML = activeLinks.map(function(l){
     return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
       '<span><strong>' + esc(l.label) + '</strong><br><span class="u">' + esc(l.url) + '</span></span>' +
       '<span class="arrow" aria-hidden="true">↗</span></a>';
   }).join('');
 
-  /* ---------- 8. 関連サイト ---------- */
-  var relatedSites = (D.relatedSites || []).filter(function(s){ return s && s.url; });
+  var relatedSites = (D.relatedSites||[]).filter(function(s){ return s && s.url; });
   if (relatedSites.length) {
     $('#relatedList').innerHTML = relatedSites.map(function(site){
-      return '<a class="card rel-card" href="' + esc(site.url) + '" target="_blank" rel="noopener" ' +
-        'style="text-decoration:none;color:inherit">' +
+      return '<a class="card rel-card" href="' + esc(site.url) + '" target="_blank" rel="noopener">' +
+        '<div class="card-body">' +
         '<h3><span>' + esc(site.name) + '</span><span class="arrow" aria-hidden="true">↗</span></h3>' +
         (site.desc ? '<p>' + esc(site.desc) + '</p>' : '') +
-        '<span class="u">' + esc(site.url) + '</span>' +
-        '</a>';
+        '<span class="u">' + esc(site.url) + '</span></div></a>';
     }).join('');
   } else {
-    $('#related').hidden = true;
-    var navRelated = $('#navRelated');
-    if (navRelated) navRelated.hidden = true;
+    $('#related').hidden = true;   /* 2件とも空なら節ごと非表示（§3-8） */
   }
 
-  /* ---------- reveal ---------- */
-  revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-  if (!('IntersectionObserver' in window) || reduced()) {
-    revealEls.forEach(function(el){ el.classList.add('in'); });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-count]'), countUp);
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if (!en.isIntersecting) return;
-        en.target.classList.add('in');
-        Array.prototype.forEach.call(en.target.querySelectorAll('[data-count]'), countUp);
-        io.unobserve(en.target);
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
-    revealEls.forEach(function(el){ io.observe(el); });
-  }
-  window.addEventListener('beforeprint', settleAll);
-  if (window.matchMedia) {
-    var mqPrint = window.matchMedia('print');
-    (mqPrint.addEventListener ? mqPrint.addEventListener('change', function(e){ if (e.matches) settleAll(); })
-                              : mqPrint.addListener && mqPrint.addListener(function(m){ if (m.matches) settleAll(); }));
-  }
+  /* ---------- ナビ（PC横並び / スマホはメニュー） ---------- */
+  var SECTIONS = [
+    { id:'about', label:'About' }, { id:'stats', label:'数字で見る活動' },
+    { id:'timeline', label:'年表' }, { id:'achievements', label:'業績一覧' },
+    { id:'works', label:'制作物' }, { id:'links', label:'リンク' },
+    { id:'related', label:'関連サイト' }
+  ].filter(function(s){ return s.id !== 'related' || relatedSites.length; });
 
-  /* ---------- altimeter（高度メーター）---------- */
-  var MAX_ALT = 12000;                       /* ページ末端＝成層圏 12,000 m */
-  var LAYERS = [
-    [0, '地上'], [900, '雲の下'], [2500, '雲の上'], [5500, '高層'], [8500, '圏界面'], [11000, '成層圏']
-  ];
+  $('#navDesktop').innerHTML = SECTIONS.map(function(s){
+    return '<a href="#' + s.id + '">' + esc(s.label) + '</a>';
+  }).join('');
+  $('#menuList').innerHTML = SECTIONS.map(function(s){
+    var alt = $('#' + s.id).getAttribute('data-alt');
+    return '<li><a href="#' + s.id + '">' + esc(s.label) +
+      (alt ? '<span class="alt">' + nf(alt) + ' m</span>' : '<span class="alt">3,000–9,000 m</span>') + '</a></li>';
+  }).join('');
+
+  var menu = $('#menu'), menuBtn = $('#menuBtn'), backdrop = $('#menuBackdrop');
+  function setMenu(open){
+    menu.hidden = !open; backdrop.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+    menuBtn.querySelector('span').textContent = open ? '✕' : '☰';
+    if (open) { var a = menu.querySelector('a'); if (a) a.focus(); }
+  }
+  menuBtn.addEventListener('click', function(){ setMenu(menu.hidden); });
+  backdrop.addEventListener('click', function(){ setMenu(false); menuBtn.focus(); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
+  mqWide.addEventListener ? mqWide.addEventListener('change', function(){ setMenu(false); })
+                          : mqWide.addListener && mqWide.addListener(function(){ setMenu(false); });
+
+  /* ページ内リンクでフォーカスも移す（§8-2） */
+  function focusTarget(hash){
+    var el = hash && document.getElementById(hash.slice(1));
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex','-1');
+    el.focus({ preventScroll:true });
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var hash = a.getAttribute('href');
+    if (hash === '#' ) return;
+    setTimeout(function(){ focusTarget(hash); }, reduced() ? 0 : 420);
+  });
+
+  window.addEventListener('hashchange', function(){
+    setTimeout(function(){
+      var a = document.activeElement, tag = (a && a.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea') return;   /* 入力中は奪わない */
+      focusTarget(location.hash);
+    }, reduced() ? 0 : 420);
+  });
+
+  /* ---------- 高度メーター（内容に紐づく固定値。§4-1） ---------- */
+  var MAX_ALT = 12000;
+  var LAYERS = [[0,'地上'],[900,'雲の下'],[2500,'雲の上'],[5500,'高層'],[8500,'圏界面'],[11000,'成層圏']];
+  var SKY = {
+    dark:  [[0,[10,17,48],[7,12,31]], [4000,[9,15,52],[6,10,30]], [8000,[10,12,46],[5,7,24]], [12000,[14,10,44],[3,4,16]]],
+    light: [[0,[219,231,251],[244,247,255]], [4000,[205,223,250],[240,246,255]], [8000,[190,214,248],[233,241,255]], [12000,[173,203,247],[226,236,255]]]
+  };
   var altValue = $('#altValue'), altFill = $('#altFill'), altLayer = $('#altLayer'), altYear = $('#altYear');
-  var tlItems = Array.prototype.slice.call(document.querySelectorAll('.tl-item'));
-  var tlSection = $('#timeline');
-
-  function scrollSpan(){
-    return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  var anchors = [];   /* {el, alt} */
+  function buildAnchors(){
+    anchors = $$('[data-alt]').filter(function(el){ return el.offsetParent !== null || el === document.body; })
+      .map(function(el){ return { el:el, alt:Number(el.getAttribute('data-alt')) }; });
+    anchors.sort(function(a,b){ return a.el.getBoundingClientRect().top - b.el.getBoundingClientRect().top; });
   }
-  function altAt(y){
-    return Math.round(Math.min(1, Math.max(0, y / scrollSpan())) * MAX_ALT);
+  function docTop(el){ var r = el.getBoundingClientRect(); return r.top + window.pageYOffset; }
+  function bounds(el){ var r = el.getBoundingClientRect(); var t = r.top + window.pageYOffset; return [t, t + r.height]; }
+  /* 要素の高度はその要素の範囲内では一定。要素と要素の間だけ補間する
+     （ヒーローを読んでいる間はずっと 0 m、年表の項目は自分の固定値をそのまま示す） */
+  function currentAlt(){
+    if (!anchors.length) return 0;
+    var line = window.pageYOffset + window.innerHeight * 0.45;
+    var bs = anchors.map(function(a){ return { alt:a.alt, b:bounds(a.el) }; });
+    if (line <= bs[0].b[1]) return bs[0].alt;
+    var last = bs[bs.length - 1];
+    if (line >= last.b[0]) return last.alt;
+    for (var i = 0; i < bs.length; i++) {
+      if (line >= bs[i].b[0] && line <= bs[i].b[1]) return bs[i].alt;
+      if (i < bs.length - 1 && line > bs[i].b[1] && line < bs[i+1].b[0]) {
+        var span = bs[i+1].b[0] - bs[i].b[1];
+        var t = span <= 0 ? 0 : (line - bs[i].b[1]) / span;
+        return Math.round(bs[i].alt + (bs[i+1].alt - bs[i].alt) * t);
+      }
+    }
+    return last.alt;
   }
   function layerOf(alt){
     var name = LAYERS[0][1];
-    for (var i = 0; i < LAYERS.length; i++) { if (alt >= LAYERS[i][0]) name = LAYERS[i][1]; }
+    for (var i=0;i<LAYERS.length;i++) if (alt >= LAYERS[i][0]) name = LAYERS[i][1];
     return name;
   }
-  function layoutAltitudes(){
-    var half = window.innerHeight / 2;
-    tlItems.forEach(function(el){
-      var r = el.getBoundingClientRect();
-      var centerDoc = r.top + window.pageYOffset + r.height / 2;
-      var chip = el.querySelector('.tl-alt');
-      if (chip) chip.textContent = '高度 ' + nf(altAt(centerDoc - half)) + ' m';
-    });
+  function mix(a, b, t){ return [0,1,2].map(function(i){ return Math.round(a[i] + (b[i]-a[i]) * t); }); }
+  function rgb(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function paintSky(alt){
+    var stops = isDark() ? SKY.dark : SKY.light;
+    for (var i=0;i<stops.length-1;i++){
+      if (alt >= stops[i][0] && alt <= stops[i+1][0]) {
+        var t = (alt - stops[i][0]) / (stops[i+1][0] - stops[i][0]);
+        root.style.setProperty('--sky-1', rgb(mix(stops[i][1], stops[i+1][1], t)));
+        root.style.setProperty('--sky-2', rgb(mix(stops[i][2], stops[i+1][2], t)));
+        return;
+      }
+    }
+    root.style.setProperty('--sky-1', rgb(stops[stops.length-1][1]));
+    root.style.setProperty('--sky-2', rgb(stops[stops.length-1][2]));
   }
+  var tlItems = $$('.tl-item');
   function updateAltimeter(){
-    var y = window.pageYOffset;
-    var alt = altAt(y);
+    var alt = currentAlt();
     altValue.textContent = nf(alt);
     altFill.style.height = (alt / MAX_ALT * 100) + '%';
     altLayer.textContent = layerOf(alt);
+    paintSky(alt);
+    root.classList.toggle('summit', alt >= MAX_ALT - 100);
 
-    var year = '';
-    var box = tlSection.getBoundingClientRect();
-    if (box.top < window.innerHeight * 0.6 && box.bottom > 0) {
-      var line = window.innerHeight * 0.55;
-      for (var i = 0; i < tlItems.length; i++) {
+    var year = '', line = window.innerHeight * 0.5;
+    var tl = $('#timeline').getBoundingClientRect();
+    if (tl.top < window.innerHeight * 0.6 && tl.bottom > 0) {
+      for (var i=0;i<tlItems.length;i++) {
         if (tlItems[i].getBoundingClientRect().top < line) year = tlItems[i].getAttribute('data-when');
       }
       var m = year.match(/^\d{4}/);
       if (year) year = '到達 ' + (m ? m[0] + '年' : year);
     }
     if (altYear.textContent !== year) altYear.textContent = year;
+
+    /* ナビの現在地（§3-0） */
+    var curId = '', mid = window.innerHeight * 0.4;
+    SECTIONS.forEach(function(s){
+      var el = document.getElementById(s.id);
+      if (el && el.getBoundingClientRect().top <= mid) curId = s.id;
+    });
+    $$('.nav a, .menu a').forEach(function(a){
+      var on = a.getAttribute('href') === '#' + curId;
+      on ? a.setAttribute('aria-current','true') : a.removeAttribute('aria-current');
+    });
+    $('#toTop').classList.toggle('show', window.pageYOffset > window.innerHeight * 0.8);
   }
 
   var ticking = false;
@@ -779,20 +1209,46 @@ p{margin:0}
     ticking = true;
     requestAnimationFrame(function(){ updateAltimeter(); ticking = false; });
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
+  window.addEventListener('scroll', onScroll, { passive:true });
   var resizeTimer;
   window.addEventListener('resize', function(){
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function(){ layoutAltitudes(); updateAltimeter(); }, 150);
+    resizeTimer = setTimeout(function(){ buildAnchors(); updateAltimeter(); }, 150);
+  });
+  $('#toTop').addEventListener('click', function(){
+    window.scrollTo({ top:0, behavior: reduced() ? 'auto' : 'smooth' });
+    $('#hero').focus({ preventScroll:true });
   });
 
-  layoutAltitudes();
-  updateAltimeter();
-  setTimeout(function(){ layoutAltitudes(); updateAltimeter(); }, 300);
+  /* ---------- 出現アニメーション ---------- */
+  var revealEls = $$('.reveal');
+  function settleAll(){
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+    $$('[data-count]').forEach(settle);
+  }
+  if (!('IntersectionObserver' in window) || reduced()) {
+    settleAll();
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        $$('[data-count]', en.target).forEach(countUp);
+        io.unobserve(en.target);
+      });
+    }, { rootMargin:'0px 0px -10% 0px', threshold:0.08 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+  window.addEventListener('beforeprint', settleAll);
+  if (window.matchMedia) {
+    var mqPrint = window.matchMedia('print');
+    var onPrint = function(m){ if (m.matches) settleAll(); };
+    mqPrint.addEventListener ? mqPrint.addEventListener('change', onPrint)
+                             : mqPrint.addListener && mqPrint.addListener(onPrint);
+  }
 
-  /* ---------- theme（既定は OS 設定。localStorage は使わない）---------- */
-  var toggle = $('#themeToggle'), icon = $('#themeIcon'), themeMeta = document.querySelector('meta[name="theme-color"]');
+  /* ---------- テーマ（既定はOS設定。保存はしない） ---------- */
+  var toggle = $('#themeToggle'), icon = $('#themeIcon'), themeMeta = $('meta[name="theme-color"]');
   function isDark(){
     var t = root.getAttribute('data-theme');
     return t ? t === 'dark' : mqDark.matches;
@@ -804,15 +1260,16 @@ p{margin:0}
     toggle.setAttribute('aria-label', dark ? 'ライトモードに切り替える' : 'ダークモードに切り替える');
     if (themeMeta) themeMeta.setAttribute('content', dark ? '#070c1f' : '#eef3fc');
     stars.apply();
+    paintSky(currentAlt());
   }
   toggle.addEventListener('click', function(){
     root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
     syncTheme();
   });
-  (mqDark.addEventListener ? mqDark.addEventListener('change', syncTheme)
-                           : mqDark.addListener && mqDark.addListener(syncTheme));
+  mqDark.addEventListener ? mqDark.addEventListener('change', syncTheme)
+                          : mqDark.addListener && mqDark.addListener(syncTheme);
 
-  /* ---------- 星空（夜空・成層圏。ライト時と reduced-motion では動かさない）---------- */
+  /* ---------- 星空（ライト時と reduced-motion では動かさない） ---------- */
   function makeStars(){
     var cv = $('#stars');
     var ctx = cv.getContext ? cv.getContext('2d') : null;
@@ -827,87 +1284,143 @@ p{margin:0}
       cv.style.height = window.innerHeight + 'px';
       var n = Math.min(200, Math.round(window.innerWidth * window.innerHeight / 9000));
       list = [];
-      for (var i = 0; i < n; i++) {
-        list.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: (Math.random() * 1.0 + 0.35) * dpr,
-          a: Math.random() * 0.55 + 0.25,
-          sp: Math.random() * 0.8 + 0.25,
-          ph: Math.random() * Math.PI * 2,
-          d: Math.random() * 0.8 + 0.2
-        });
+      for (var i=0;i<n;i++){
+        list.push({ x:Math.random()*w, y:Math.random()*h, r:(Math.random()*1+.35)*dpr,
+                    a:Math.random()*.55+.25, sp:Math.random()*.8+.25, ph:Math.random()*Math.PI*2,
+                    d:Math.random()*.8+.2 });
       }
     }
-
     function draw(t, animate){
       if (!ctx) return;
-      ctx.clearRect(0, 0, w, h);
+      ctx.clearRect(0,0,w,h);
       var sy = window.pageYOffset * dpr;
-      for (var i = 0; i < list.length; i++) {
+      for (var i=0;i<list.length;i++){
         var s = list[i];
-        var y = s.y - (animate ? sy * 0.06 * s.d : 0);
+        var y = s.y - (animate ? sy * .06 * s.d : 0);
         y = ((y % h) + h) % h;
-        var a = animate ? s.a * (0.62 + 0.38 * Math.sin(t * 0.0016 * s.sp + s.ph)) : s.a * 0.85;
-        ctx.globalAlpha = a;
+        ctx.globalAlpha = animate ? s.a * (.62 + .38 * Math.sin(t * .0016 * s.sp + s.ph)) : s.a * .85;
         ctx.fillStyle = i % 11 === 0 ? '#ffd479' : '#ffffff';
-        ctx.beginPath();
-        ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(s.x, y, s.r, 0, Math.PI*2); ctx.fill();
       }
       if (animate && shooter) {
-        ctx.globalAlpha = Math.max(0, 1 - shooter.life / shooter.max) * 0.9;
-        var g = ctx.createLinearGradient(shooter.x, shooter.y, shooter.x - shooter.vx * 14, shooter.y - shooter.vy * 14);
-        g.addColorStop(0, 'rgba(255,255,255,.95)');
-        g.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 1.4 * dpr;
-        ctx.beginPath();
-        ctx.moveTo(shooter.x, shooter.y);
-        ctx.lineTo(shooter.x - shooter.vx * 14, shooter.y - shooter.vy * 14);
-        ctx.stroke();
+        ctx.globalAlpha = Math.max(0, 1 - shooter.life / shooter.max) * .9;
+        var g = ctx.createLinearGradient(shooter.x, shooter.y, shooter.x - shooter.vx*14, shooter.y - shooter.vy*14);
+        g.addColorStop(0,'rgba(255,255,255,.95)'); g.addColorStop(1,'rgba(255,255,255,0)');
+        ctx.strokeStyle = g; ctx.lineWidth = 1.4*dpr;
+        ctx.beginPath(); ctx.moveTo(shooter.x, shooter.y);
+        ctx.lineTo(shooter.x - shooter.vx*14, shooter.y - shooter.vy*14); ctx.stroke();
       }
       ctx.globalAlpha = 1;
     }
-
     function tick(t){
       if (!running) return;
       if (shooter) {
         shooter.x += shooter.vx; shooter.y += shooter.vy; shooter.life++;
         if (shooter.life > shooter.max) shooter = null;
-      } else if (Math.random() < 0.0016) {
-        shooter = {
-          x: Math.random() * w * 0.7, y: Math.random() * h * 0.5,
-          vx: (5 + Math.random() * 3) * dpr, vy: (2.2 + Math.random() * 1.6) * dpr,
-          life: 0, max: 60
-        };
+      } else if (Math.random() < .0016) {
+        shooter = { x:Math.random()*w*.7, y:Math.random()*h*.5,
+                    vx:(5+Math.random()*3)*dpr, vy:(2.2+Math.random()*1.6)*dpr, life:0, max:60 };
       }
       draw(t, true);
       raf = requestAnimationFrame(tick);
     }
-
     function stop(){ running = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
-
     function apply(){
       if (!ctx) return;
-      if (!isDark()) { stop(); ctx.clearRect(0, 0, w, h); return; }
-      if (reduced()) { stop(); draw(0, false); return; }
+      if (!isDark()) { stop(); ctx.clearRect(0,0,w,h); return; }
+      if (reduced()) { stop(); draw(0,false); return; }
       if (!running) { running = true; raf = requestAnimationFrame(tick); }
     }
-
     build();
     var rt;
-    window.addEventListener('resize', function(){
-      clearTimeout(rt);
-      rt = setTimeout(function(){ build(); apply(); }, 200);
-    });
-    (mqReduce.addEventListener ? mqReduce.addEventListener('change', apply)
-                               : mqReduce.addListener && mqReduce.addListener(apply));
-    return { apply: apply };
+    window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ build(); apply(); }, 200); });
+    mqReduce.addEventListener ? mqReduce.addEventListener('change', apply)
+                              : mqReduce.addListener && mqReduce.addListener(apply);
+    return { apply:apply };
   }
-
   var stars = makeStars();
+
+  /* ---------- キーボード操作（§4-2） ---------- */
+  var dlg = $('#kbdDialog'), lastFocus = null;
+  function openDlg(){ lastFocus = document.activeElement; dlg.hidden = false; $('#kbdClose').focus(); }
+  function closeDlg(){ dlg.hidden = true; if (lastFocus) lastFocus.focus(); }
+  $('#kbdOpen').addEventListener('click', openDlg);
+  $('#kbdClose').addEventListener('click', closeDlg);
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) closeDlg(); });
+
+  var NAV_IDS = ['hero'].concat(SECTIONS.map(function(s){ return s.id; }));
+  function goSection(dir){
+    var hdr = $('.site-header').offsetHeight;
+    var tops = NAV_IDS.map(function(id){ return { id:id, top:docTop(document.getElementById(id)) }; })
+                      .filter(function(t){ return document.getElementById(t.id).offsetParent !== null; });
+    var ref = window.pageYOffset + hdr + 6, target = null;
+    if (dir > 0) { for (var i=0;i<tops.length;i++) if (tops[i].top > ref) { target = tops[i]; break; } }
+    else { for (var j=tops.length-1;j>=0;j--) if (tops[j].top < ref - 16) { target = tops[j]; break; } }
+    if (!target) return;
+    location.hash = '#' + target.id;
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target, tag = (t.tagName || '').toLowerCase();
+    var typing = tag === 'input' || tag === 'textarea' || tag === 'select' || t.isContentEditable;
+    if (e.key === 'Escape') {
+      if (!dlg.hidden) { closeDlg(); return; }
+      if (!menu.hidden) { setMenu(false); menuBtn.focus(); return; }
+      if (typing) { t.blur(); return; }
+      return;
+    }
+    if (typing) return;
+    switch (e.key) {
+      case 'j': goSection(1); break;
+      case 'k': goSection(-1); break;
+      case 'g': window.scrollTo({ top:0, behavior: reduced()?'auto':'smooth' }); break;
+      case 'G': window.scrollTo({ top:document.body.scrollHeight, behavior: reduced()?'auto':'smooth' }); break;
+      case '/':
+        e.preventDefault();
+        $('#achievements').scrollIntoView({ behavior: reduced()?'auto':'smooth', block:'start' });
+        setTimeout(function(){ $('#achSearch').focus(); }, reduced()?0:450);
+        break;
+      case 't': toggle.click(); break;
+      case '?': openDlg(); break;
+      default: return;
+    }
+  });
+
+  /* ---------- 構造化データ（§8-4。データ源は data.js のみ） ---------- */
+  (function jsonld(){
+    var site = (D.siteMeta && D.siteMeta.siteUrl) || location.href;
+    var person = {
+      '@type':'Person', '@id':site + '#person',
+      name:p.name, alternateName:p.nameEn, url:site,
+      jobTitle:(p.roles||[]).join(' / '),
+      affiliation:(p.roles||[]).map(function(r){ return { '@type':'Organization', name:r }; }),
+      alumniOf:(p.path||[]).map(function(p2){ return { '@type':'EducationalOrganization', name:p2 }; }),
+      knowsAbout:p.keywords||[],
+      sameAs:activeLinks.map(function(l){ return l.url; })
+    };
+    var works = (D.talks||[]).map(function(t){
+      return {
+        '@type':'ScholarlyArticle', name:t.title,
+        author:(t.authors||[]).map(function(a){ return { '@type':'Person', name:a.name }; }),
+        isPartOf:{ '@type':'PublicationEvent', name:t.venue },
+        datePublished:t.date || undefined,
+        locationCreated:t.place ? { '@type':'Place', name:t.place } : undefined
+      };
+    });
+    var el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.textContent = JSON.stringify({ '@context':'https://schema.org', '@graph':[person].concat(works) });
+    document.head.appendChild(el);
+  })();
+
+  /* ---------- 起動 ---------- */
+  buildAnchors();
+  readURL();
+  applyFilter(false);
   syncTheme();
+  updateAltimeter();
+  setTimeout(function(){ buildAnchors(); updateAltimeter(); }, 300);
+  if (location.hash) setTimeout(function(){ focusTarget(location.hash); }, 200);
 })();
 </script>
 </body>
