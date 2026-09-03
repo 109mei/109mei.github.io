@@ -205,6 +205,21 @@ window.SITE_DATA = {
     }
   ],
 
+  /* ── 関連サイト（§3-8。§6の業績データとは別枠のサイト情報）──────
+     url が空のカードは表示しない（2件とも空ならセクションごと非表示） */
+  relatedSites: [
+    {
+      name: 'ゲーム制作・プログラミング学習アーカイブ',
+      desc: '制作した作品を遊んで・コードを見て学べるサイト',
+      url: 'https://109mei.github.io/game-learning-archive/'
+    },
+    {
+      name: 'IDERIA公式サイト',
+      desc: '代表を務める制作団体の公式サイト',
+      url: 'https://109mei.github.io/ideria-official/'
+    }
+  ],
+
   /* ── 年表（§6「活動」・古い→新しい順）───────────────────────
      type: presentation=発表 / award=受賞 / activity=活動 / work=制作 */
   timeline: [

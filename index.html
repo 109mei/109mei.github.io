@@ -242,6 +242,13 @@ p{margin:0}
 .card p{font-size:13.5px; color:var(--muted); flex:1}
 .card .go{font-size:13px; font-weight:600}
 
+/* ===== related sites ===================================================== */
+.rel-cards{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.rel-card{gap:7px}
+.rel-card h3{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
+.rel-card h3 .arrow{color:var(--accent); font-size:16px; flex:none}
+.rel-card .u{font-size:11.5px; color:var(--muted); word-break:break-all}
+
 /* ===== links / footer ==================================================== */
 .linklist{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
 .linklist a{
@@ -285,7 +292,7 @@ p{margin:0}
     --c-presentation:#000; --c-award:#000; --c-activity:#000; --c-work:#000;
   }
   body{background:#fff !important; color:#000; font-size:10.5pt; line-height:1.6}
-  #stars,.site-header,.altimeter,.theme-toggle,.filters,.copy-btn,.scroll-hint,.toast,.skip,#works{display:none !important}
+  #stars,.site-header,.altimeter,.theme-toggle,.filters,.copy-btn,.scroll-hint,.toast,.skip,#works,#related{display:none !important}
   .js .reveal{opacity:1 !important; transform:none !important}
   .hero{min-height:0; padding:0 0 14px; page-break-after:avoid}
   .hero h1{font-size:20pt; margin:0}
@@ -332,6 +339,7 @@ p{margin:0}
       <a href="#achievements">業績</a>
       <a href="#works">制作物</a>
       <a href="#links">リンク</a>
+      <a href="#related" id="navRelated">関連サイト</a>
     </nav>
     <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"
             title="ダーク／ライト切替（既定はOSの設定に従います）">
@@ -405,6 +413,12 @@ p{margin:0}
   <section class="section wrap" id="links" aria-labelledby="linksH">
     <div class="section-head"><h2 id="linksH">リンク</h2><span class="en">links</span></div>
     <div class="linklist reveal" id="linkList"></div>
+  </section>
+
+  <!-- 8. 関連サイト -->
+  <section class="section wrap" id="related" aria-labelledby="relatedH">
+    <div class="section-head"><h2 id="relatedH">関連サイト</h2><span class="en">related sites</span></div>
+    <div class="cards rel-cards reveal" id="relatedList"></div>
   </section>
 </main>
 
@@ -669,6 +683,23 @@ p{margin:0}
       '<span><strong>' + esc(l.label) + '</strong><br><span class="u">' + esc(l.url) + '</span></span>' +
       '<span class="arrow" aria-hidden="true">↗</span></a>';
   }).join('');
+
+  /* ---------- 8. 関連サイト ---------- */
+  var relatedSites = (D.relatedSites || []).filter(function(s){ return s && s.url; });
+  if (relatedSites.length) {
+    $('#relatedList').innerHTML = relatedSites.map(function(site){
+      return '<a class="card rel-card" href="' + esc(site.url) + '" target="_blank" rel="noopener" ' +
+        'style="text-decoration:none;color:inherit">' +
+        '<h3><span>' + esc(site.name) + '</span><span class="arrow" aria-hidden="true">↗</span></h3>' +
+        (site.desc ? '<p>' + esc(site.desc) + '</p>' : '') +
+        '<span class="u">' + esc(site.url) + '</span>' +
+        '</a>';
+    }).join('');
+  } else {
+    $('#related').hidden = true;
+    var navRelated = $('#navRelated');
+    if (navRelated) navRelated.hidden = true;
+  }
 
   /* ---------- reveal ---------- */
   revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
