@@ -1041,6 +1041,16 @@ kbd{
       : '<div class="card" id="work-' + i + '">' + art + body + '</div>';
   }).join('');
 
+  /* 見出し画像が読めなかったときは図形にもどす（欠けた画像枠を出さない）*/
+  $$('#worksList .card-art img').forEach(function (img) {
+    img.addEventListener('error', function () {
+      var card = img.closest('.card');
+      if (!card) return;
+      var w = (D.works || [])[Number(card.id.slice(5))];
+      if (w) img.parentNode.outerHTML = cardArt(w);
+    });
+  });
+
   /* ---------- 7. リンク / 8. 関連サイト ---------- */
   $('#linkList').innerHTML = activeLinks.map(function(l){
     return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +

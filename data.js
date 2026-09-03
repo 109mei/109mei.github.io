@@ -185,7 +185,7 @@ window.SITE_DATA = {
     {
       title: 'チョコパキ！',
       kind: 'ゲーム',
-      image: '',
+      image: 'https://109mei.github.io/game-learning-archive/images/games/ideria-chokopaki.png',
       desc: 'Python + Pygame の対戦ゲーム。おもちゃ化の試作も行った。',
       url: 'https://109mei.github.io/game-learning-archive/games/ideria-chokopaki/'
     },
