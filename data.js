@@ -197,13 +197,6 @@ window.SITE_DATA = {
       url: ''
     },
     {
-      title: 'ハチ避け',
-      kind: 'ゲーム',
-      image: '',
-      desc: '十人十色ゲームコンテスト出品作。',
-      url: 'https://109mei.github.io/game-learning-archive/games/contest-hachi-yoke/'
-    },
-    {
       title: 'IDERIAロゴ／ゲーム学会 第24回全国大会 テーマポスター',
       kind: 'デザイン',
       image: '',
