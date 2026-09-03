@@ -1,0 +1,294 @@
+/*!
+ * data.js — 掲載データ
+ *
+ * 唯一のデータ源は docs/SITE_SPEC.md の §6（確定分のみ）です。
+ * §6 にない業績・情報を推測で足さないこと。追加・修正はまず仕様書 §6 を更新してから。
+ * §5 の掲載禁止情報（学籍番号・住所・電話番号・メールアドレス・生年月日 ほか）は書かない。
+ */
+window.SITE_DATA = {
+
+  /* ── プロフィール（§3-1 / §3-2） ───────────────────────────── */
+  profile: {
+    name: '永野 斗遠',
+    reading: 'ながの とわ',
+    nameEn: 'Towa Nagano',
+    handle: '109mei',
+    roles: [
+      '九州情報大学大学院 荒平研究室',
+      '制作団体 IDERIA 代表'
+    ],
+    keywords: ['教育用ゲームジャム研究', 'ゲーム制作', '高大連携'],
+    about: [
+      '福岡県立嘉穂総合高等学校を経て九州情報大学へ進み、現在は同大学院の荒平高章研究室に在籍しています。',
+      '研究テーマは「初心者向け教育用ゲームジャムの設計と実践」。制作団体 IDERIA の代表として、ゲームと教材を制作しています。'
+    ],
+    path: [
+      '福岡県立嘉穂総合高等学校',
+      '九州情報大学',
+      '九州情報大学大学院（荒平高章研究室）'
+    ]
+  },
+
+  /* ── リンク（§3-7）───────────────────────────────────────────
+     ideria は公開後に URL を入れると自動的に表示されます。空の間は非表示。 */
+  links: {
+    github:  { label: 'GitHub',       url: 'https://github.com/109mei' },
+    archive: { label: '学習アーカイブ', url: 'https://109mei.github.io/game-learning-archive/' },
+    ideria:  { label: 'IDERIA公式',    url: '' }
+  },
+
+  /* ── 数字で見る活動（§3-3）─────────────────────────────────── */
+  stats: [
+    { label: '学会発表',               value: 7,  unit: '件' },
+    { label: '受賞',                   value: 2,  unit: '件' },
+    { label: '運営したゲームジャム',   value: 4,  unit: '回', note: '＋予備実験' },
+    { label: 'ブラウザで遊べる公開作品', value: 24, unit: '本', note: '学習アーカイブより' }
+  ],
+
+  /* ── 学会発表（§6・新しい順）───────────────────────────────
+     upcomingUntil: この日より前は「発表予定」と表示する */
+  talks: [
+    {
+      authors: [
+        { name: '伊嵜音子' },
+        { name: '椎葉圭', org: '純真高等学校' },
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学大学院' }
+      ],
+      title: '写真・一言分析から感情を読み取り記録していくアプリケーションの提案',
+      venue: 'ゲーム学会「ゲームと健康科学」研究部会 第3回研究会',
+      dateLabel: '2026-09-05',
+      date: '2026-09-05',
+      place: '九州情報大学',
+      notes: ['共著', '高大連携'],
+      upcomingUntil: '2026-09-05'
+    },
+    {
+      authors: [
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章' }
+      ],
+      title: '初心者向けゲームジャムの実施 ～第1回の実施結果と次回への課題～',
+      venue: 'ゲーム学会「ゲームと健康科学」研究部会 第3回研究会',
+      dateLabel: '2026-09-05',
+      date: '2026-09-05',
+      format: 'ポスター発表',
+      upcomingUntil: '2026-09-05'
+    },
+    {
+      authors: [
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: 'VRを用いた3Dモデル制作体験会の実施と課題',
+      venue: 'ゲーム学会「ゲームと健康科学」研究部会 第2回研究会',
+      dateLabel: '2026-07-10',
+      date: '2026-07-10',
+      place: 'オンライン'
+    },
+    {
+      authors: [
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: '新しいゲームコンテストの試行と評価',
+      venue: 'ゲーム学会 第24回全国大会',
+      session: 'OB3',
+      dateLabel: '2026-03-01',
+      date: '2026-03-01',
+      place: '九州情報大学'
+    },
+    {
+      authors: [
+        { name: '田村明日香' },
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: '自主制作ゲーム『チョコパキ！』の物理的触覚体験への拡張と試作',
+      venue: 'ゲーム学会 第24回全国大会',
+      session: 'OC3',
+      dateLabel: '2026-02-28〜03-01',
+      date: '2026-03-01',
+      place: '九州情報大学',
+      notes: ['共著・第2著者']
+    },
+    {
+      authors: [
+        { name: '永野斗遠', me: true },
+        { name: '田村明日香' },
+        { name: '中嶋文萌' },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: 'VRを用いた3Dモデル制作体験',
+      venue: 'ゲーム学会 第24回全国大会',
+      session: 'DP4',
+      dateLabel: '2026-02-28〜03-01',
+      date: '2026-03-01',
+      place: '九州情報大学',
+      format: 'デモ・ポスター'
+    },
+    {
+      authors: [
+        { name: '永野斗遠', me: true },
+        { name: '田村明日香' },
+        { name: '椎葉圭' },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: '高大連携による制作ゲーム『OneButtonGames』',
+      venue: 'ゲーム学会 第24回全国大会',
+      session: 'DP5',
+      dateLabel: '2026-02-28〜03-01',
+      date: '2026-03-01',
+      place: '九州情報大学',
+      format: 'デモ・ポスター'
+    }
+  ],
+
+  /* ── 受賞（§6）─────────────────────────────────────────────── */
+  awards: [
+    {
+      title: 'ゲーム学会 第21回ゲームコンペ 優秀賞',
+      work: '作品「チョコパキ！」',
+      recipients: ['永野斗遠', '田村明日香'],
+      org: '九州情報大学',
+      dateLabel: '表彰式 2024-03-02（第22回全国大会）',
+      date: '2024-03-02'
+    },
+    {
+      title: '令和の都だざいふ 世界に羽ばたく人材育成表彰',
+      work: '2年連続受賞',
+      recipients: ['永野斗遠', '田村明日香', 'IDERIA'],
+      dateLabel: '直近の授賞式 2026-02-08',
+      date: '2026-02-08'
+    }
+  ],
+
+  /* ── 制作物（§6）───────────────────────────────────────────
+     url が空のものはリンクを出さない（リンク切れを作らないため） */
+  works: [
+    {
+      title: 'ゲーム制作・プログラミング学習アーカイブ',
+      kind: 'Webサイト',
+      period: '2026〜',
+      desc: '',
+      url: 'https://109mei.github.io/game-learning-archive/'
+    },
+    {
+      title: 'チョコパキ！',
+      kind: 'ゲーム',
+      desc: 'Python + Pygame の対戦ゲーム。おもちゃ化の試作も行った。',
+      url: 'https://109mei.github.io/game-learning-archive/games/ideria-chokopaki/'
+    },
+    {
+      title: 'OneButtonGames ランチャー',
+      kind: 'ゲーム',
+      desc: '高校生・大学生による1ボタンゲーム10作品を収録。IDERIA × 純真高等学校 × 九州情報大学。',
+      url: ''
+    },
+    {
+      title: 'ハチ避け',
+      kind: 'ゲーム',
+      desc: '十人十色ゲームコンテスト出品作。',
+      url: 'https://109mei.github.io/game-learning-archive/games/contest-hachi-yoke/'
+    },
+    {
+      title: 'IDERIAロゴ／ゲーム学会 第24回全国大会 テーマポスター',
+      kind: 'デザイン',
+      desc: 'ロゴと大会テーマポスターのデザイン。',
+      url: ''
+    },
+    {
+      title: 'しまっぴー先生の覚えてクイズ／ひらがなUNO／オセロカードゲーム試作',
+      kind: '教材・ゲーム',
+      desc: 'IDERIA制作。「しまっぴー先生の覚えてクイズ」は TyranoScript 製。',
+      url: ''
+    }
+  ],
+
+  /* ── 年表（§6「活動」・古い→新しい順）───────────────────────
+     type: presentation=発表 / award=受賞 / activity=活動 / work=制作 */
+  timeline: [
+    {
+      when: '2024年度',
+      type: 'activity',
+      title: '十人十色ゲームコンテスト実施',
+      detail: '九州情報大学'
+    },
+    {
+      when: '2024年度',
+      type: 'award',
+      title: '「チョコパキ！」が第21回ゲームコンペ 優秀賞',
+      detail: '表彰式 2024-03-02（第22回全国大会）'
+    },
+    {
+      when: '2025-03-18',
+      type: 'activity',
+      title: '福岡県立嘉穂総合高等学校で1日完結型ゲームジャム試行',
+      detail: '母校での予備実験'
+    },
+    {
+      when: '2025-05〜07',
+      type: 'activity',
+      title: '九州情報大学 学部生対象ゲームジャムを2日程で実施',
+      detail: '第1回・第2回'
+    },
+    {
+      when: '2025-11',
+      type: 'activity',
+      title: '純真高等学校 eスポーツ部でゲームジャム実施',
+      detail: '第3回・高大連携',
+      link: { label: '紹介記事', url: 'https://junshin-hs.ed.jp/club/archives/19744' }
+    },
+    {
+      when: '2025-12',
+      type: 'activity',
+      title: '純真高等学校 追加制作サポート'
+    },
+    {
+      when: '2026-01-21',
+      type: 'activity',
+      title: '純真高等学校でVR 3Dモデル制作体験会'
+    },
+    {
+      when: '2026-01-25',
+      type: 'work',
+      title: 'OneButtonGames プロジェクト始動',
+      detail: '企画書'
+    },
+    {
+      when: '2026-02-08',
+      type: 'award',
+      title: '令和の都だざいふ 世界に羽ばたく人材育成表彰',
+      detail: '2年連続'
+    },
+    {
+      when: '2026-02-28〜03-01',
+      type: 'presentation',
+      title: 'ゲーム学会 第24回全国大会で発表4件',
+      detail: '九州情報大学開催'
+    },
+    {
+      when: '2026-07-10',
+      type: 'presentation',
+      title: '「ゲームと健康科学」第2回研究会で発表'
+    },
+    {
+      when: '2026-08-21',
+      type: 'activity',
+      title: '夏の集中講義「ゲームプログラミング」で第4回ゲームジャム実施',
+      detail: '8-24 改良日'
+    },
+    {
+      when: '2026-08〜',
+      type: 'work',
+      title: '学習アーカイブサイトを公開',
+      link: { label: 'サイトを見る', url: 'https://109mei.github.io/game-learning-archive/' }
+    },
+    {
+      when: '2026-09-05',
+      type: 'presentation',
+      title: '「ゲームと健康科学」第3回研究会で発表2件',
+      upcomingUntil: '2026-09-05'
+    }
+  ]
+};

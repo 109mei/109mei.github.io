@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>永野 斗遠 — ポートフォリオ</title>
+<meta name="description" content="永野斗遠（九州情報大学大学院 荒平研究室／制作団体IDERIA代表）のポートフォリオ。教育用ゲームジャム研究・ゲーム制作・高大連携の記録。">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#070c1f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="永野 斗遠 — ポートフォリオ">
+<meta property="og:description" content="教育用ゲームジャム研究・ゲーム制作・高大連携。学会発表と制作物の記録。">
+<meta property="og:url" content="https://109mei.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070c1f'/%3E%3Cpath d='M16 6l2.2 6.4L25 14l-5.4 3.1L20.8 24 16 20.4 11.2 24l1.2-6.9L7 14l6.8-1.6z' fill='%23ffd479'/%3E%3C/svg%3E">
+<style>
+/* ===== tokens ============================================================ */
+:root{
+  --bg:#eef3fc; --bg-2:#ffffff; --bg-3:#e3eaf8;
+  --fg:#0f1a33; --muted:#4c5a7c; --line:rgba(15,26,51,.14); --line-2:rgba(15,26,51,.30);
+  --accent:#1f57c3; --accent-2:#9a6207; --ring:#1f57c3;
+  --sky-1:#dbe7fb; --sky-2:#f4f7ff;
+  --c-presentation:#1f6fbf; --c-award:#9a6207; --c-activity:#1f7a63; --c-work:#7a3fb0;
+  --shadow:0 1px 2px rgba(15,26,51,.06), 0 8px 24px rgba(15,26,51,.07);
+  --radius:14px; --maxw:1000px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#070c1f; --bg-2:#0e1633; --bg-3:#131e42;
+    --fg:#e9edff; --muted:#9fabd2; --line:rgba(233,237,255,.14); --line-2:rgba(233,237,255,.30);
+    --accent:#8dc6ff; --accent-2:#ffd479; --ring:#8dc6ff;
+    --sky-1:#0a1130; --sky-2:#070c1f;
+    --c-presentation:#8dc6ff; --c-award:#ffd479; --c-activity:#6fe0bf; --c-work:#d3aaff;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#070c1f; --bg-2:#0e1633; --bg-3:#131e42;
+  --fg:#e9edff; --muted:#9fabd2; --line:rgba(233,237,255,.14); --line-2:rgba(233,237,255,.30);
+  --accent:#8dc6ff; --accent-2:#ffd479; --ring:#8dc6ff;
+  --sky-1:#0a1130; --sky-2:#070c1f;
+  --c-presentation:#8dc6ff; --c-award:#ffd479; --c-activity:#6fe0bf; --c-work:#d3aaff;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* ===== base ============================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--fg);
+  background:linear-gradient(180deg,var(--sky-2) 0%,var(--sky-1) 45%,var(--bg) 100%) fixed, var(--bg);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",Meiryo,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.75; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+a{color:var(--accent); text-decoration-thickness:1px; text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--ring); outline-offset:3px; border-radius:6px}
+h1,h2,h3{line-height:1.35; letter-spacing:.02em; margin:0}
+ul,ol{margin:0; padding:0; list-style:none}
+p{margin:0}
+.tnum{font-variant-numeric:tabular-nums}
+
+#stars{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:1; transition:opacity .4s ease}
+:root[data-theme="light"] #stars{opacity:0}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]) #stars{opacity:0} }
+
+.skip{position:absolute; left:-9999px; top:0; z-index:100; background:var(--bg-2); color:var(--fg); padding:10px 16px; border-radius:0 0 10px 0}
+.skip:focus{left:0}
+
+.wrap{width:min(100% - 2.5rem, var(--maxw)); margin-inline:auto}
+
+/* ===== header ============================================================ */
+.site-header{
+  position:sticky; top:0; z-index:40;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  background:color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{display:flex; align-items:center; gap:14px; min-height:56px}
+.brand{font-weight:700; letter-spacing:.06em; white-space:nowrap; text-decoration:none; color:var(--fg)}
+.brand small{display:block; font-size:10px; font-weight:500; letter-spacing:.18em; color:var(--muted); line-height:1}
+.nav{flex:1; display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{
+  color:var(--muted); text-decoration:none; font-size:13.5px; white-space:nowrap;
+  padding:7px 10px; border-radius:999px;
+}
+.nav a:hover,.nav a:focus-visible{color:var(--fg); background:var(--bg-3)}
+.theme-toggle{
+  flex:none; width:38px; height:38px; border-radius:50%; cursor:pointer;
+  border:1px solid var(--line); background:var(--bg-2); color:var(--fg); font-size:16px; line-height:1;
+}
+.theme-toggle:hover{border-color:var(--line-2)}
+
+/* ===== altimeter ========================================================= */
+.altimeter{
+  position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:30;
+  display:flex; align-items:center; gap:10px; pointer-events:none;
+}
+.alti-rail{width:3px; height:min(46vh,320px); border-radius:2px; background:var(--line); position:relative; overflow:hidden}
+.alti-fill{position:absolute; left:0; right:0; bottom:0; height:0%; background:linear-gradient(180deg,var(--accent),var(--accent-2)); transition:height .12s linear}
+.alti-read{
+  text-align:right; font-size:11px; letter-spacing:.08em; color:var(--muted);
+  background:color-mix(in srgb, var(--bg) 72%, transparent); padding:6px 8px; border-radius:8px; border:1px solid var(--line);
+}
+.alti-read b{display:block; font-size:15px; color:var(--fg); font-variant-numeric:tabular-nums; letter-spacing:.02em}
+.alti-year{display:block; color:var(--accent); font-size:11px; min-height:1em}
+@media (max-width:1249px){
+  /* 縦レールを置く余白がない幅では、右下の小さな1行表示に切り替える（本文に重ならないように） */
+  .altimeter{right:10px; bottom:10px; top:auto; transform:none}
+  .alti-rail{display:none}
+  .alti-read{
+    display:flex; align-items:baseline; gap:7px; text-align:left;
+    font-size:10.5px; padding:4px 11px; border-radius:999px;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    background:color-mix(in srgb, var(--bg) 96%, transparent);
+  }
+  .alti-read b{display:inline; font-size:12px}
+  .alti-read #altLayer{display:none}
+  .alti-year{display:inline}
+}
+
+/* ===== hero ============================================================== */
+.hero{min-height:min(88vh,780px); display:flex; flex-direction:column; justify-content:center; padding:64px 0 48px; position:relative}
+.chip{
+  display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.14em;
+  color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:5px 12px;
+}
+.hero h1{font-size:clamp(2.4rem,8vw,4.4rem); font-weight:800; margin:22px 0 6px}
+.hero h1 .en{display:block; font-size:clamp(.85rem,2.6vw,1.05rem); font-weight:600; letter-spacing:.28em; color:var(--accent); margin-top:12px}
+.hero-reading{color:var(--muted); font-size:13.5px; letter-spacing:.1em}
+.hero-roles{margin-top:22px; display:flex; flex-wrap:wrap; gap:8px 18px; font-size:15px}
+.hero-roles li{position:relative; padding-left:16px}
+.hero-roles li::before{content:""; position:absolute; left:0; top:.72em; width:6px; height:6px; border-radius:50%; background:var(--accent-2)}
+.hero-keys{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px}
+.hero-keys li{font-size:12.5px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:4px 12px; background:var(--bg-2)}
+.hero-links{margin-top:30px; display:flex; flex-wrap:wrap; gap:10px}
+.btn{
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-size:14px; font-weight:600;
+  padding:11px 18px; border-radius:999px; border:1px solid var(--line-2); color:var(--fg); background:var(--bg-2);
+  transition:transform .18s ease, border-color .18s ease;
+}
+.btn:hover{transform:translateY(-2px); border-color:var(--accent)}
+.btn-primary{background:var(--accent); color:var(--bg); border-color:transparent}
+:root[data-theme="dark"] .btn-primary, :root:not([data-theme="light"]) .btn-primary{color:#08122b}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]) .btn-primary{color:#fff} }
+:root[data-theme="light"] .btn-primary{color:#fff}
+.scroll-hint{position:absolute; left:0; bottom:14px; font-size:11.5px; letter-spacing:.16em; color:var(--muted)}
+.scroll-hint span{display:inline-block; animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ===== sections ========================================================== */
+.section{padding:72px 0; scroll-margin-top:70px}
+.section-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:28px; padding-bottom:12px; border-bottom:1px solid var(--line)}
+.section-head h2{font-size:clamp(1.25rem,3.4vw,1.6rem)}
+.section-head .en{font-size:11px; letter-spacing:.24em; color:var(--muted); text-transform:uppercase}
+.lead{max-width:60ch; color:var(--fg)}
+.lead p + p{margin-top:14px}
+
+.about-grid{display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:34px; align-items:start}
+@media (max-width:760px){ .about-grid{grid-template-columns:1fr; gap:26px} }
+.path{border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:20px 22px; box-shadow:var(--shadow)}
+.path h3{font-size:12px; letter-spacing:.18em; color:var(--muted); margin-bottom:14px}
+.path li{position:relative; padding:0 0 16px 22px; font-size:14.5px}
+.path li:last-child{padding-bottom:0}
+.path li::before{content:""; position:absolute; left:3px; top:.62em; width:9px; height:9px; border-radius:50%; background:var(--bg-2); border:2px solid var(--accent)}
+.path li:not(:last-child)::after{content:""; position:absolute; left:7px; top:1.5em; bottom:0; width:1px; background:var(--line-2)}
+
+.stats{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
+@media (max-width:820px){ .stats{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.stat{border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:22px 20px; box-shadow:var(--shadow)}
+.stat .num{font-size:clamp(2.1rem,6vw,2.9rem); font-weight:800; line-height:1.1; font-variant-numeric:tabular-nums; color:var(--fg)}
+.stat .unit{font-size:.95rem; font-weight:600; color:var(--muted); margin-left:4px}
+.stat .label{margin-top:6px; font-size:13.5px; font-weight:600; word-break:auto-phrase}
+.stat .note{font-size:11.5px; color:var(--muted)}
+
+/* ===== timeline ========================================================== */
+.timeline{position:relative; padding-left:34px}
+.timeline::before{content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg,var(--line),var(--accent) 60%,var(--accent-2))}
+.tl-item{position:relative; padding:0 0 26px}
+.tl-item::before{
+  content:""; position:absolute; left:-30px; top:9px; width:12px; height:12px; border-radius:50%;
+  background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 0 4px color-mix(in srgb, var(--bg) 80%, transparent);
+}
+.tl-item.t-award::before{border-color:var(--c-award)}
+.tl-item.t-presentation::before{border-color:var(--c-presentation)}
+.tl-item.t-activity::before{border-color:var(--c-activity)}
+.tl-item.t-work::before{border-color:var(--c-work)}
+.tl-meta{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.tl-when{font-size:12.5px; letter-spacing:.08em; color:var(--muted); font-variant-numeric:tabular-nums}
+.tl-alt{font-size:11px; letter-spacing:.06em; color:var(--muted); opacity:.72; font-variant-numeric:tabular-nums}
+.tl-title{font-size:15.5px; font-weight:650; margin-top:3px; word-break:auto-phrase}
+.tl-detail{font-size:13.5px; color:var(--muted)}
+.tl-item a{font-size:13px}
+.badge{
+  font-size:11px; font-weight:700; letter-spacing:.1em; padding:2px 9px; border-radius:999px;
+  border:1px solid currentColor; white-space:nowrap;
+}
+.b-presentation{color:var(--c-presentation)}
+.b-award{color:var(--c-award)}
+.b-activity{color:var(--c-activity)}
+.b-work{color:var(--c-work)}
+.b-upcoming{color:var(--muted)}
+
+/* ===== achievements ====================================================== */
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
+.filters button{
+  font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+  padding:7px 16px; border-radius:999px; border:1px solid var(--line); background:var(--bg-2); color:var(--muted);
+}
+.filters button[aria-pressed="true"]{background:var(--fg); color:var(--bg); border-color:var(--fg)}
+.ach-list{display:grid; gap:12px}
+.ach{
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:18px 20px; box-shadow:var(--shadow);
+  display:grid; gap:8px;
+}
+.ach.is-off{display:none}
+.ach-top{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.ach-authors{font-size:13.5px; color:var(--muted)}
+.ach-authors .me{color:var(--fg); font-weight:700}
+.ach-authors .org{font-size:12px}
+.ach-title{font-size:15.5px; font-weight:650; word-break:auto-phrase}
+.ach-venue{font-size:13.5px; color:var(--muted)}
+.ach-kind{font-size:12.5px; letter-spacing:.08em; color:var(--muted)}
+.ach-actions{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:2px}
+.copy-btn{
+  font:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
+  padding:6px 13px; border-radius:999px; border:1px solid var(--line-2); background:transparent; color:var(--fg);
+}
+.copy-btn:hover{border-color:var(--accent); color:var(--accent)}
+
+/* ===== works ============================================================= */
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px}
+.card{
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:22px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; gap:9px; transition:transform .2s ease, border-color .2s ease;
+}
+.card:hover{transform:translateY(-3px); border-color:var(--line-2)}
+.card .kind{font-size:11px; letter-spacing:.14em; color:var(--muted)}
+.card h3{font-size:15.5px; word-break:auto-phrase}
+.card p{font-size:13.5px; color:var(--muted); flex:1}
+.card .go{font-size:13px; font-weight:600}
+
+/* ===== links / footer ==================================================== */
+.linklist{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+.linklist a{
+  display:flex; justify-content:space-between; align-items:center; gap:12px; text-decoration:none;
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:18px 20px; color:var(--fg); box-shadow:var(--shadow);
+}
+.linklist a:hover{border-color:var(--accent)}
+.linklist .u{font-size:11.5px; color:var(--muted); word-break:break-all}
+.linklist .arrow{color:var(--accent); font-size:18px}
+.site-footer{border-top:1px solid var(--line); margin-top:40px; padding:26px 0 40px; font-size:12.5px; color:var(--muted)}
+.site-footer .wrap{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+
+.toast{
+  position:fixed; left:50%; bottom:26px; transform:translate(-50%,14px); z-index:60;
+  background:var(--fg); color:var(--bg); font-size:13px; font-weight:600; padding:9px 18px; border-radius:999px;
+  opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;
+}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+
+/* ===== reveal ============================================================ */
+.js .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
+.js .reveal.in{opacity:1; transform:none}
+
+/* ===== reduced motion ==================================================== */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms !important; animation-iteration-count:1 !important;
+    transition-duration:.001ms !important; transition-delay:0s !important; scroll-behavior:auto !important;
+  }
+  .js .reveal{opacity:1 !important; transform:none !important}
+  .btn:hover,.card:hover{transform:none}
+  .scroll-hint span{animation:none}
+}
+
+/* ===== print ============================================================= */
+@media print{
+  :root{
+    --bg:#fff; --bg-2:#fff; --bg-3:#fff; --fg:#000; --muted:#333;
+    --line:#bbb; --line-2:#888; --accent:#000; --accent-2:#000; --shadow:none;
+    --c-presentation:#000; --c-award:#000; --c-activity:#000; --c-work:#000;
+  }
+  body{background:#fff !important; color:#000; font-size:10.5pt; line-height:1.6}
+  #stars,.site-header,.altimeter,.theme-toggle,.filters,.copy-btn,.scroll-hint,.toast,.skip,#works{display:none !important}
+  .js .reveal{opacity:1 !important; transform:none !important}
+  .hero{min-height:0; padding:0 0 14px; page-break-after:avoid}
+  .hero h1{font-size:20pt; margin:0}
+  .hero h1 .en{font-size:9pt; letter-spacing:.16em; margin-top:2px}
+  .hero .chip,.hero-keys,.hero-links{display:none}
+  .hero-roles{margin-top:6px; font-size:10pt}
+  .section{padding:14px 0; border:0}
+  .section-head{margin-bottom:10px}
+  .section-head .en{display:none}
+  .about-grid{grid-template-columns:1fr 1fr; gap:16px}
+  .stats{grid-template-columns:repeat(4,1fr); gap:8px}
+  .stat{padding:8px 10px}
+  .stat .num{font-size:16pt}
+  .ach,.card,.path,.stat,.tl-item{
+    border:1px solid #ccc; box-shadow:none; background:#fff;
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  .ach{padding:8px 10px; margin-bottom:6px}
+  .note-screen{display:none}
+  .linklist{grid-template-columns:1fr 1fr; gap:8px}
+  .linklist a{padding:8px 10px}
+  .linklist .arrow{display:none}
+  .ach.is-off{display:grid !important}   /* 印刷時はフィルタに関わらず全件出す */
+  .tl-item{border:0; padding-bottom:10px}
+  .tl-alt{display:none}
+  a{color:#000; text-decoration:none}
+  #achievements a[href]::after{content:" <" attr(href) ">"; font-size:8.5pt; color:#444; word-break:break-all}
+  .wrap{width:100%}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">本文へスキップ</a>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">永野 斗遠<small>TOWA NAGANO</small></a>
+    <nav class="nav" aria-label="セクション">
+      <a href="#about">About</a>
+      <a href="#stats">数字で見る</a>
+      <a href="#timeline">年表</a>
+      <a href="#achievements">業績</a>
+      <a href="#works">制作物</a>
+      <a href="#links">リンク</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"
+            title="ダーク／ライト切替（既定はOSの設定に従います）">
+      <span aria-hidden="true" id="themeIcon">☾</span>
+    </button>
+  </div>
+</header>
+
+<aside class="altimeter" id="altimeter" aria-hidden="true">
+  <div class="alti-read">
+    高度<b><span id="altValue" class="tnum">0</span> m</b>
+    <span id="altLayer">地上</span>
+    <span class="alti-year" id="altYear"></span>
+  </div>
+  <div class="alti-rail"><div class="alti-fill" id="altFill"></div></div>
+</aside>
+
+<main id="main">
+  <div id="top"></div>
+
+  <!-- 1. ヒーロー -->
+  <section class="hero wrap" aria-labelledby="heroName">
+    <p><span class="chip">高度 0 m ／ 地上</span></p>
+    <h1 id="heroName"></h1>
+    <p class="hero-reading" id="heroReading"></p>
+    <ul class="hero-roles" id="heroRoles"></ul>
+    <ul class="hero-keys" id="heroKeys"></ul>
+    <div class="hero-links" id="heroLinks"></div>
+    <p class="scroll-hint"><span>↓ SCROLL — 高度を上げる</span></p>
+  </section>
+
+  <!-- 2. About -->
+  <section class="section wrap" id="about" aria-labelledby="aboutH">
+    <div class="section-head"><h2 id="aboutH">About</h2><span class="en">自己紹介</span></div>
+    <div class="about-grid reveal">
+      <div class="lead" id="aboutText"></div>
+      <div class="path"><h3>PATH</h3><ul id="aboutPath"></ul></div>
+    </div>
+  </section>
+
+  <!-- 3. 数字で見る活動 -->
+  <section class="section wrap" id="stats" aria-labelledby="statsH">
+    <div class="section-head"><h2 id="statsH">数字で見る活動</h2><span class="en">by the numbers</span></div>
+    <ul class="stats reveal" id="statsList"></ul>
+  </section>
+
+  <!-- 4. 年表 -->
+  <section class="section wrap" id="timeline" aria-labelledby="timelineH">
+    <div class="section-head">
+      <h2 id="timelineH">年表</h2><span class="en">ascending log</span>
+    </div>
+    <p class="lead" style="margin-bottom:26px; color:var(--muted); font-size:14px">古い記録から順に、高度を上げながら積み上がります。</p>
+    <ol class="timeline reveal" id="timelineList"></ol>
+  </section>
+
+  <!-- 5. 業績一覧 -->
+  <section class="section wrap" id="achievements" aria-labelledby="achH">
+    <div class="section-head"><h2 id="achH">業績一覧</h2><span class="en">publications &amp; awards</span></div>
+    <div class="filters" id="filters" role="group" aria-label="業績の絞り込み"></div>
+    <div class="ach-list" id="achList"></div>
+    <p class="note-screen" style="margin-top:14px; font-size:12.5px; color:var(--muted)">学会発表は「書誌をコピー」で引用形式をコピーできます。印刷すると装飾のない一覧になります。</p>
+  </section>
+
+  <!-- 6. 制作物ギャラリー -->
+  <section class="section wrap" id="works" aria-labelledby="worksH">
+    <div class="section-head"><h2 id="worksH">制作物</h2><span class="en">works</span></div>
+    <div class="cards reveal" id="worksList"></div>
+  </section>
+
+  <!-- 7. リンク -->
+  <section class="section wrap" id="links" aria-labelledby="linksH">
+    <div class="section-head"><h2 id="linksH">リンク</h2><span class="en">links</span></div>
+    <div class="linklist reveal" id="linkList"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span id="footName"></span>
+    <span>掲載内容の「正」は <code>docs/SITE_SPEC.md</code></span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript>
+  <div class="wrap" style="padding:24px 0">
+    このサイトは業績データ（<code>data.js</code>）を読み込んで表示します。JavaScript を有効にしてご覧ください。
+  </div>
+</noscript>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var D = window.SITE_DATA;
+  var root = document.documentElement;
+  root.classList.add('js');
+  if (!D) { return; }
+
+  /* ---------- utils ---------- */
+  var ESC = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' };
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return ESC[c]; }); }
+  function $(sel){ return document.querySelector(sel); }
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function todayISO(){ var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+  function isUpcoming(until){ return !!until && todayISO() < until; }
+  function nf(n){ return n.toLocaleString('ja-JP'); }
+  var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function reduced(){ return mqReduce.matches; }
+
+  var TYPE_LABEL = { presentation:'発表', award:'受賞', activity:'活動', work:'制作' };
+  var revealEls = [];
+
+  /* ---------- toast ---------- */
+  var toastEl = $('#toast'), toastTimer;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
+  }
+
+  /* ---------- 1. hero ---------- */
+  var p = D.profile;
+  $('#heroName').innerHTML = esc(p.name) + '<span class="en">' + esc(p.nameEn) + '</span>';
+  $('#heroReading').textContent = p.reading + '　/　@' + p.handle;
+  $('#heroRoles').innerHTML = (p.roles || []).map(function(r){ return '<li>' + esc(r) + '</li>'; }).join('');
+  $('#heroKeys').innerHTML = (p.keywords || []).map(function(k){ return '<li>' + esc(k) + '</li>'; }).join('');
+  $('#footName').textContent = p.name + '（' + p.nameEn + '）';
+  document.title = p.name + ' — ポートフォリオ';
+
+  /* リンクは url が空なら出さない（§3-7 / §7 リンク切れなし） */
+  var linkOrder = ['github', 'archive', 'ideria'];
+  var activeLinks = linkOrder.map(function(k){ return D.links[k]; })
+                             .filter(function(l){ return l && l.url; });
+  $('#heroLinks').innerHTML = activeLinks.map(function(l, i){
+    return '<a class="btn' + (i === 0 ? ' btn-primary' : '') + '" href="' + esc(l.url) + '"' +
+           (/^https?:/.test(l.url) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(l.label) + ' ↗</a>';
+  }).join('');
+
+  /* ---------- 2. about ---------- */
+  $('#aboutText').innerHTML = (p.about || []).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('');
+  $('#aboutPath').innerHTML = (p.path || []).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('');
+
+  /* ---------- 3. stats ---------- */
+  $('#statsList').innerHTML = (D.stats || []).map(function(s){
+    return '<li class="stat">' +
+      '<div><span class="num" data-count="' + esc(s.value) + '">0</span>' +
+      '<span class="unit">' + esc(s.unit || '') + '</span></div>' +
+      '<div class="label">' + esc(s.label) + '</div>' +
+      (s.note ? '<div class="note">' + esc(s.note) + '</div>' : '') +
+      '</li>';
+  }).join('');
+
+  function settle(el){
+    el.setAttribute('data-done', '1');
+    el.textContent = nf(Number(el.getAttribute('data-count')) || 0);
+  }
+  function countUp(el){
+    var target = Number(el.getAttribute('data-count')) || 0;
+    if (reduced() || el.getAttribute('data-done')) { settle(el); return; }
+    var start = null, dur = 1100;
+    function step(ts){
+      if (el.getAttribute('data-done')) return;          /* 印刷時は即座に最終値へ */
+      if (start === null) start = ts;
+      var t = Math.min(1, (ts - start) / dur);
+      el.textContent = nf(Math.round(target * (1 - Math.pow(1 - t, 3))));
+      if (t < 1) { requestAnimationFrame(step); } else { el.setAttribute('data-done', '1'); }
+    }
+    requestAnimationFrame(step);
+  }
+  function settleAll(){
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-count]'), settle);
+  }
+
+  /* ---------- 4. timeline ---------- */
+  $('#timelineList').innerHTML = (D.timeline || []).map(function(it){
+    var type = it.type || 'activity';
+    var badges = '<span class="badge b-' + esc(type) + '">' + esc(TYPE_LABEL[type] || type) + '</span>';
+    if (isUpcoming(it.upcomingUntil)) badges += ' <span class="badge b-upcoming">予定</span>';
+    return '<li class="tl-item t-' + esc(type) + '" data-when="' + esc(it.when) + '">' +
+      '<div class="tl-meta">' + badges +
+        '<span class="tl-when">' + esc(it.when) + '</span>' +
+        '<span class="tl-alt"></span>' +
+      '</div>' +
+      '<div class="tl-title">' + esc(it.title) + '</div>' +
+      (it.detail ? '<div class="tl-detail">' + esc(it.detail) + '</div>' : '') +
+      (it.link ? '<a href="' + esc(it.link.url) + '" target="_blank" rel="noopener">' + esc(it.link.label) + ' ↗</a>' : '') +
+      '</li>';
+  }).join('');
+
+  /* ---------- 5. achievements ---------- */
+  function authorsHTML(list){
+    return (list || []).map(function(a){
+      return (a.me ? '<b class="me">' + esc(a.name) + '</b>' : esc(a.name)) +
+             (a.org ? '<span class="org">（' + esc(a.org) + '）</span>' : '');
+    }).join('・');
+  }
+  function venueText(t){
+    var s = t.venue + (t.session ? ' ' + t.session : '');
+    var paren = [];
+    if (t.dateLabel) paren.push(t.dateLabel);
+    if (t.place) paren.push(t.place);
+    if (paren.length) s += '（' + paren.join('・') + '）';
+    if (t.format) s += ' ' + t.format;
+    if (t.notes && t.notes.length) s += '　※' + t.notes.join('・');
+    return s;
+  }
+  function citation(t){
+    var names = (t.authors || []).map(function(a){ return a.name; }).join('・');
+    var head = names + '「' + t.title + '」' + t.venue + (t.session ? ' ' + t.session : '');
+    if (t.format) head += '（' + t.format + '）';
+    var tail = [];
+    if (t.dateLabel) tail.push(t.dateLabel);
+    if (t.place) tail.push(t.place);
+    return head + (tail.length ? ', ' + tail.join(', ') : '') + '.';
+  }
+
+  var achHTML = [];
+
+  (D.talks || []).forEach(function(t, i){
+    var soon = isUpcoming(t.upcomingUntil);
+    achHTML.push(
+      '<article class="ach" data-kind="talk">' +
+        '<div class="ach-top">' +
+          '<span class="badge b-presentation">学会発表</span>' +
+          (soon ? '<span class="badge b-upcoming">発表予定</span>' : '') +
+        '</div>' +
+        '<div class="ach-authors">' + authorsHTML(t.authors) + '</div>' +
+        '<h3 class="ach-title">' + esc(t.title) + '</h3>' +
+        '<div class="ach-venue">' + esc(venueText(t)) + '</div>' +
+        '<div class="ach-actions">' +
+          '<button class="copy-btn" type="button" data-cite="' + esc(citation(t)) + '">書誌をコピー</button>' +
+        '</div>' +
+      '</article>'
+    );
+  });
+
+  (D.awards || []).forEach(function(a){
+    var who = (a.recipients || []).join('・') + (a.org ? '（' + a.org + '）' : '');
+    achHTML.push(
+      '<article class="ach" data-kind="award">' +
+        '<div class="ach-top"><span class="badge b-award">受賞</span></div>' +
+        '<h3 class="ach-title">' + esc(a.title) + '</h3>' +
+        (a.work ? '<div class="ach-venue">' + esc(a.work) + '</div>' : '') +
+        '<div class="ach-authors">' + esc(who) + '</div>' +
+        (a.dateLabel ? '<div class="ach-venue">' + esc(a.dateLabel) + '</div>' : '') +
+      '</article>'
+    );
+  });
+
+  (D.works || []).forEach(function(w){
+    achHTML.push(
+      '<article class="ach" data-kind="work">' +
+        '<div class="ach-top"><span class="badge b-work">制作物</span>' +
+          (w.kind ? '<span class="ach-kind">' + esc(w.kind) + (w.period ? '・' + esc(w.period) : '') + '</span>' : '') +
+        '</div>' +
+        '<h3 class="ach-title">' + esc(w.title) + '</h3>' +
+        (w.desc ? '<div class="ach-venue">' + esc(w.desc) + '</div>' : '') +
+        (w.url ? '<div class="ach-actions"><a href="' + esc(w.url) + '" target="_blank" rel="noopener">アーカイブで見る ↗</a></div>' : '') +
+      '</article>'
+    );
+  });
+
+  $('#achList').innerHTML = achHTML.join('');
+
+  var FILTERS = [
+    { key:'all',   label:'すべて' },
+    { key:'talk',  label:'学会発表' },
+    { key:'award', label:'受賞' },
+    { key:'work',  label:'制作物' }
+  ];
+  $('#filters').innerHTML = FILTERS.map(function(f){
+    return '<button type="button" data-filter="' + f.key + '" aria-pressed="' + (f.key === 'all') + '">' +
+           esc(f.label) + '</button>';
+  }).join('');
+
+  $('#filters').addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-filter]');
+    if (!btn) return;
+    var key = btn.getAttribute('data-filter');
+    Array.prototype.forEach.call(this.querySelectorAll('button'), function(b){
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.ach'), function(card){
+      card.classList.toggle('is-off', key !== 'all' && card.getAttribute('data-kind') !== key);
+    });
+    layoutAltitudes();
+  });
+
+  function copyText(text){
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function(resolve, reject){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error('copy failed'));
+    });
+  }
+
+  $('#achList').addEventListener('click', function(e){
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    copyText(btn.getAttribute('data-cite')).then(function(){
+      toast('書誌をコピーしました');
+    }).catch(function(){
+      toast('コピーできませんでした');
+    });
+  });
+
+  /* ---------- 6. works gallery ---------- */
+  $('#worksList').innerHTML = (D.works || []).map(function(w){
+    var inner =
+      (w.kind ? '<span class="kind">' + esc(w.kind) + (w.period ? '・' + esc(w.period) : '') + '</span>' : '') +
+      '<h3>' + esc(w.title) + '</h3>' +
+      (w.desc ? '<p>' + esc(w.desc) + '</p>' : '') +
+      (w.url ? '<span class="go">アーカイブで見る ↗</span>' : '');
+    return w.url
+      ? '<a class="card" href="' + esc(w.url) + '" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">' + inner + '</a>'
+      : '<div class="card">' + inner + '</div>';
+  }).join('');
+
+  /* ---------- 7. links ---------- */
+  $('#linkList').innerHTML = activeLinks.map(function(l){
+    return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
+      '<span><strong>' + esc(l.label) + '</strong><br><span class="u">' + esc(l.url) + '</span></span>' +
+      '<span class="arrow" aria-hidden="true">↗</span></a>';
+  }).join('');
+
+  /* ---------- reveal ---------- */
+  revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if (!('IntersectionObserver' in window) || reduced()) {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-count]'), countUp);
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        Array.prototype.forEach.call(en.target.querySelectorAll('[data-count]'), countUp);
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+  window.addEventListener('beforeprint', settleAll);
+  if (window.matchMedia) {
+    var mqPrint = window.matchMedia('print');
+    (mqPrint.addEventListener ? mqPrint.addEventListener('change', function(e){ if (e.matches) settleAll(); })
+                              : mqPrint.addListener && mqPrint.addListener(function(m){ if (m.matches) settleAll(); }));
+  }
+
+  /* ---------- altimeter（高度メーター）---------- */
+  var MAX_ALT = 12000;                       /* ページ末端＝成層圏 12,000 m */
+  var LAYERS = [
+    [0, '地上'], [900, '雲の下'], [2500, '雲の上'], [5500, '高層'], [8500, '圏界面'], [11000, '成層圏']
+  ];
+  var altValue = $('#altValue'), altFill = $('#altFill'), altLayer = $('#altLayer'), altYear = $('#altYear');
+  var tlItems = Array.prototype.slice.call(document.querySelectorAll('.tl-item'));
+  var tlSection = $('#timeline');
+
+  function scrollSpan(){
+    return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  }
+  function altAt(y){
+    return Math.round(Math.min(1, Math.max(0, y / scrollSpan())) * MAX_ALT);
+  }
+  function layerOf(alt){
+    var name = LAYERS[0][1];
+    for (var i = 0; i < LAYERS.length; i++) { if (alt >= LAYERS[i][0]) name = LAYERS[i][1]; }
+    return name;
+  }
+  function layoutAltitudes(){
+    var half = window.innerHeight / 2;
+    tlItems.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      var centerDoc = r.top + window.pageYOffset + r.height / 2;
+      var chip = el.querySelector('.tl-alt');
+      if (chip) chip.textContent = '高度 ' + nf(altAt(centerDoc - half)) + ' m';
+    });
+  }
+  function updateAltimeter(){
+    var y = window.pageYOffset;
+    var alt = altAt(y);
+    altValue.textContent = nf(alt);
+    altFill.style.height = (alt / MAX_ALT * 100) + '%';
+    altLayer.textContent = layerOf(alt);
+
+    var year = '';
+    var box = tlSection.getBoundingClientRect();
+    if (box.top < window.innerHeight * 0.6 && box.bottom > 0) {
+      var line = window.innerHeight * 0.55;
+      for (var i = 0; i < tlItems.length; i++) {
+        if (tlItems[i].getBoundingClientRect().top < line) year = tlItems[i].getAttribute('data-when');
+      }
+      var m = year.match(/^\d{4}/);
+      if (year) year = '到達 ' + (m ? m[0] + '年' : year);
+    }
+    if (altYear.textContent !== year) altYear.textContent = year;
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){ updateAltimeter(); ticking = false; });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){ layoutAltitudes(); updateAltimeter(); }, 150);
+  });
+
+  layoutAltitudes();
+  updateAltimeter();
+  setTimeout(function(){ layoutAltitudes(); updateAltimeter(); }, 300);
+
+  /* ---------- theme（既定は OS 設定。localStorage は使わない）---------- */
+  var toggle = $('#themeToggle'), icon = $('#themeIcon'), themeMeta = document.querySelector('meta[name="theme-color"]');
+  function isDark(){
+    var t = root.getAttribute('data-theme');
+    return t ? t === 'dark' : mqDark.matches;
+  }
+  function syncTheme(){
+    var dark = isDark();
+    icon.textContent = dark ? '☾' : '☀';
+    toggle.setAttribute('aria-pressed', String(dark));
+    toggle.setAttribute('aria-label', dark ? 'ライトモードに切り替える' : 'ダークモードに切り替える');
+    if (themeMeta) themeMeta.setAttribute('content', dark ? '#070c1f' : '#eef3fc');
+    stars.apply();
+  }
+  toggle.addEventListener('click', function(){
+    root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+    syncTheme();
+  });
+  (mqDark.addEventListener ? mqDark.addEventListener('change', syncTheme)
+                           : mqDark.addListener && mqDark.addListener(syncTheme));
+
+  /* ---------- 星空（夜空・成層圏。ライト時と reduced-motion では動かさない）---------- */
+  function makeStars(){
+    var cv = $('#stars');
+    var ctx = cv.getContext ? cv.getContext('2d') : null;
+    var dpr = 1, w = 0, h = 0, list = [], shooter = null, raf = 0, running = false;
+
+    function build(){
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      w = Math.max(1, Math.floor(window.innerWidth * dpr));
+      h = Math.max(1, Math.floor(window.innerHeight * dpr));
+      cv.width = w; cv.height = h;
+      cv.style.width = window.innerWidth + 'px';
+      cv.style.height = window.innerHeight + 'px';
+      var n = Math.min(200, Math.round(window.innerWidth * window.innerHeight / 9000));
+      list = [];
+      for (var i = 0; i < n; i++) {
+        list.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: (Math.random() * 1.0 + 0.35) * dpr,
+          a: Math.random() * 0.55 + 0.25,
+          sp: Math.random() * 0.8 + 0.25,
+          ph: Math.random() * Math.PI * 2,
+          d: Math.random() * 0.8 + 0.2
+        });
+      }
+    }
+
+    function draw(t, animate){
+      if (!ctx) return;
+      ctx.clearRect(0, 0, w, h);
+      var sy = window.pageYOffset * dpr;
+      for (var i = 0; i < list.length; i++) {
+        var s = list[i];
+        var y = s.y - (animate ? sy * 0.06 * s.d : 0);
+        y = ((y % h) + h) % h;
+        var a = animate ? s.a * (0.62 + 0.38 * Math.sin(t * 0.0016 * s.sp + s.ph)) : s.a * 0.85;
+        ctx.globalAlpha = a;
+        ctx.fillStyle = i % 11 === 0 ? '#ffd479' : '#ffffff';
+        ctx.beginPath();
+        ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      if (animate && shooter) {
+        ctx.globalAlpha = Math.max(0, 1 - shooter.life / shooter.max) * 0.9;
+        var g = ctx.createLinearGradient(shooter.x, shooter.y, shooter.x - shooter.vx * 14, shooter.y - shooter.vy * 14);
+        g.addColorStop(0, 'rgba(255,255,255,.95)');
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1.4 * dpr;
+        ctx.beginPath();
+        ctx.moveTo(shooter.x, shooter.y);
+        ctx.lineTo(shooter.x - shooter.vx * 14, shooter.y - shooter.vy * 14);
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function tick(t){
+      if (!running) return;
+      if (shooter) {
+        shooter.x += shooter.vx; shooter.y += shooter.vy; shooter.life++;
+        if (shooter.life > shooter.max) shooter = null;
+      } else if (Math.random() < 0.0016) {
+        shooter = {
+          x: Math.random() * w * 0.7, y: Math.random() * h * 0.5,
+          vx: (5 + Math.random() * 3) * dpr, vy: (2.2 + Math.random() * 1.6) * dpr,
+          life: 0, max: 60
+        };
+      }
+      draw(t, true);
+      raf = requestAnimationFrame(tick);
+    }
+
+    function stop(){ running = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
+
+    function apply(){
+      if (!ctx) return;
+      if (!isDark()) { stop(); ctx.clearRect(0, 0, w, h); return; }
+      if (reduced()) { stop(); draw(0, false); return; }
+      if (!running) { running = true; raf = requestAnimationFrame(tick); }
+    }
+
+    build();
+    var rt;
+    window.addEventListener('resize', function(){
+      clearTimeout(rt);
+      rt = setTimeout(function(){ build(); apply(); }, 200);
+    });
+    (mqReduce.addEventListener ? mqReduce.addEventListener('change', apply)
+                               : mqReduce.addListener && mqReduce.addListener(apply));
+    return { apply: apply };
+  }
+
+  var stars = makeStars();
+  syncTheme();
+})();
+</script>
+</body>
+</html>
