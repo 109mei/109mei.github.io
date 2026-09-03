@@ -47,8 +47,8 @@ window.SITE_DATA = {
 
   /* ── 数字で見る活動（§3-3）─────────────────────────────────── */
   stats: [
-    { label: '学会発表',               value: 7,  unit: '件' },
-    { label: '受賞',                   value: 2,  unit: '件' },
+    { label: '学会発表',               value: 12, unit: '件' },
+    { label: '受賞',                   value: 3,  unit: '件' },
     { label: '運営したゲームジャム',   value: 4,  unit: '回', note: '＋予備実験' },
     { label: 'ブラウザで遊べる公開作品', value: 24, unit: '本', note: '学習アーカイブより' }
   ],
@@ -157,6 +157,78 @@ window.SITE_DATA = {
       url: 'https://www.gameamusementsociety.org/html/NationalConvention_24_prog1.html',
       urlLabel: '大会プログラム',
       format: 'デモ・ポスター'
+    },
+    {
+      authors: [
+        { name: '田村明日香' },
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: '自主制作ゲーム『チョコパキ！』の改良と触覚体験への拡張',
+      venue: 'ゲーム学会「ゲームと健康科学」研究部会 第1回研究会',
+      dateLabel: '2025-07-25',
+      date: '2025-07-25',
+      place: '九州情報大学太宰府キャンパス（オンライン開催）',
+      notes: ['共著・第2著者'],
+      url: 'https://www.gameamusementsociety.org/html/GameHealthScience_1.html',
+      urlLabel: '研究会プログラム'
+    },
+    {
+      authors: [
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: '新しいゲームコンテストの試行と評価',
+      venue: 'ゲーム学会「ゲームと健康科学」研究部会 第1回研究会',
+      dateLabel: '2025-07-25',
+      date: '2025-07-25',
+      place: '九州情報大学太宰府キャンパス（オンライン開催）',
+      url: 'https://www.gameamusementsociety.org/html/GameHealthScience_1.html',
+      urlLabel: '研究会プログラム'
+    },
+    {
+      authors: [
+        { name: '中嶋文萌' },
+        { name: '永野斗遠', me: true },
+        { name: '田村明日香' },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: 'VRを用いた3Dモデリング教育の提案',
+      venue: 'ゲーム学会「ゲームと健康科学」研究部会 第1回研究会',
+      dateLabel: '2025-07-25',
+      date: '2025-07-25',
+      place: '九州情報大学太宰府キャンパス（オンライン開催）',
+      notes: ['共著'],
+      url: 'https://www.gameamusementsociety.org/html/GameHealthScience_1.html',
+      urlLabel: '研究会プログラム'
+    },
+    {
+      authors: [
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: 'プログラマー向けゲーム制作コンテストの提案',
+      venue: 'ゲーム学会「ゲームと教育」研究部会 第20回研究会',
+      dateLabel: '2024-07-26',
+      date: '2024-07-26',
+      place: '香川大学幸町キャンパス（オンライン開催）',
+      url: 'https://www.eng.kagawa-u.ac.jp/~hayashi/gas/2024-GE-1.pdf',
+      urlLabel: '研究報告（予稿集PDF）'
+    },
+    {
+      authors: [
+        { name: '田村明日香' },
+        { name: '永野斗遠', me: true },
+        { name: '荒平高章', org: '九州情報大学' }
+      ],
+      title: '自主制作ゲーム「チョコパキ！」の客観的評価',
+      venue: 'ゲーム学会「ゲームと教育」研究部会 第20回研究会',
+      dateLabel: '2024-07-26',
+      date: '2024-07-26',
+      place: '香川大学幸町キャンパス（オンライン開催）',
+      notes: ['共著・第2著者'],
+      url: 'https://www.eng.kagawa-u.ac.jp/~hayashi/gas/2024-GE-1.pdf',
+      urlLabel: '研究報告（予稿集PDF）'
     }
   ],
 
