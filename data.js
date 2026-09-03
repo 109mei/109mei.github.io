@@ -38,11 +38,11 @@ window.SITE_DATA = {
   },
 
   /* ── リンク（§3-7）───────────────────────────────────────────
-     ideria は公開後に URL を入れると自動的に表示されます。空の間は非表示。 */
+     url を空にするとその項目は表示されません（リンク切れを作らないため）。 */
   links: {
     github:  { label: 'GitHub',       url: 'https://github.com/109mei' },
     archive: { label: '学習アーカイブ', url: 'https://109mei.github.io/game-learning-archive/' },
-    ideria:  { label: 'IDERIA公式',    url: '' }
+    ideria:  { label: 'IDERIA公式',    url: 'https://109mei.github.io/ideria-official/' }
   },
 
   /* ── 数字で見る活動（§3-3）─────────────────────────────────── */
