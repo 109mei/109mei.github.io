@@ -104,7 +104,9 @@ window.SITE_DATA = {
       session: 'OB3',
       dateLabel: '2026-03-01',
       date: '2026-03-01',
-      place: '九州情報大学'
+      place: '九州情報大学太宰府キャンパス',
+      url: 'https://www.gameamusementsociety.org/html/NationalConvention_24_prog2.html',
+      urlLabel: '大会プログラム'
     },
     {
       authors: [
@@ -115,9 +117,11 @@ window.SITE_DATA = {
       title: '自主制作ゲーム『チョコパキ！』の物理的触覚体験への拡張と試作',
       venue: 'ゲーム学会 第24回全国大会',
       session: 'OC3',
-      dateLabel: '2026-02-28〜03-01',
+      dateLabel: '2026-03-01',
       date: '2026-03-01',
-      place: '九州情報大学',
+      place: '九州情報大学太宰府キャンパス',
+      url: 'https://www.gameamusementsociety.org/html/NationalConvention_24_prog2.html',
+      urlLabel: '大会プログラム',
       notes: ['共著・第2著者']
     },
     {
@@ -130,9 +134,11 @@ window.SITE_DATA = {
       title: 'VRを用いた3Dモデル制作体験',
       venue: 'ゲーム学会 第24回全国大会',
       session: 'DP4',
-      dateLabel: '2026-02-28〜03-01',
-      date: '2026-03-01',
-      place: '九州情報大学',
+      dateLabel: '2026-02-28',
+      date: '2026-02-28',
+      place: '九州情報大学太宰府キャンパス',
+      url: 'https://www.gameamusementsociety.org/html/NationalConvention_24_prog1.html',
+      urlLabel: '大会プログラム',
       format: 'デモ・ポスター'
     },
     {
@@ -145,9 +151,11 @@ window.SITE_DATA = {
       title: '高大連携による制作ゲーム『OneButtonGames』',
       venue: 'ゲーム学会 第24回全国大会',
       session: 'DP5',
-      dateLabel: '2026-02-28〜03-01',
-      date: '2026-03-01',
-      place: '九州情報大学',
+      dateLabel: '2026-02-28',
+      date: '2026-02-28',
+      place: '九州情報大学太宰府キャンパス',
+      url: 'https://www.gameamusementsociety.org/html/NationalConvention_24_prog1.html',
+      urlLabel: '大会プログラム',
       format: 'デモ・ポスター'
     }
   ],
@@ -155,19 +163,32 @@ window.SITE_DATA = {
   /* ── 受賞（§6）─────────────────────────────────────────────── */
   awards: [
     {
+      title: '太宰府市 令和7年度「令和の都だざいふ 世界に羽ばたく人材育成表彰」',
+      work: '一般表彰（団体）・2年連続',
+      recipients: ['荒平ゼミ「IDERIA」'],
+      dateLabel: '授賞式 2026-02-08',
+      date: '2026-02-08',
+      url: 'https://www.kiis.ac.jp/info/%E5%A4%AA%E5%AE%B0%E5%BA%9C%E5%B8%82%E3%80%80%E4%BB%A4%E5%92%8C7%E5%B9%B4%E5%BA%A6%E3%80%8C%E4%BB%A4%E5%92%8C%E3%81%AE%E9%83%BD%E3%81%A0%E3%81%96%E3%81%84%E3%81%B5%E4%B8%96%E7%95%8C%E3%81%AB%E7%BE%BD/',
+      urlLabel: '九州情報大学の記事'
+    },
+    {
+      title: '太宰府市 令和6年度「世界に羽ばたく人材育成表彰」',
+      work: '一般表彰（団体）',
+      recipients: ['荒平ゼミ「IDERIA」'],
+      dateLabel: '授賞式 2025-02-09',
+      date: '2025-02-09',
+      url: 'https://www.kiis.ac.jp/info/%E5%A4%AA%E5%AE%B0%E5%BA%9C%E5%B8%82%E3%80%80%E4%BB%A4%E5%92%8C6%E5%B9%B4%E5%BA%A6%E3%80%8C%E4%B8%96%E7%95%8C%E3%81%AB%E7%BE%BD%E3%81%B0%E3%81%9F%E3%81%8F%E4%BA%BA%E6%9D%90%E8%82%B2%E6%88%90%E3%80%8D/',
+      urlLabel: '九州情報大学の記事'
+    },
+    {
       title: 'ゲーム学会 第21回ゲームコンペ 優秀賞',
       work: '作品「チョコパキ！」',
       recipients: ['永野斗遠', '田村明日香'],
       org: '九州情報大学',
       dateLabel: '表彰式 2024-03-02（第22回全国大会）',
-      date: '2024-03-02'
-    },
-    {
-      title: '令和の都だざいふ 世界に羽ばたく人材育成表彰',
-      work: '2年連続受賞',
-      recipients: ['永野斗遠', '田村明日香', 'IDERIA'],
-      dateLabel: '直近の授賞式 2026-02-08',
-      date: '2026-02-08'
+      date: '2024-03-02',
+      url: 'https://www.gameamusementsociety.org/html/GameCompe21_Award2.html',
+      urlLabel: '受賞作品紹介'
     }
   ],
 
@@ -194,13 +215,6 @@ window.SITE_DATA = {
       kind: 'ゲーム',
       image: '',
       desc: '高校生・大学生による1ボタンゲーム10作品を収録。IDERIA × 純真高等学校 × 九州情報大学。',
-      url: ''
-    },
-    {
-      title: 'IDERIAロゴ／ゲーム学会 第24回全国大会 テーマポスター',
-      kind: 'デザイン',
-      image: '',
-      desc: 'ロゴと大会テーマポスターのデザイン。',
       url: ''
     },
     {

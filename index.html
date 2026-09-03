@@ -888,6 +888,8 @@ kbd{
             'aria-label="「' + esc(t.title) + '」の書誌をコピー">書誌をコピー</button>' +
           '<button class="mini" type="button" data-copy="bib" data-i="' + i + '" ' +
             'aria-label="「' + esc(t.title) + '」のBibTeXをコピー">BibTeX</button>' +
+          (t.url ? ' <a href="' + esc(t.url) + '" target="_blank" rel="noopener">' +
+            esc(t.urlLabel || '出典') + ' ↗</a>' : '') +
         '</div></article>'
     });
   });
@@ -902,6 +904,8 @@ kbd{
         (a.work ? '<div class="ach-venue">' + esc(a.work) + '</div>' : '') +
         '<div class="ach-authors">' + esc(who) + '</div>' +
         (a.dateLabel ? '<div class="ach-venue">' + esc(jpDate(a.dateLabel)) + '</div>' : '') +
+        (a.url ? '<div class="ach-actions"><a href="' + esc(a.url) + '" target="_blank" rel="noopener">' +
+          esc(a.urlLabel || '出典') + ' ↗</a></div>' : '') +
         '</article>'
     });
   });
