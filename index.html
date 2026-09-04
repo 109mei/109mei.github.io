@@ -447,6 +447,21 @@ kbd{
 /* =========================================================================
    9. 出現アニメーション
    ========================================================================= */
+/* ---------- サイトに入ったときの導入 ---------- */
+/* 重要: 通常状態は「見える」まま。透明にするのは @keyframes の from だけ。
+   さらに html.anim-in が付いているときだけ動かす。このクラスは読み込み時点で
+   ページが表示されている場合にのみ付く。バックグラウンドタブで開くと
+   アニメーションが進まず中身が透明のまま残るため。JSが無効なときも付かない。 */
+@keyframes enter-up{ from{ opacity:0; transform:translateY(14px) } to{ opacity:1; transform:none } }
+.anim-in .hero > *{ animation:enter-up .52s cubic-bezier(.22,.9,.28,1) both }
+.anim-in .hero > :nth-child(2){ animation-delay:.06s }
+.anim-in .hero > :nth-child(3){ animation-delay:.12s }
+.anim-in .hero > :nth-child(4){ animation-delay:.18s }
+.anim-in .hero > :nth-child(5){ animation-delay:.24s }
+.anim-in .hero > :nth-child(6){ animation-delay:.30s }
+.anim-in .hero > :nth-child(7){ animation-delay:.36s }
+.anim-in .hero > :nth-child(8){ animation-delay:.42s }
+
 .js .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
 .js .reveal.in{opacity:1; transform:none}
 
@@ -479,6 +494,9 @@ kbd{
    11. 印刷（提出資料用）
    ========================================================================= */
 @media print{
+  /* 入場演出が途中の状態で印刷されても中身が消えないようにする */
+  *,*::before,*::after{ animation:none !important }
+
   :root{
     --bg:#fff; --bg-2:#fff; --bg-3:#fff; --fg:#000; --muted:#333;
     --line:#bbb; --line-2:#888; --accent:#000; --accent-2:#000; --shadow:none;
@@ -676,6 +694,8 @@ kbd{
   'use strict';
   var root = document.documentElement;
   root.classList.add('js');
+  /* 読み込み時に表示されているときだけ入場演出を許可する */
+  if (!document.hidden) root.classList.add('anim-in');
   var D = window.SITE_DATA;
 
   /* ---------- 共通ユーティリティ ---------- */
