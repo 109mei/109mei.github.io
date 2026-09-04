@@ -89,7 +89,10 @@ a{color:var(--accent); text-decoration-thickness:1px; text-underline-offset:3px}
 a:hover{text-decoration-thickness:2px}
 a:active{opacity:.7}
 :focus-visible{outline:2px solid var(--ring); outline-offset:3px; border-radius:6px}
-h1,h2,h3{line-height:1.35; letter-spacing:.02em; margin:0}
+/* 大きい見出しは字間を詰める。緩いと締まりがなく見える */
+h1,h2,h3{line-height:1.35; letter-spacing:-.012em; margin:0}
+/* 特に大きい文字ほど強めに詰める */
+#heroName{letter-spacing:-.022em}
 ul,ol{margin:0; padding:0; list-style:none}
 p{margin:0}
 button{font:inherit}
@@ -260,6 +263,9 @@ button{font:inherit}
 .note{font-size:12.5px; color:var(--muted)}
 
 .about-grid{display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:32px; align-items:start}
+/* 読ませる文章は行間を広げる（和文は1.9前後が読みやすい） */
+#aboutText p{line-height:1.95; max-width:68ch}
+#aboutText p + p{margin-top:14px}
 @media (max-width:760px){ .about-grid{grid-template-columns:1fr; gap:24px} }
 .path{border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-2); padding:20px 22px; box-shadow:var(--shadow)}
 .path h3{font-size:12px; letter-spacing:.16em; color:var(--muted); margin-bottom:14px}
