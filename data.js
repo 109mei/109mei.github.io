@@ -73,7 +73,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学大学院' }
       ],
       title: '写真・一言分析から感情を読み取り記録していくアプリケーションの提案',
+      titleEn: 'A Proposal for an Application that Reads and Records Emotions from Photos and Short Comments',
       venue: 'ゲーム学会「ゲームと健康科学」研究部会 第3回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Health Science, 3rd Meeting',
       dateLabel: '2026-09-05',
       date: '2026-09-05',
       place: '九州情報大学',
@@ -86,7 +88,9 @@ window.SITE_DATA = {
         { name: '荒平高章' }
       ],
       title: '初心者向けゲームジャムの実施 ～第1回の実施結果と次回への課題～',
+      titleEn: 'Running a Game Jam for Beginners: Results of the First Event and Issues for the Next',
       venue: 'ゲーム学会「ゲームと健康科学」研究部会 第3回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Health Science, 3rd Meeting',
       dateLabel: '2026-09-05',
       date: '2026-09-05',
       format: 'ポスター発表',
@@ -98,7 +102,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: 'VRを用いた3Dモデル制作体験会の実施と課題',
+      titleEn: 'A Hands-on 3D Modeling Workshop Using VR: Implementation and Issues',
       venue: 'ゲーム学会「ゲームと健康科学」研究部会 第2回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Health Science, 2nd Meeting',
       dateLabel: '2026-07-10',
       date: '2026-07-10',
       place: 'オンライン'
@@ -109,7 +115,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: '新しいゲームコンテストの試行と評価',
+      titleEn: 'Trial and Evaluation of a New Game Contest',
       venue: 'ゲーム学会 第24回全国大会',
+      venueEn: 'Game Amusement Society, 24th National Convention',
       session: 'OB3',
       dateLabel: '2026-03-01',
       date: '2026-03-01',
@@ -124,7 +132,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: '自主制作ゲーム『チョコパキ！』の物理的触覚体験への拡張と試作',
+      titleEn: 'Extending the Indie Game Choco-Paki! to a Physical Tactile Experience: A Prototype',
       venue: 'ゲーム学会 第24回全国大会',
+      venueEn: 'Game Amusement Society, 24th National Convention',
       session: 'OC3',
       dateLabel: '2026-03-01',
       date: '2026-03-01',
@@ -141,7 +151,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: 'VRを用いた3Dモデル制作体験',
+      titleEn: 'A 3D Modeling Experience Using VR',
       venue: 'ゲーム学会 第24回全国大会',
+      venueEn: 'Game Amusement Society, 24th National Convention',
       session: 'DP4',
       dateLabel: '2026-02-28',
       date: '2026-02-28',
@@ -158,7 +170,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: '高大連携による制作ゲーム『OneButtonGames』',
+      titleEn: 'OneButtonGames: Games Created through High School-University Collaboration',
       venue: 'ゲーム学会 第24回全国大会',
+      venueEn: 'Game Amusement Society, 24th National Convention',
       session: 'DP5',
       dateLabel: '2026-02-28',
       date: '2026-02-28',
@@ -174,7 +188,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: '自主制作ゲーム『チョコパキ！』の改良と触覚体験への拡張',
+      titleEn: 'Improving the Indie Game Choco-Paki! and Extending It to a Tactile Experience',
       venue: 'ゲーム学会「ゲームと健康科学」研究部会 第1回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Health Science, 1st Meeting',
       dateLabel: '2025-07-25',
       date: '2025-07-25',
       place: '九州情報大学太宰府キャンパス（オンライン開催）',
@@ -188,7 +204,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: '新しいゲームコンテストの試行と評価',
+      titleEn: 'Trial and Evaluation of a New Game Contest',
       venue: 'ゲーム学会「ゲームと健康科学」研究部会 第1回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Health Science, 1st Meeting',
       dateLabel: '2025-07-25',
       date: '2025-07-25',
       place: '九州情報大学太宰府キャンパス（オンライン開催）',
@@ -203,7 +221,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: 'VRを用いた3Dモデリング教育の提案',
+      titleEn: 'A Proposal for 3D Modeling Education Using VR',
       venue: 'ゲーム学会「ゲームと健康科学」研究部会 第1回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Health Science, 1st Meeting',
       dateLabel: '2025-07-25',
       date: '2025-07-25',
       place: '九州情報大学太宰府キャンパス（オンライン開催）',
@@ -217,7 +237,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: 'プログラマー向けゲーム制作コンテストの提案',
+      titleEn: 'A Proposal for a Game Development Contest for Programmers',
       venue: 'ゲーム学会「ゲームと教育」研究部会 第20回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Education, 20th Meeting',
       dateLabel: '2024-07-26',
       date: '2024-07-26',
       place: '香川大学幸町キャンパス（オンライン開催）',
@@ -231,7 +253,9 @@ window.SITE_DATA = {
         { name: '荒平高章', org: '九州情報大学' }
       ],
       title: '自主制作ゲーム「チョコパキ！」の客観的評価',
+      titleEn: 'An Objective Evaluation of the Indie Game Choco-Paki!',
       venue: 'ゲーム学会「ゲームと教育」研究部会 第20回研究会',
+      venueEn: 'Game Amusement Society, SIG on Games and Education, 20th Meeting',
       dateLabel: '2024-07-26',
       date: '2024-07-26',
       place: '香川大学幸町キャンパス（オンライン開催）',
@@ -245,6 +269,7 @@ window.SITE_DATA = {
   awards: [
     {
       title: '太宰府市 令和7年度「令和の都だざいふ 世界に羽ばたく人材育成表彰」',
+      titleEn: 'Dazaifu City, FY2025 Award for Nurturing Globally Active Talent',
       work: '一般表彰（団体）・2年連続',
       recipients: ['荒平ゼミ「IDERIA」'],
       dateLabel: '授賞式 2026-02-08',
@@ -254,6 +279,7 @@ window.SITE_DATA = {
     },
     {
       title: '太宰府市 令和6年度「世界に羽ばたく人材育成表彰」',
+      titleEn: 'Dazaifu City, FY2024 Award for Nurturing Globally Active Talent',
       work: '一般表彰（団体）',
       recipients: ['荒平ゼミ「IDERIA」'],
       dateLabel: '授賞式 2025-02-09',
@@ -263,6 +289,7 @@ window.SITE_DATA = {
     },
     {
       title: 'ゲーム学会 第21回ゲームコンペ 優秀賞',
+      titleEn: 'Game Amusement Society, 21st Game Competition, Award of Excellence',
       work: '作品「チョコパキ！」',
       recipients: ['永野斗遠', '田村明日香'],
       org: '九州情報大学',
@@ -278,6 +305,7 @@ window.SITE_DATA = {
   works: [
     {
       title: 'PLAYCE（ゲーム制作・プログラミング学習アーカイブ）',
+      titleEn: 'PLAYCE - an archive for learning game development and programming',
       kind: 'Webサイト',
       period: '2026〜',
       image: 'https://109mei.github.io/game-learning-archive/images/og-default.png',
@@ -287,6 +315,7 @@ window.SITE_DATA = {
     },
     {
       title: 'チョコパキ！',
+      titleEn: 'Choco-Paki!',
       kind: 'ゲーム',
       image: 'https://109mei.github.io/game-learning-archive/images/games/ideria-chokopaki.png',
       imageW: 640, imageH: 400,
@@ -295,6 +324,7 @@ window.SITE_DATA = {
     },
     {
       title: 'OneButtonGames ランチャー',
+      titleEn: 'OneButtonGames launcher',
       kind: 'ゲーム',
       image: 'https://109mei.github.io/game-learning-archive/images/games/obg-launcher.png',
       imageW: 640, imageH: 400,
@@ -303,6 +333,7 @@ window.SITE_DATA = {
     },
     {
       title: 'しまっぴー先生の覚えてクイズ／ひらがなUNO／オセロカードゲーム試作',
+      titleEn: 'Shimappy-sensei Memory Quiz / Hiragana UNO / Othello card game prototype',
       kind: '教材・ゲーム',
       image: '',
       desc: 'IDERIA制作。「しまっぴー先生の覚えてクイズ」は TyranoScript 製で、イラストは田村明日香が担当。',

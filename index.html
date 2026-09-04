@@ -8,6 +8,9 @@
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#070c1f">
 <link rel="canonical" href="https://109mei.github.io/">
+<link rel="alternate" hreflang="ja" href="https://109mei.github.io/">
+<link rel="alternate" hreflang="en" href="https://109mei.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://109mei.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="永野 斗遠 ポートフォリオ">
 <meta property="og:locale" content="ja_JP">
@@ -140,6 +143,9 @@ button{font:inherit}
   border:1px solid var(--line-2); background:var(--bg-2); color:var(--fg);
   font-size:17px; line-height:1; display:inline-flex; align-items:center; justify-content:center;
 }
+/* 英語ページへの切替（丸ボタンだが文字を入れるので少し詰める） */
+.lang-btn{font-size:12.5px; font-weight:700; letter-spacing:.04em; text-decoration:none}
+.lang-btn:hover{text-decoration:none; border-color:var(--accent)}
 .icon-btn:hover{border-color:var(--accent)}
 .icon-btn:active{transform:scale(.94)}
 #menuBtn{margin-left:auto}
@@ -523,6 +529,8 @@ kbd{
     <button class="icon-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="メニューを開く">
       <span aria-hidden="true">☰</span>
     </button>
+    <a class="icon-btn lang-btn" href="en/" hreflang="en" lang="en"
+       title="English version of this page">EN</a>
     <button class="icon-btn" id="themeToggle" type="button" aria-pressed="false"
             title="ダーク／ライト切替（既定はOSの設定に従います）">
       <span aria-hidden="true" id="themeIcon">☾</span>
