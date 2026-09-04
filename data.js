@@ -281,6 +281,7 @@ window.SITE_DATA = {
       kind: 'Webサイト',
       period: '2026〜',
       image: 'https://109mei.github.io/game-learning-archive/images/og-default.png',
+      imageW: 1200, imageH: 630,
       desc: '',
       url: 'https://109mei.github.io/game-learning-archive/'
     },
@@ -288,6 +289,7 @@ window.SITE_DATA = {
       title: 'チョコパキ！',
       kind: 'ゲーム',
       image: 'https://109mei.github.io/game-learning-archive/images/games/ideria-chokopaki.png',
+      imageW: 640, imageH: 400,
       desc: 'Python + Pygame の対戦ゲーム。おもちゃ化の試作も行った。',
       url: 'https://109mei.github.io/game-learning-archive/games/ideria-chokopaki/'
     },
@@ -295,6 +297,7 @@ window.SITE_DATA = {
       title: 'OneButtonGames ランチャー',
       kind: 'ゲーム',
       image: 'https://109mei.github.io/game-learning-archive/images/games/obg-launcher.png',
+      imageW: 640, imageH: 400,
       desc: '高校生・大学生による1ボタンゲーム10作品を収録。IDERIA × 純真高等学校 × 九州情報大学。',
       url: ''
     },

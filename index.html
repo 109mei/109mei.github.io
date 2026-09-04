@@ -1033,7 +1033,10 @@ kbd{
   }
   $('#worksList').innerHTML = (D.works||[]).map(function(w, i){
     var art = w.image
-      ? '<span class="card-art"><img src="' + esc(w.image) + '" alt="' + esc(w.title) + 'の画面" loading="lazy" decoding="async"></span>'
+      /* 寸法を入れて読み込み時のガタつきを防ぐ（枠は .card-art の aspect-ratio で確保済み） */
+      ? '<span class="card-art"><img src="' + esc(w.image) + '" alt="' + esc(w.title) + 'の画面"' +
+        (w.imageW && w.imageH ? ' width="' + w.imageW + '" height="' + w.imageH + '"' : '') +
+        ' loading="lazy" decoding="async"></span>'
       : cardArt(w);
     var body = '<div class="card-body">' +
       (w.kind ? '<span class="kind">' + esc(w.kind) + (w.period ? '・' + esc(w.period) : '') + '</span>' : '') +
