@@ -302,7 +302,7 @@ window.SITE_DATA = {
       title: 'しまっぴー先生の覚えてクイズ／ひらがなUNO／オセロカードゲーム試作',
       kind: '教材・ゲーム',
       image: '',
-      desc: 'IDERIA制作。「しまっぴー先生の覚えてクイズ」は TyranoScript 製。',
+      desc: 'IDERIA制作。「しまっぴー先生の覚えてクイズ」は TyranoScript 製で、イラストは田村明日香が担当。',
       url: ''
     }
   ],
