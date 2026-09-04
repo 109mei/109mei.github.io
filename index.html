@@ -91,7 +91,9 @@ img{max-width:100%; height:auto}
 a{color:var(--accent); text-decoration-thickness:1px; text-underline-offset:3px}
 a:hover{text-decoration-thickness:2px}
 a:active{opacity:.7}
-:focus-visible{outline:2px solid var(--ring); outline-offset:3px; border-radius:6px}
+/* border-radius をここで指定すると、丸ボタンなどの形がフォーカス時だけ変わりうる。
+   outline は要素自身の角丸に沿うので指定しない。 */
+:focus-visible{outline:2px solid var(--ring); outline-offset:3px}
 /* 大きい見出しは字間を詰める。緩いと締まりがなく見える */
 h1,h2,h3{line-height:1.35; letter-spacing:-.012em; margin:0}
 /* 特に大きい文字ほど強めに詰める */
