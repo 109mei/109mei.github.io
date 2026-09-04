@@ -693,7 +693,7 @@ kbd{
   }
 
   /* ---------- 日付の表示（データはISO、画面は日本語。§8-5） ---------- */
-  var WORDING = { '8-24 改良日':'8月24日に改良日', '企画書':'企画書を作成' };  /* §6 表示上の表記 */
+  var WORDING = { '企画書':'企画書を作成' };  /* §6 表示上の表記 */
   function jpDate(str){
     if (str == null) return '';
     var s = String(str);
@@ -769,8 +769,8 @@ kbd{
   $('#aboutText').innerHTML = (p.about||[]).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('');
   $('#aboutPath').innerHTML = (p.path||[]).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('');
 
-  /* ---------- 3. 数字 ---------- */
-  $('#statsList').innerHTML = (D.stats||[]).map(function(s){
+  /* ---------- 3. 数字（ヒーローの stats とは別の数字を出す。§3-3） ---------- */
+  $('#statsList').innerHTML = (D.statsDetail || D.stats || []).map(function(s){
     return '<li class="stat">' +
       '<div><span class="num" data-count="' + esc(s.value) + '">0</span>' +
       '<span class="unit">' + esc(s.unit||'') + '</span></div>' +
