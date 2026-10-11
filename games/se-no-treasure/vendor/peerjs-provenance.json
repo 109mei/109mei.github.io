@@ -1,0 +1,17 @@
+{
+  "package": "peerjs",
+  "version": "1.5.5",
+  "license": "MIT",
+  "source": "https://registry.npmjs.org/peerjs/-/peerjs-1.5.5.tgz",
+  "upstream": {
+    "type": "git",
+    "url": "https://github.com/peers/peerjs"
+  },
+  "retrieved": "2026-10-11",
+  "tarballIntegrity": "sha512-viMUCPDL6CSfOu0ZqVcFqbWRXNHIbv2lPqNbrBIjbFYrflebOjItJ4hPfhjnuUCstqciHVu9vVJ7jFqqKi/EuQ==",
+  "method": "npm pack peerjs@1.5.5 --ignore-scripts; extracted browser distribution and license unmodified",
+  "files": {
+    "peerjs-LICENSE": "9407807dba7f47a79bfb3ac55759d63d77c9371ebd0616d5a093e97d3e810397",
+    "peerjs.min.js": "7604d8c31bec4f134b0d15c2d80b1d095ea18af005354f439f14291fcd7b4168"
+  }
+}
