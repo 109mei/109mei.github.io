@@ -1,0 +1,68 @@
+{
+  "format": "ringout-static-v1",
+  "buildId": "d7ca654dbee80c540f71c01e",
+  "provenance": "New reconstructed baseline. No recovered old code or inherited test results.",
+  "sourceCommit": "20b57e8",
+  "files": [
+    {
+      "path": "app.mjs",
+      "sha256": "9f10123acb94f10cda0443ceb9b9bb42088aca94580d8d0dfc14df691e49d893",
+      "bytes": 30305
+    },
+    {
+      "path": "audio-feedback.mjs",
+      "sha256": "50156fd3a15f6744059677311eb90467ee6fe29f737036a5b55dc527bd8bf1d0",
+      "bytes": 14520
+    },
+    {
+      "path": "core/game.mjs",
+      "sha256": "4197f83ab65784c49236a8430483b03393189b073e0e5b5eed692437a0998fe2",
+      "bytes": 11039
+    },
+    {
+      "path": "core/physics.mjs",
+      "sha256": "781c9ce28de785a8a0ecdcaa228bf18aea36ad20ea358d282994eb8f48ff9995",
+      "bytes": 12353
+    },
+    {
+      "path": "index.html",
+      "sha256": "fd7cc6fa977c8a2e72a006ab772ca99696812a0253049a96d7b60b3f60f59f49",
+      "bytes": 5655
+    },
+    {
+      "path": "practice/index.html",
+      "sha256": "6907a8ac68ca08110e9820d3cdd5b4de821d525bec285675520748e10b3bd357",
+      "bytes": 3065
+    },
+    {
+      "path": "practice/practice.css",
+      "sha256": "96b762168cd5c2022d3400533e300c8f3226d2e430b0ddea1fe2dcb451aef3e1",
+      "bytes": 2852
+    },
+    {
+      "path": "practice/practice.mjs",
+      "sha256": "8fbf77304ae4302af6fe4d780d5d5fa161eb4a008cbadd41fef526d7cb74f2f2",
+      "bytes": 10654
+    },
+    {
+      "path": "practice/session.mjs",
+      "sha256": "3724639f065e541d9393b4d97dc3378738f38f72ceefec378485506f4093d75a",
+      "bytes": 2018
+    },
+    {
+      "path": "renderer.mjs",
+      "sha256": "1e8a2a4a391d9edf588afde17d4044ce1a466fc22f1e27749f2dab6a1746d9ab",
+      "bytes": 7942
+    },
+    {
+      "path": "strategy/onboarding/spring-lesson.mjs",
+      "sha256": "13199ce82216ecbf23e6c7bdc9dbde979e48daf84259f3a494e32f858e7c991e",
+      "bytes": 2555
+    },
+    {
+      "path": "style.css",
+      "sha256": "b4ba38f4a301394c1f7783ff77c08c0b56ba13512bea356cf45588aa8f8ba6fa",
+      "bytes": 5747
+    }
+  ]
+}

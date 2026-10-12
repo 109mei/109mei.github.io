@@ -1,0 +1,13 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><title>ばねを試す · RINGOUT</title><link rel="stylesheet" href="./practice.css?v=d7ca654dbee80c540f71c01e"></head>
+<body><main id="practice-root">
+<header><div><p class="eyebrow">OPTIONAL PRACTICE</p><h1>ばねを試す</h1></div><a href="../?v=d7ca654dbee80c540f71c01e">対戦へ戻る</a></header>
+<p class="intro">青を引いて弾く。ばねに当てると矢印へ曲がる。</p>
+<div class="settings"><fieldset><legend class="sr-only">ばねの有無</legend><button id="spring-off" type="button" aria-pressed="false">ばねなし</button><button id="spring-on" type="button" aria-pressed="true">ばねあり</button></fieldset><button id="opponent-toggle" type="button" aria-pressed="false">相手：別の駒</button></div>
+<p id="opponent-note">橙1：270°・10%（上0°から時計回り・固定）</p>
+<div class="board-wrap"><canvas id="practice-arena" tabindex="0" role="img" aria-label="練習盤面。青い駒を引いて発射" aria-describedby="keyboard-help practice-description practice-status"></canvas><p class="counts"><span id="blue-count">青 3</span><span id="orange-count">橙 3</span></p></div>
+<p id="practice-status">青3が選択中。自分の駒を引いて離す。</p>
+<div class="actions"><button id="retry" type="button">もう一度</button><button id="resume" type="button" hidden>再生を再開</button></div>
+<details id="practice-numeric"><summary>方向と強さを数値で選ぶ</summary><div class="numeric-inner"><label>青の駒 <select id="practice-disk"><option value="p0-0">駒1</option><option value="p0-1">駒2</option><option value="p0-2" selected>駒3</option></select></label><output id="practice-aim" aria-live="off">方向・強さを選ぶと照準が出ます。</output><div class="adjust"><button id="aim-left" type="button" aria-label="方向を左へ7.5度">↶</button><button id="aim-right" type="button" aria-label="方向を右へ7.5度">↷</button><button id="aim-weaker" type="button" aria-label="強さを5パーセント下げる">−</button><button id="aim-stronger" type="button" aria-label="強さを5パーセント上げる">＋</button></div><div class="numeric-actions"><button id="aim-cancel" type="button">取消</button><button id="practice-fire" type="button" disabled>発射</button></div></div></details>
+<p id="keyboard-help" class="sr-only">盤面のキーボード操作：QとEで自駒選択、AとDで方向、WとSで強さ、Enterで照準して次のEnterで発射、Escapeで取消。角度は上0度から時計回り。</p>
+<p id="practice-description" class="sr-only"></p><p id="practice-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p><p class="footnote">普通に直接当ててもOK。これは1手だけの練習です。</p>
+</main><script type="module" src="./practice.mjs?v=d7ca654dbee80c540f71c01e"></script></body></html>

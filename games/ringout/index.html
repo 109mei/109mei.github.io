@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ばね対戦 · 1台で2人</title><link rel="stylesheet" href="./style.css?v=d7ca654dbee80c540f71c01e"></head>
+<body>
+<main id="game" hidden inert>
+  <header class="compact-header"><h1>ばね対戦<span>.</span></h1><span class="build-note">1台で2人 · 新しい検証版</span></header>
+  <section class="score" aria-label="残りの駒"><span class="p1">● P1 <b id="p1-count">3</b></span><span id="turn-label">1 / 12ターン</span><span class="p2"><b id="p2-count">3</b> P2 ◆</span></section>
+  <p id="identity" class="identity"></p>
+  <section class="arena-wrap"><canvas id="arena" tabindex="0" aria-label="対戦フィールド" aria-describedby="board-description coordinate-help"></canvas><span id="phase-badge" class="phase-badge" aria-hidden="true"></span></section>
+  <p id="board-description" class="sr-only"></p><p id="coordinate-help" class="sr-only">位置は中央からの距離です。開始時の半径が100%。上が12時、右が3時。方向は上から時計回りです。</p>
+  <section class="controls">
+    <p id="status" class="status"></p><p id="hint" class="hint"></p><button id="next-input" type="button" class="primary" hidden>次の入力へ</button><button id="audio-mute" type="button" hidden>音を止める</button>
+    <div id="item-actions" class="item-actions"><button id="item-open" type="button">ばねを置く · 残1</button><button id="item-drop" type="button" hidden>予約を取消</button></div>
+    <p id="pad-status" class="pad-status"></p>
+    <section id="item-editor" hidden aria-labelledby="editor-title">
+      <h2 id="editor-title">台の位置と出口を選ぶ</h2>
+      <div class="item-fields">
+        <label>基準の駒<select id="anchor-select" aria-label="配置の基準にする自分の駒"></select></label>
+        <label>位置<select id="position-select" aria-label="基準駒からの位置、上から時計回り"></select></label>
+        <label>出口<select id="outlet-select" aria-label="ばねの出口、上から時計回り"></select></label>
+      </div>
+      <p id="placement-reason" class="placement-reason"></p>
+      <div class="action-pair"><button id="reserve" type="button" class="primary">配置を予約</button><button id="no-item" type="button">使わない</button></div>
+    </section>
+    <details id="numeric"><summary>ドラッグせずに入力</summary><label for="disk-select">発射する自分の駒</label><select id="disk-select"></select><p id="aim-readout" aria-live="off"></p><div class="numeric-grid"><button id="left" type="button">方向 −7.5°</button><button id="right" type="button">方向 +7.5°</button><button id="weaker" type="button">強さ −5%</button><button id="stronger" type="button">強さ +5%</button></div><div class="action-pair"><button id="fire" type="button" class="primary">入力を確定</button><button id="cancel" type="button">取消</button></div></details>
+    <button id="abort" type="button" class="secondary">対戦を中断</button>
+  </section>
+</main>
+<section id="cover" class="cover" role="dialog" aria-modal="true" aria-labelledby="cover-title" aria-describedby="cover-detail">
+ <div class="cover-card"><p class="cover-kicker">1台で2人 · ばねリングアウト</p><h1 id="cover-title">準備しています</h1><p id="cover-detail">読み込みが終わると、入力を開けます。</p><button id="advance" type="button" class="primary" disabled>読み込み中</button><button id="restart" type="button" class="secondary" disabled>最初からやり直す</button>
+ <a id="practice-link" href="./practice/?v=d7ca654dbee80c540f71c01e" aria-describedby="practice-note">ばねを試す</a><span id="practice-note" class="practice-note">練習から戻ると、新しい対戦になります。</span><details id="settings"><summary>開始条件・短い遊び方</summary><button id="audio-toggle" type="button" aria-pressed="false">共有再生の音：OFF</button><p id="audio-status" aria-live="off">音は初期状態でOFF。ONにしても個人の入力中は鳴りません。</p><label>各チームの駒数<select id="count"><option value="3">3個</option><option value="1">1個</option></select></label><p>「最初から」で設定を適用。各人1個を選び、同時に発射するのが1ターンです。上限12ターン、残った駒が多い側の勝ち。</p><p>ばねは各人1個。発射と一緒に配置できます。置いたターンは未作動で、次から2ターン有効。相手も使えます。点線は未作動、四角の数は残りターンです。最終ターンは設置できません。</p><p>台の位置は自分の駒から35の輪の上、位置と出口は15°刻み。先に入力する人は交互です。P1は青、P2は橙。入力中は自分が手前、共有再生はP1が手前です。</p><p>相手は入力中の画面を見ないでください。端末所有者、画面保存、既に聞こえた読み上げに対する秘密保証はありません。ページを離れると対戦を中断します。</p><p class="build-note">以前のファイルを復元したものではない、新しい再構築版です。通信・保存・外部サービスは使いません。音は任意の共有再生だけです。実機や2人での楽しさは検証中です。</p></details></div>
+</section><p id="announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+<script type="module" src="./app.mjs?v=d7ca654dbee80c540f71c01e"></script>
+</body></html>
