@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {createTapHandlers} from './interactions.mjs';
+import {createTapHandlers} from './interactions.mjs?v=20261013-qa3';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {instantiate,tint,disposeMaterials,disposeResources,buildProceduralPrototype,applyAppearance,createFinishTexture} from './scene-data.mjs';
