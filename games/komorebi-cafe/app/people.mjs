@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {createFoodFactory,FOOD_MODELS} from './food.mjs?v=20261013-qa4';
+import {createFoodFactory,FOOD_MODELS} from './food.mjs?v=20261013-qa5';
 
 const TAU=Math.PI*2;
 const SKIN=['#d9ab85','#bc805a','#94603f','#e5be9d','#a96f50'];

@@ -1,6 +1,6 @@
 /** Fictional game bookkeeping, not real accounting, lending, tax or business advice. */
-import {STOCK_ITEMS} from './catalog.mjs?v=20261013-qa4';
-import {recordCash} from './progression.mjs?v=20261013-qa4';
+import {STOCK_ITEMS} from './catalog.mjs?v=20261013-qa5';
+import {recordCash} from './progression.mjs?v=20261013-qa5';
 const clone=s=>JSON.parse(JSON.stringify(s));
 const assert=(ok,message)=>{if(!ok)throw Error(message)};
 const integer=Number.isSafeInteger;

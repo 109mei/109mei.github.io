@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {MENU} from './catalog.mjs?v=20261013-qa4';
-import {buildRecipeFood} from './food-recipes.mjs?v=20261013-qa4';
+import {MENU} from './catalog.mjs?v=20261013-qa5';
+import {buildRecipeFood} from './food-recipes.mjs?v=20261013-qa5';
 
 /** Original cafe-scale geometry. One unit is one metre; y=0 is the serving surface.
  * Prototypes are merged by material and section, then shared between independent instances.

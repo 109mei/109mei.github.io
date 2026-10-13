@@ -1,24 +1,24 @@
-import {createDelivery,migrateDelivery,initializeDeliveryDay,tickDelivery,assignDelivery,progressDeliveryTask,hasActiveDelivery,stopDelivery,validateDelivery} from './delivery.mjs?v=20261013-qa4';
-import {createAwareness,migrateAwareness,validateAwareness,makeAwarenessSchedule,updateAwarenessAtClose} from './demand-awareness.mjs?v=20261013-qa4';
-export {getAwarenessSummary} from './demand-awareness.mjs?v=20261013-qa4';
-export {getRecipeProcessing,getRecipePreview,getActivePreparation,getActivePreparations,PROCESS_KINDS,PROCESSING_SIMPLIFICATION} from './recipe-processing.mjs?v=20261013-qa4';
-import {MAX_ACTIVE_MENU,getMenuStrategy,chooseCustomerOrder,CUSTOMER_SEGMENTS} from './menu-strategy.mjs?v=20261013-qa4';
-export {MAX_ACTIVE_MENU,getMenuStrategy,CUSTOMER_SEGMENTS,getProductTags,getDemandTheme} from './menu-strategy.mjs?v=20261013-qa4';
-import {createStorage,assertStockCapacity,getStorageDailyCosts,validateStorage} from './storage.mjs?v=20261013-qa4';
-export {STORAGE_CATEGORIES,INGREDIENT_STORAGE,getStorageSummary,getStorageUpgradeOffer,upgradeStorage,getStorageDailyCosts} from './storage.mjs?v=20261013-qa4';
-import {initializeAccounting,recordInventoryExpense,closeAccountingDay,validateAccounting,validateFinancialStatements,getFinancialStatements} from './accounting.mjs?v=20261013-qa4';
-export {getFinancialStatements,getLoanOffer,borrowFunds,takeLoan,repayLoan} from './accounting.mjs?v=20261013-qa4';
+import {createDelivery,migrateDelivery,initializeDeliveryDay,tickDelivery,assignDelivery,progressDeliveryTask,hasActiveDelivery,stopDelivery,validateDelivery} from './delivery.mjs?v=20261013-qa5';
+import {createAwareness,migrateAwareness,validateAwareness,makeAwarenessSchedule,updateAwarenessAtClose} from './demand-awareness.mjs?v=20261013-qa5';
+export {getAwarenessSummary} from './demand-awareness.mjs?v=20261013-qa5';
+export {getRecipeProcessing,getRecipePreview,getActivePreparation,getActivePreparations,PROCESS_KINDS,PROCESSING_SIMPLIFICATION} from './recipe-processing.mjs?v=20261013-qa5';
+import {MAX_ACTIVE_MENU,getMenuStrategy,chooseCustomerOrder,CUSTOMER_SEGMENTS} from './menu-strategy.mjs?v=20261013-qa5';
+export {MAX_ACTIVE_MENU,getMenuStrategy,CUSTOMER_SEGMENTS,getProductTags,getDemandTheme} from './menu-strategy.mjs?v=20261013-qa5';
+import {createStorage,assertStockCapacity,getStorageDailyCosts,validateStorage} from './storage.mjs?v=20261013-qa5';
+export {STORAGE_CATEGORIES,INGREDIENT_STORAGE,getStorageSummary,getStorageUpgradeOffer,upgradeStorage,getStorageDailyCosts} from './storage.mjs?v=20261013-qa5';
+import {initializeAccounting,recordInventoryExpense,closeAccountingDay,validateAccounting,validateFinancialStatements,getFinancialStatements} from './accounting.mjs?v=20261013-qa5';
+export {getFinancialStatements,getLoanOffer,borrowFunds,takeLoan,repayLoan} from './accounting.mjs?v=20261013-qa5';
 /**
  * Pure, deterministic cafe operations simulation. One tick is one in-game minute.
  * Prices, footfall, wages and timings are explicit game assumptions, not a forecast.
  * Layout is sampled at opening; editing a live cafe does not teleport its guests.
  */
-import {OPERATING_DEFAULTS,SERVICE_PACES,getOperatingSettings,getOperatingTiming,validateOperatingSettings} from './operating-settings.mjs?v=20261013-qa4';
-export {OPERATING_DEFAULTS,SERVICE_PACES,getOperatingSettings,getOperatingTiming,setOperatingSettings} from './operating-settings.mjs?v=20261013-qa4';
-import {MENU,STOCK_ITEMS,STAFF_ROLES,INITIAL_RECIPES} from './catalog.mjs?v=20261013-qa4';
-import {createProgression,createFinance,recordCash,getGrowthBounds,getGrowthRent,getStaffCapacity,isRecipeUnlocked,setStaffCount,advanceResearch,validateProgression,validateFinance,MAX_DAILY_ARRIVALS} from './progression.mjs?v=20261013-qa4';
-export {MENU,STOCK_ITEMS,STAFF_ROLES,INITIAL_RECIPES} from './catalog.mjs?v=20261013-qa4';
-export {getProgressionGoals,getGrowthBounds,getGrowthRent,getStaffCapacity,isRecipeUnlocked,getExpansionOffer,purchaseExpansion,getResearchOffer,getResearchProjects,startResearch,getResearchBatchOffer,startResearchBatch,hireStaff,RESEARCH_PROJECTS,MAX_EXPANSION_LEVEL} from './progression.mjs?v=20261013-qa4';
+import {OPERATING_DEFAULTS,SERVICE_PACES,getOperatingSettings,getOperatingTiming,validateOperatingSettings} from './operating-settings.mjs?v=20261013-qa5';
+export {OPERATING_DEFAULTS,SERVICE_PACES,getOperatingSettings,getOperatingTiming,setOperatingSettings} from './operating-settings.mjs?v=20261013-qa5';
+import {MENU,STOCK_ITEMS,STAFF_ROLES,INITIAL_RECIPES} from './catalog.mjs?v=20261013-qa5';
+import {createProgression,createFinance,recordCash,getGrowthBounds,getGrowthRent,getStaffCapacity,isRecipeUnlocked,setStaffCount,advanceResearch,validateProgression,validateFinance,MAX_DAILY_ARRIVALS} from './progression.mjs?v=20261013-qa5';
+export {MENU,STOCK_ITEMS,STAFF_ROLES,INITIAL_RECIPES} from './catalog.mjs?v=20261013-qa5';
+export {getProgressionGoals,getGrowthBounds,getGrowthRent,getStaffCapacity,isRecipeUnlocked,getExpansionOffer,purchaseExpansion,getResearchOffer,getResearchProjects,startResearch,getResearchBatchOffer,startResearchBatch,hireStaff,RESEARCH_PROJECTS,MAX_EXPANSION_LEVEL} from './progression.mjs?v=20261013-qa5';
 export const STAGE_LABELS=Object.freeze({queue:'入店待ち',walking:'席へ移動',ordering:'注文待ち',preparing:'調理待ち',ready:'提供待ち',eating:'飲食中',paying:'会計待ち',cleaning:'片づけ待ち',departed:'退店済み'});
 export const DAY_MINUTES=480;
 // Shared walking-body envelope: the 3D character fit is checked against this radius.

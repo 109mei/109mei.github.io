@@ -1,9 +1,9 @@
 /** Fictional in-game delivery. No network, real orders, Uber account or actual fees. */
-import {getAwarenessSummary} from './demand-awareness.mjs?v=20261013-qa4';
-import {MENU} from './catalog.mjs?v=20261013-qa4';
-import {recordCash,isRecipeUnlocked} from './progression.mjs?v=20261013-qa4';
-import {getOperatingTiming,SERVICE_PACES,getOperatingSettings} from './operating-settings.mjs?v=20261013-qa4';
-import {getMenuStrategy} from './menu-strategy.mjs?v=20261013-qa4';
+import {getAwarenessSummary} from './demand-awareness.mjs?v=20261013-qa5';
+import {MENU} from './catalog.mjs?v=20261013-qa5';
+import {recordCash,isRecipeUnlocked} from './progression.mjs?v=20261013-qa5';
+import {getOperatingTiming,SERVICE_PACES,getOperatingSettings} from './operating-settings.mjs?v=20261013-qa5';
+import {getMenuStrategy} from './menu-strategy.mjs?v=20261013-qa5';
 const clone=s=>JSON.parse(JSON.stringify(s)),integer=Number.isSafeInteger;
 export const DELIVERY_FEE_RATE=.25;
 export const DELIVERY_DISCLAIMER='配達はゲーム内の架空サービスです。手数料25%はゲーム用の仮定で、実際のUberの条件ではありません。';

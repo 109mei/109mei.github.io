@@ -1,4 +1,4 @@
-import {LABELS,itemAppearance,itemZone,footprint,layoutBounds} from './core.mjs?v=20261013-qa4';
+import {LABELS,itemAppearance,itemZone,footprint,layoutBounds} from './core.mjs?v=20261013-qa5';
 const NS='http://www.w3.org/2000/svg';
 function svg(tag,attrs={},parent){const el=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))el.setAttribute(k,v);parent?.append(el);return el}
 const text=(root,value,x,y,size=12,fill='#5e704b',attrs={})=>{const e=svg('text',{x,y,'font-size':size,fill,'text-anchor':'middle',...attrs},root);e.textContent=value;return e};

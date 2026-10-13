@@ -1,20 +1,20 @@
-import {courierRecords} from './courier-scene.mjs?v=20261013-qa4';
-import {createParkingScene} from './parking-scene.mjs?v=20261013-qa4';
-import {createStreetScene} from './street-scene.mjs?v=20261013-qa4';
-import {approachRoute,interiorRoute,departureRoute,streetOpacity,cleanRoute} from './street-arrivals.mjs?v=20261013-qa4';
-import{fitBoxDistance}from'./camera-framing.mjs?v=20261013-qa4';
+import {courierRecords} from './courier-scene.mjs?v=20261013-qa5';
+import {createParkingScene} from './parking-scene.mjs?v=20261013-qa5';
+import {createStreetScene} from './street-scene.mjs?v=20261013-qa5';
+import {approachRoute,interiorRoute,departureRoute,streetOpacity,cleanRoute} from './street-arrivals.mjs?v=20261013-qa5';
+import{fitBoxDistance}from'./camera-framing.mjs?v=20261013-qa5';
 import * as THREE from 'three';
-import {createCafeControls,cafeControlKey} from './diegetic-controls.mjs?v=20261013-qa4';
-import {createTapHandlers} from './interactions.mjs?v=20261013-qa4';
+import {createCafeControls,cafeControlKey} from './diegetic-controls.mjs?v=20261013-qa5';
+import {createTapHandlers} from './interactions.mjs?v=20261013-qa5';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {instantiate,tint,disposeMaterials,disposeResources,buildProceduralPrototype,applyAppearance,createFinishTexture} from './scene-data.mjs?v=20261013-qa4';
-import {itemAppearance,growthLevels} from './core.mjs?v=20261013-qa4';
-import {buildExpansion,expansionMetrics,disposeExpansion} from './building.mjs?v=20261013-qa4';
-import {createStorageView,STORAGE_BOUNDS,STORAGE_FOCUS} from './storage-view.mjs?v=20261013-qa4';
-import {createFoodFactory} from './food.mjs?v=20261013-qa4';
-import {availableDisplayRecipes,tableFoodPlacements} from './service-display.mjs?v=20261013-qa4';
-import {createCharacterFactory,updateCharacterPose,characterMode,characterVisible,setCharacterMenu} from './people.mjs?v=20261013-qa4';
+import {instantiate,tint,disposeMaterials,disposeResources,buildProceduralPrototype,applyAppearance,createFinishTexture} from './scene-data.mjs?v=20261013-qa5';
+import {itemAppearance,growthLevels} from './core.mjs?v=20261013-qa5';
+import {buildExpansion,expansionMetrics,disposeExpansion} from './building.mjs?v=20261013-qa5';
+import {createStorageView,STORAGE_BOUNDS,STORAGE_FOCUS} from './storage-view.mjs?v=20261013-qa5';
+import {createFoodFactory} from './food.mjs?v=20261013-qa5';
+import {availableDisplayRecipes,tableFoodPlacements} from './service-display.mjs?v=20261013-qa5';
+import {createCharacterFactory,updateCharacterPose,characterMode,characterVisible,setCharacterMenu} from './people.mjs?v=20261013-qa5';
 
 export async function create3D(host,manifest,select,lost,onHotspot=()=>{}){
  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio||1,2));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.setClearColor(0xe9eadf);host.replaceChildren(renderer.domElement);

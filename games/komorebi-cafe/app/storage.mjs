@@ -2,8 +2,8 @@
  * Each ingredient count uses one shared unit. Existing FIFO/expiry is unchanged.
  * Initial storage is included in the cafe's existing running costs.
  */
-import {STOCK_ITEMS} from './catalog.mjs?v=20261013-qa4';
-import {recordCash} from './progression.mjs?v=20261013-qa4';
+import {STOCK_ITEMS} from './catalog.mjs?v=20261013-qa5';
+import {recordCash} from './progression.mjs?v=20261013-qa5';
 export const MAX_STORAGE_LEVEL=6;
 export const STORAGE_CATEGORIES=Object.freeze({
  dry:Object.freeze({id:'dry',name:'常温倉庫',baseCapacity:1500,capacityPerLevel:500,maintenancePerLevel:25,electricityPerLevel:10,costs:Object.freeze([6500,11000,18000,28000,42000,60000])}),

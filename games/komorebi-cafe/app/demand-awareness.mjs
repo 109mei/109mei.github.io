@@ -1,4 +1,4 @@
-import {MAX_DAILY_ARRIVALS} from './progression.mjs?v=20261013-qa4';
+import {MAX_DAILY_ARRIVALS} from './progression.mjs?v=20261013-qa5';
 /** Explicit game assumptions, not calibrated market predictions. Awareness is the
  * percentage of a small local catchment who have heard of this cafe, not quality. */
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));

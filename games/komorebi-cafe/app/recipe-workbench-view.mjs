@@ -1,5 +1,5 @@
-import {MENU,STOCK_ITEMS} from './catalog.mjs?v=20261013-qa4';
-import {WORKBENCH_BASES,getWorkbenchBase,createWorkbenchSelection,selectionForRecipe,describeWorkbench} from './recipe-workbench.mjs?v=20261013-qa4';
+import {MENU,STOCK_ITEMS} from './catalog.mjs?v=20261013-qa5';
+import {WORKBENCH_BASES,getWorkbenchBase,createWorkbenchSelection,selectionForRecipe,describeWorkbench} from './recipe-workbench.mjs?v=20261013-qa5';
 /** Selection is transient. Only onResearch opens the existing paid confirmation. */
 export function createRecipeWorkbench(host,{getState,onPreview,onResearch}){
  const doc=host.ownerDocument??document,make=(tag,text)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n},money=n=>`¥${Math.round(n).toLocaleString('ja-JP')}`;

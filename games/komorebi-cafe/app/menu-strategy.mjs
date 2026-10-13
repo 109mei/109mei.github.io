@@ -1,5 +1,5 @@
 /** Menu planning is a capacity decision, not a collect-everything demand multiplier. */
-import {MENU} from './catalog.mjs?v=20261013-qa4';
+import {MENU} from './catalog.mjs?v=20261013-qa5';
 export const MAX_ACTIVE_MENU=24;
 export const CUSTOMER_SEGMENTS=Object.freeze([
  Object.freeze({id:'coffee',name:'コーヒー好き',tags:['coffee'],share:.30,priceSensitivity:1.8,foodChance:.32}),
