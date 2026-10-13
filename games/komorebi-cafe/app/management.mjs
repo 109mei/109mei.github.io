@@ -1,0 +1,235 @@
+export {getRecipeProcessing,getRecipePreview,getActivePreparation,getActivePreparations,PROCESS_KINDS,PROCESSING_SIMPLIFICATION} from './recipe-processing.mjs';
+import {MAX_ACTIVE_MENU,getMenuStrategy,chooseCustomerOrder,CUSTOMER_SEGMENTS} from './menu-strategy.mjs';
+export {MAX_ACTIVE_MENU,getMenuStrategy,CUSTOMER_SEGMENTS,getProductTags,getDemandTheme} from './menu-strategy.mjs';
+import {createStorage,assertStockCapacity,getStorageDailyCosts,validateStorage} from './storage.mjs';
+export {STORAGE_CATEGORIES,INGREDIENT_STORAGE,getStorageSummary,getStorageUpgradeOffer,upgradeStorage,getStorageDailyCosts} from './storage.mjs';
+import {initializeAccounting,recordInventoryExpense,closeAccountingDay,validateAccounting,validateFinancialStatements,getFinancialStatements} from './accounting.mjs';
+export {getFinancialStatements,getLoanOffer,borrowFunds,takeLoan,repayLoan} from './accounting.mjs';
+/**
+ * Pure, deterministic cafe operations simulation. One tick is one in-game minute.
+ * Prices, footfall, wages and timings are explicit game assumptions, not a forecast.
+ * Layout is sampled at opening; editing a live cafe does not teleport its guests.
+ */
+import {OPERATING_DEFAULTS,SERVICE_PACES,getOperatingSettings,getOperatingTiming,validateOperatingSettings} from './operating-settings.mjs';
+export {OPERATING_DEFAULTS,SERVICE_PACES,getOperatingSettings,getOperatingTiming,setOperatingSettings} from './operating-settings.mjs';
+import {MENU,STOCK_ITEMS,STAFF_ROLES,INITIAL_RECIPES} from './catalog.mjs';
+import {createProgression,createFinance,recordCash,getGrowthBounds,getGrowthRent,getStaffCapacity,isRecipeUnlocked,setStaffCount,advanceResearch,validateProgression,validateFinance,MAX_DAILY_ARRIVALS} from './progression.mjs';
+export {MENU,STOCK_ITEMS,STAFF_ROLES,INITIAL_RECIPES} from './catalog.mjs';
+export {getProgressionGoals,getGrowthBounds,getGrowthRent,getStaffCapacity,isRecipeUnlocked,getExpansionOffer,purchaseExpansion,getResearchOffer,getResearchProjects,startResearch,getResearchBatchOffer,startResearchBatch,hireStaff,RESEARCH_PROJECTS,MAX_EXPANSION_LEVEL} from './progression.mjs';
+export const STAGE_LABELS=Object.freeze({queue:'入店待ち',walking:'席へ移動',ordering:'注文待ち',preparing:'調理待ち',ready:'提供待ち',eating:'飲食中',paying:'会計待ち',cleaning:'片づけ待ち',departed:'退店済み'});
+export const DAY_MINUTES=480;
+// Shared walking-body envelope: the 3D character fit is checked against this radius.
+export const WALKING_CLEARANCE_RADIUS=.32;
+export const QUEUE_SPACING=.68,MAX_WAITING_GUESTS=32;
+const STEP=.2, START_X=-3.2, NX=33;
+const copy=s=>JSON.parse(JSON.stringify(s));
+const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+const round=n=>Math.round(n*100)/100;
+const money=n=>Math.round(n);
+const finite=n=>typeof n==='number'&&Number.isFinite(n);
+const int=n=>Number.isSafeInteger(n);
+const assert=(condition,message)=>{if(!condition)throw Error(message)};
+const validKey=(obj,key)=>typeof key==='string'&&Object.hasOwn(obj,key);
+const fallback={table:{width:.85,depth:.8},chair:{width:.5,depth:.55,seats:1},counter:{width:1.05,depth:3.2},shelf:{width:2.1,depth:.5},pendant:{width:.5,depth:.5,layer:'overhead'},sofa:{width:1.65,depth:.72,seats:2},bench:{width:1.3,depth:.5,seats:2},plant:{width:.55,depth:.55},planter:{width:1.2,depth:.4},outdoor_table:{width:.9,depth:.9},outdoor_chair:{width:.5,depth:.55,seats:1},parasol:{width:1.7,depth:1.7,layer:'overhead'},rug:{width:1.8,depth:1.2,layer:'floor'},menu_board:{width:.5,depth:.45},lamp:{width:.45,depth:.45},pastry_case:{width:1.1,depth:.65}};
+const freshToday=()=>({revenue:0,costOfGoods:0,served:0,lost:0,arrivals:0,stockouts:0,waitTotal:0,satisfactionTotal:0,spoilageCost:0,stockPurchases:0,abandoned:0});
+export function formatTime(minute,openingMinute=540){const value=openingMinute+Math.max(0,Math.floor(Number(minute)||0));return `${String(Math.floor(value/60)).padStart(2,'0')}:${String(value%60).padStart(2,'0')}`}
+export function createManagement(){
+ const stock=Object.fromEntries(Object.keys(STOCK_ITEMS).map(k=>[k,0]));Object.assign(stock,{beans:60,milk:35,cake:24});
+ const batches=Object.fromEntries(Object.keys(STOCK_ITEMS).map(k=>[k,[]]));Object.assign(batches,{beans:[{quantity:60,expiresDay:8}],milk:[{quantity:35,expiresDay:3}],cake:[{quantity:24,expiresDay:2}]});
+ const state={version:2,simulationVersion:2,storage:createStorage(),settings:{...OPERATING_DEFAULTS},day:1,phase:'planning',minute:0,cash:80000,reputation:60,satisfaction:75,stock,batches,prices:Object.fromEntries(Object.values(MENU).map(m=>[m.id,m.basePrice])),menuEnabled:Object.fromEntries(Object.keys(MENU).map(id=>[id,INITIAL_RECIPES.includes(id)])),closingRequested:false,weather:{id:'sunny',name:'晴れ',demandFactor:1,terraceOpen:true},staff:{service:1,barista:1},customers:[],staffActors:[],today:freshToday(),lastReport:null,history:[],lastEvent:'仕入れ・価格・スタッフを決めて開店しましょう。',events:[],seed:240519,arrivalSchedule:[],arrivalIndex:0,floor:null,planningSpend:0,totalServed:0,totalRevenue:0,progression:createProgression(),finance:createFinance()};initializeAccounting(state);return state;
+}
+function log(s,text){s.lastEvent=text;s.events.push({minute:s.minute,text});if(s.events.length>30)s.events.shift()}
+function random(s){s.seed=(Math.imul(s.seed,1664525)+1013904223)>>>0;return s.seed/4294967296}
+function rect(item,p){const rotated=(item.rotationDeg??0)%180!==0;return {x:item.x,z:item.z,w:rotated?p.depth:p.width,d:rotated?p.width:p.depth}}
+const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
+function gridGeometry(layout,manifest){
+ const bounds=getGrowthBounds(layout),START_Z=Math.round((bounds.indoor.minZ+.23)*100)/100,NZ=Math.round((bounds.terrace.maxZ-START_Z-.15)/STEP)+1;
+ const gridPoint=id=>({x:round(START_X+(id%NX)*STEP),z:round(START_Z+Math.floor(id/NX)*STEP)});
+ const prototypes=manifest?.prototypes||fallback;
+ const objects=(layout?.instances||[]).filter(o=>finite(o.x)&&finite(o.z)).map(o=>({...o,p:prototypes[o.type]||fallback[o.type]})).filter(o=>o.p);
+ const blocks=objects.filter(o=>!['overhead','floor'].includes(o.p.layer)&&!['pendant','parasol','rug'].includes(o.type)).map(o=>rect(o,o.p));
+ const allowed=new Set();
+ for(let j=0;j<NZ;j++)for(let i=0;i<NX;i++){const id=j*NX+i,{x,z}=gridPoint(id);const radius=WALKING_CLEARANCE_RADIUS,room=x>=bounds.indoor.minX+radius&&x<=bounds.indoor.maxX-radius&&z>=bounds.indoor.minZ+radius&&z<=bounds.indoor.maxZ-radius,terrace=z>=bounds.terrace.minZ+radius&&z<=bounds.terrace.maxZ-radius&&x>=bounds.terrace.minX+radius&&x<=bounds.terrace.maxX-radius,bridge=Math.abs(x)<=.6-radius&&z>=2.63-radius&&z<=3.25+radius;
+  if(!(room||terrace||bridge))continue;
+  if(blocks.some(b=>Math.abs(x-b.x)<b.w/2+WALKING_CLEARANCE_RADIUS&&Math.abs(z-b.z)<b.d/2+WALKING_CLEARANCE_RADIUS))continue;allowed.add(id);
+ }
+ const nearest=(point,candidates=allowed,max=Infinity)=>{let best=null,d=max;for(const id of candidates){const p=gridPoint(id),n=distance(point,p);if(n<d){d=n;best=id}}return best};
+ const entrance=nearest({x:0,z:2.6},allowed,.5);
+ const flood=(start)=>{const paths=new Map();if(start===null)return paths;paths.set(start,null);const queue=[start];for(let head=0;head<queue.length;head++){const id=queue[head],x=id%NX,z=Math.floor(id/NX);for(const n of [x>0?id-1:-1,x<NX-1?id+1:-1,z>0?id-NX:-1,z<NZ-1?id+NX:-1])if(allowed.has(n)&&!paths.has(n)){paths.set(n,id);queue.push(n)}}return paths};
+ const entrancePaths=flood(entrance),connected=new Set(entrancePaths.keys());
+ const path=(parents,to)=>{const out=[];for(let id=to;id!==null&&id!==undefined;id=parents.get(id))out.push(gridPoint(id));out.reverse();return out.filter((p,i)=>!i||i===out.length-1||!((out[i-1].x===p.x&&p.x===out[i+1].x)||(out[i-1].z===p.z&&p.z===out[i+1].z)))};
+ const reachableNear=(point,radius)=>nearest(point,connected,radius);
+ return {objects,entrance,entrancePaths,connected,path,flood,reachableNear,nearest,gridPoint};
+}
+/** Seats require a nearby table and a walkable route for a 64cm-wide moving body. */
+export function getCafeStats(layout,manifest){
+ const g=gridGeometry(layout,manifest),gridPoint=g.gridPoint,warnings=[],seats=[];
+ const tables=g.objects.filter(o=>['table','outdoor_table'].includes(o.type));
+ const counters=g.objects.filter(o=>o.type==='counter');
+ let station=null,stationId=null;
+ for(const counter of counters){const r=rect(counter,counter.p),candidates=[{x:r.x-r.w/2-.3,z:r.z},{x:r.x+r.w/2+.3,z:r.z},{x:r.x,z:r.z-r.d/2-.3},{x:r.x,z:r.z+r.d/2+.3}];
+  for(const candidate of candidates){const id=g.reachableNear(candidate,.45);if(id!==null){stationId=id;station=gridPoint(id);break}}if(station)break;
+ }
+ const stationPaths=g.flood(stationId),tableUsage=new Map();
+ for(const chair of g.objects.filter(o=>['chair','outdoor_chair','sofa','bench'].includes(o.type))){
+  const zone=chair.zone||'indoor';const table=tables.filter(t=>(t.zone||'indoor')===zone).sort((a,b)=>distance(chair,a)-distance(chair,b))[0];
+  if(!table||distance(chair,table)>1.8){warnings.push(`${chair.id}: 近くにテーブルがありません`);continue}
+  const candidates=new Set([...g.connected].filter(id=>{const target=gridPoint(id);if(distance(chair,target)>Math.max(chair.p.width,chair.p.depth)/2+.55)return false;return !g.objects.some(o=>{if(o.id===chair.id||['overhead','floor'].includes(o.p.layer)||['pendant','parasol','rug'].includes(o.type))return false;const b=rect(o,o.p);for(let n=1;n<=12;n++){const x=chair.x+(target.x-chair.x)*n/12,z=chair.z+(target.z-chair.z)*n/12;if(Math.abs(x-b.x)<b.w/2+.04&&Math.abs(z-b.z)<b.d/2+.04)return true}return false})}));
+  const access=g.nearest(chair,candidates); 
+  if(access===null){warnings.push(`${chair.id}: 通路から席へたどり着けません`);continue}
+  const count=Math.min(chair.p.seats||1,4-(tableUsage.get(table.id)||0));
+  if(count<=0){warnings.push(`${chair.id}: テーブルの定員（4席）を超えています`);continue}
+  tableUsage.set(table.id,(tableUsage.get(table.id)||0)+count);
+  for(let n=0;n<count;n++){const shift=count>1?(n-.5)*.5:0,rotation=(chair.rotationDeg||0)*Math.PI/180;
+   seats.push({id:`${chair.id}:${n}`,chairId:chair.id,tableId:table.id,zone,x:round(chair.x+shift*Math.cos(rotation)),z:round(chair.z-shift*Math.sin(rotation)),access:gridPoint(access),entrancePath:g.path(g.entrancePaths,access),stationPath:stationPaths.has(access)?g.path(stationPaths,access):[]});
+  }
+ }
+ // Distinct work/wait points share the same furniture and wall clearance as navigation.
+ const indoorBounds=getGrowthBounds(layout).indoor,staffPositions=[];
+ if(station){const candidates=[...g.connected].map(id=>({id,...gridPoint(id)})).filter(p=>p.x>=indoorBounds.minX+WALKING_CLEARANCE_RADIUS&&p.x<=indoorBounds.maxX-WALKING_CLEARANCE_RADIUS&&p.z>=indoorBounds.minZ+WALKING_CLEARANCE_RADIUS&&p.z<=indoorBounds.maxZ-WALKING_CLEARANCE_RADIUS).sort((a,b)=>distance(a,station)-distance(b,station)||a.id-b.id);
+  for(const p of candidates)if(staffPositions.every(q=>distance(p,q)>=.65)){staffPositions.push({x:p.x,z:p.z,path:g.path(stationPaths,p.id)});if(staffPositions.length>=getStaffCapacity(layout)*2)break}
+ }
+ // Waiting uses owned, connected deck space, leaving the entrance and seat access free.
+ const queuePositions=[],queueCandidates=[...g.connected].map(id=>({id,...gridPoint(id)})).filter(p=>p.z>=3.8&&Math.abs(p.x)>=.8&&seats.every(seat=>distance(p,seat.access)>=QUEUE_SPACING)&&staffPositions.every(home=>distance(p,home)>=QUEUE_SPACING)).sort((a,b)=>distance(a,{x:0,z:3.25})-distance(b,{x:0,z:3.25})||a.id-b.id);
+ for(const p of queueCandidates)if(queuePositions.every(q=>distance(p,q)>=QUEUE_SPACING)){queuePositions.push({x:p.x,z:p.z,path:g.path(g.entrancePaths,p.id)});if(queuePositions.length>=MAX_WAITING_GUESTS)break}
+ const decor=g.objects.filter(o=>['plant','planter','rug','menu_board','lamp','pastry_case','shelf'].includes(o.type)).length;
+ const overhead=g.objects.filter(o=>['pendant','parasol'].includes(o.type)).length;
+ const distinct=new Set(g.objects.map(o=>o.type)).size;
+ const appeal=clamp(20+decor*4+overhead*2+distinct*1.5,0,100),indoorSeats=seats.filter(s=>s.zone==='indoor').length,outdoorSeats=seats.length-indoorSeats;
+ const blockedReason=!counters.length?'営業にはカウンターが必要です':!station?'カウンターへ続く通路を確保してください':!seats.length?'通路につながるテーブルと座席が必要です':null;
+ return {seats:seats.length,indoorSeats,outdoorSeats,appeal:round(appeal),dailyRent:2600+(outdoorSeats?400:0)+getGrowthRent(layout),routeWarnings:warnings,staffPositions,queuePositions,queueCapacity:queuePositions.length,canOpen:!blockedReason,blockedReason,seatPositions:seats,station:station||{x:0,z:0},entrance:{x:0,z:2.6}};
+}
+function planning(s){assert(s.phase!=='open','営業中は変更できません。閉店後に調整してください')}
+export function purchaseStock(state,itemId,quantity){
+ planning(state);assert(validKey(STOCK_ITEMS,itemId),'食材の種類が不正です');assert(int(quantity)&&quantity>0&&quantity<=500,'仕入れ数は1〜500の整数にしてください');const item=STOCK_ITEMS[itemId],cost=item.unitCost*quantity;assert(state.cash>=cost,'仕入れ資金が足りません');assert(state.stock[itemId]+quantity<=1000,'食材は各1000個までです');assertStockCapacity(state,itemId,quantity);const s=copy(state),useDay=s.phase==='closed'?s.day+1:s.day;recordCash(s,-cost,'stock',`${item.name} ${quantity}${item.unit}仕入れ`);s.stock[itemId]+=quantity;s.batches[itemId].push({quantity,expiresDay:useDay+item.shelfLife});s.planningSpend+=cost;log(s,`${item.name} ${quantity}${item.unit}を ¥${cost.toLocaleString('ja-JP')}で仕入れました`);return s;
+}
+export function setMenuPrice(state,id,price){planning(state);assert(validKey(MENU,id),'メニューの種類が不正です');const m=MENU[id];assert(int(price)&&price>=m.minPrice&&price<=m.maxPrice,`価格は¥${m.minPrice}〜¥${m.maxPrice}の整数にしてください`);const s=copy(state);s.prices[id]=price;log(s,`${m.name}を ¥${price}に設定しました`);return s}
+export function setMenuEnabled(state,id,enabled){planning(state);assert(validKey(MENU,id)&&typeof enabled==='boolean','メニューの設定が不正です');assert(!enabled||isRecipeUnlocked(state,id),'未開発のメニューです。先にレシピを開発してください');assert(!enabled||state.menuEnabled[id]||getMenuStrategy(state).activeCount<MAX_ACTIVE_MENU,`販売中メニューは最大${MAX_ACTIVE_MENU}種類です。先に別の商品を販売停止してください`);const s=copy(state);s.menuEnabled[id]=enabled;log(s,`${MENU[id].name}の販売を${enabled?'開始':'停止'}しました`);return s}
+export function setStaff(state,role,count){return setStaffCount(state,role,count)}
+export function spendMoney(state,amount,description='設備購入'){planning(state);assert(int(amount)&&amount>=0,'金額が不正です');assert(state.cash>=amount,'資金が足りません');const s=copy(state);recordCash(s,-amount,'equipment',description);log(s,`${String(description).slice(0,80)}: ¥${amount.toLocaleString('ja-JP')}`);return s}
+function ingredients(order){const need=Object.fromEntries(Object.keys(STOCK_ITEMS).map(k=>[k,0]));for(const id of order)for(const[k,n]of Object.entries(MENU[id].recipe))need[k]+=n;return need}
+function available(s,order){return Object.entries(ingredients(order)).every(([k,n])=>s.stock[k]>=n)}
+function consume(s,order){for(const[k,quantity]of Object.entries(ingredients(order))){let n=quantity;s.batches[k].sort((a,b)=>a.expiresDay-b.expiresDay);for(const batch of s.batches[k]){const used=Math.min(batch.quantity,n);batch.quantity-=used;n-=used;if(!n)break}s.batches[k]=s.batches[k].filter(b=>b.quantity>0);s.stock[k]-=quantity;s.today.costOfGoods+=quantity*STOCK_ITEMS[k].unitCost;recordInventoryExpense(s,quantity*STOCK_ITEMS[k].unitCost,'costOfGoods')}}
+function expire(s){for(const[k,batches]of Object.entries(s.batches)){let discarded=0;s.batches[k]=batches.filter(b=>{if(b.expiresDay<=s.day+1){discarded+=b.quantity;return false}return true});s.stock[k]-=discarded;s.today.spoilageCost+=discarded*STOCK_ITEMS[k].unitCost;recordInventoryExpense(s,discarded*STOCK_ITEMS[k].unitCost,'spoilageCost');if(discarded)log(s,`${STOCK_ITEMS[k].name} ${discarded}${STOCK_ITEMS[k].unit}が期限を迎え、廃棄されました`)}}
+function makeSchedule(s){const strategy=getMenuStrategy(s),recognition=Math.min(150,Math.sqrt(s.totalServed)*3);const demand=clamp(Math.round((35+s.reputation*.4+s.floor.appeal*.3+strategy.diversityBonus+recognition)*strategy.priceFactor*(1+strategy.themeBonus/100)*s.weather.demandFactor*(getOperatingTiming(s).lastEntryOffset/450)*(1+getOperatingSettings(s).promotionBudget/10000)),8,MAX_DAILY_ARRIVALS),result=[];for(let i=0;i<demand;i++){const wave=random(s),r=random(s);result.push(Math.floor((wave<.3?r*100:wave<.65?150+r*120:wave<.9?300+r*140:r*450)*getOperatingTiming(s).lastEntryOffset/450))}return result.sort((a,b)=>a-b)}
+export function openDay(state,layout,manifest){
+ assert(state.phase!=='open','すでに営業中です');assert(getMenuStrategy(state).activeCount<=MAX_ACTIVE_MENU,`販売中メニューは最大${MAX_ACTIVE_MENU}種類です`);const settings=getOperatingSettings(state),settingsError=validateOperatingSettings(settings);assert(!settingsError,settingsError);assert(!settings.promotionBudget||state.cash>=settings.promotionBudget,'宣伝予算の資金が足りません');const nextDay=state.phase==='closed'?state.day+1:state.day;const weather=nextDay%4===0?{id:'rain',name:'雨',demandFactor:.78,terraceOpen:false}:nextDay%4===2?{id:'cloudy',name:'曇り',demandFactor:.95,terraceOpen:true}:{id:'sunny',name:'晴れ',demandFactor:1,terraceOpen:true};const floor=getCafeStats({...layout,growth:{...state.progression.expansions}},manifest);assert(floor.canOpen,floor.blockedReason);assert(state.staff.service>0,'営業にはホールスタッフが1人以上必要です');assert(state.staff.barista>0,'営業にはバリスタが1人以上必要です');assert(floor.staffPositions.length>=state.staff.service+state.staff.barista,'スタッフの待機場所が足りません。店内の通路を広げるか、勤務人数を減らしてください');assert(Object.keys(MENU).some(id=>state.menuEnabled[id]&&isRecipeUnlocked(state,id)),'販売中のメニューを1つ以上設定してください');assert(Object.keys(MENU).some(id=>state.menuEnabled[id]&&isRecipeUnlocked(state,id)&&available(state,[id])),'提供できる食材がありません。仕入れをしてください');if(!weather.terraceOpen||!settings.terraceEnabled){floor.seatPositions=floor.seatPositions.filter(seat=>seat.zone==='indoor');floor.seats=floor.indoorSeats;floor.outdoorSeats=0;floor.routeWarnings.push(!settings.terraceEnabled?'営業方針によりテラス席は休止しています':'雨のためテラス席は休止しています');assert(floor.seats>0,'テラス席が休止中です。店内に座席を用意してください')}const s=copy(state);if(s.phase==='closed')s.day++;s.simulationVersion=2;s.weather=weather;s.closingRequested=false;s.phase='open';s.settings=settings;s.minute=0;s.floor=floor;s.customers=[];s.today=freshToday();s.today.promotionCosts=settings.promotionBudget;if(settings.promotionBudget)recordCash(s,-settings.promotionBudget,'promotion','当日の宣伝費');s.today.stockPurchases=s.planningSpend;s.planningSpend=0;for(const [field,category]of [['capitalInvestment','expansion'],['researchCosts','research'],['recruitmentCosts','recruitment'],['equipmentInvestment','equipment']])s.today[field]=s.finance.totals[category]-(s.lastReport?.financeTotals?.[category]??0);s.events=[];s.arrivalIndex=0;s.staffActors=[];
+ for(const[role,count]of Object.entries(s.staff))for(let i=0;i<count;i++){const home=floor.staffPositions[s.staffActors.length];s.staffActors.push({id:`${role}-${i+1}`,role,x:home.x,z:home.z,home:{x:home.x,z:home.z},homePath:copy(home.path),task:null,taskLabel:'待機中',lastSeatId:null})};s.arrivalSchedule=makeSchedule(s);log(s,`${s.day}日目を開店しました。営業は${formatTime(0,settings.openingMinute)}〜${formatTime(0,settings.closingMinute)}、最終入店${formatTime(0,settings.lastEntryMinute)}です`);return s;
+}
+function label(c,stage){c.stage=stage;c.stageLabel=STAGE_LABELS[stage];c.stageMinute=0;if(stage==='cleaning'||stage==='departed'){c.path=[];c.queueSlot=null}}
+function arrive(s){const id=`d${s.day}-g${s.today.arrivals+1}`,names=['あおい','りく','ひなた','さくら','ゆう','なな','はる','みお','けい','そら'];let order,segment;
+ if((s.simulationVersion??1)===1){const enabled=Object.keys(MENU).filter(id=>s.menuEnabled[id]&&isRecipeUnlocked(s,id));
+ if(enabled.every(id=>INITIAL_RECIPES.includes(id))){const drink=random(s)<.58?'coffee':'latte',other=drink==='coffee'?'latte':'coffee';order=s.menuEnabled[drink]?[drink]:s.menuEnabled[other]?[other]:['cake'];if(random(s)<.32&&s.menuEnabled.cake&&!order.includes('cake'))order.push('cake');if(random(s)<.1&&s.menuEnabled.cake)order=['cake'];}
+ else{const drinks=enabled.filter(id=>MENU[id].category==='drink'),foods=enabled.filter(id=>MENU[id].category!=='drink');const pick=items=>items[Math.min(items.length-1,Math.floor(random(s)*items.length))];order=drinks.length?[pick(drinks)]:[pick(foods)];if(foods.length&&drinks.length&&random(s)<.55)order.push(pick(foods));}}
+ else({order,segment}=chooseCustomerOrder(s,()=>random(s)));
+ const bill=order.reduce((sum,id)=>sum+s.prices[id],0),fair=order.reduce((sum,id)=>sum+MENU[id].basePrice,0);const orderPrices=Object.fromEntries(order.map(id=>[id,s.prices[id]]));const c={id,...(segment?{segment}:{}),orderPrices,queueSlot:null,name:names[Math.floor(random(s)*names.length)],stage:'queue',stageLabel:STAGE_LABELS.queue,stageMinute:0,x:0,z:3.1,targetX:0,targetZ:2.6,seatId:null,tableId:null,order,bill,wait:0,queuePatience:6+Math.floor(random(s)*9),orderPatience:14+Math.floor(random(s)*12),eatMinutes:14+Math.floor(random(s)*14)+(order.some(id=>MENU[id].category==='food')?10:order.some(id=>MENU[id].category==='dessert')?6:0),satisfaction:clamp(78+SERVICE_PACES[getOperatingSettings(s).servicePace].satisfactionBonus+s.floor.appeal*.12-Math.max(0,bill/fair-1)*35,10,100),paid:false,ingredientsConsumed:false,assignedTo:null,path:[],walkProgress:0};s.customers.push(c);s.today.arrivals++}
+function leave(s,c,reason){if(c.stage==='departed'||c.stage==='cleaning')return;s.today.lost++;if(reason==='食材切れ')s.today.stockouts++;else s.today.abandoned++;log(s,`${c.name}さんが${reason}で退店しました`);for(const actor of s.staffActors)if(actor.task?.customerId===c.id){actor.task=null;actor.taskLabel='待機中'}c.assignedTo=null;c.departureReason=reason;label(c,c.seatId?'cleaning':'departed')}
+function pathLength(path){let n=0;for(let i=1;i<path.length;i++)n+=distance(path[i-1],path[i]);return n}
+function atPath(path,fraction){if(!path.length)return {x:0,z:0};let remaining=pathLength(path)*clamp(fraction,0,1);for(let i=1;i<path.length;i++){const d=distance(path[i-1],path[i]);if(remaining<=d){const f=d?remaining/d:0;return {x:round(path[i-1].x+(path[i].x-path[i-1].x)*f),z:round(path[i-1].z+(path[i].z-path[i-1].z)*f)}}remaining-=d}return path[path.length-1]}
+function seatFor(s,c){return s.floor.seatPositions.find(seat=>seat.id===c.seatId)}
+function taskPath(s,actor,c){const seat=seatFor(s,c),previous=s.floor.seatPositions.find(seat=>seat.id===actor.lastSeatId);const back=previous?[...previous.stationPath].reverse():actor.homePath?.length?[...actor.homePath].reverse():[s.floor.station];return [...back,...(seat?.stationPath||[s.floor.station])]}
+function assign(s){
+ // Oldest guest first within each stage; completing payment and delivery precedes new orders.
+ const priorities={paying:0,ready:1,ordering:2,cleaning:3};
+ for(const actor of s.staffActors){if(actor.task)continue;
+  if(actor.role==='barista'){
+   const c=s.customers.find(c=>c.stage==='preparing'&&!c.assignedTo);if(!c)continue;
+   if(!available(s,c.order)){leave(s,c,'食材切れ');continue}
+   consume(s,c.order);c.ingredientsConsumed=true;c.assignedTo=actor.id;const total=c.order.reduce((n,id)=>n+MENU[id].prepMinutes,0)*((s.simulationVersion??1)===1?1:getMenuStrategy(s).prepFactor)*SERVICE_PACES[getOperatingSettings(s).servicePace].timeFactor;actor.task={kind:'prepare',customerId:c.id,remaining:total,total,path:[actor.home??s.floor.station],travel:0};actor.taskLabel='調理中';actor.x=actor.home?.x??s.floor.station.x;actor.z=actor.home?.z??s.floor.station.z;
+  }else{
+   const c=s.customers.filter(c=>Object.hasOwn(priorities,c.stage)&&!c.assignedTo).sort((a,b)=>priorities[a.stage]-priorities[b.stage]||b.wait-a.wait)[0];if(!c)continue;
+   const kind={paying:'checkout',ready:'deliver',ordering:'order',cleaning:'clean'}[c.stage],work={checkout:.7,deliver:.6,order:1.2,clean:1.5}[kind],path=taskPath(s,actor,c),travel=pathLength(path)/(1.1*60),total=work*SERVICE_PACES[getOperatingSettings(s).servicePace].timeFactor+travel;c.assignedTo=actor.id;actor.task={kind,customerId:c.id,total,remaining:total,path,travel};actor.taskLabel={checkout:'会計へ',deliver:'配膳へ',order:'注文を聞く',clean:'片づけへ'}[kind];
+  }
+ }
+}
+function completeTask(s,actor,c,kind){c.assignedTo=null;actor.lastSeatId=actor.role==='service'?c.seatId:null;actor.task=null;actor.taskLabel='待機中';
+ if(kind==='order')label(c,'preparing');
+ if(kind==='prepare')label(c,'ready');
+ if(kind==='deliver'){label(c,'eating');c.eatRemaining=c.eatMinutes}
+ if(kind==='checkout'){c.paid=true;c.satisfaction=round(clamp(c.satisfaction-Math.max(0,c.wait-5)*1.6,5,100));recordCash(s,c.bill,'revenue',`${c.name}さんのお会計`);s.today.revenue+=c.bill;s.today.served++;s.today.waitTotal+=c.wait;s.today.satisfactionTotal+=c.satisfaction;label(c,'cleaning');log(s,`${c.name}さんがお会計 ¥${c.bill.toLocaleString('ja-JP')} · 満足度 ${Math.round(c.satisfaction)}%`)}
+ if(kind==='clean'){label(c,'departed');c.x=0;c.z=3.1}
+}
+function tick(s){
+ s.minute++;advanceResearch(s);
+ while(s.arrivalIndex<s.arrivalSchedule.length&&s.arrivalSchedule[s.arrivalIndex]<s.minute){arrive(s);s.arrivalIndex++}
+ for(const c of s.customers){c.stageMinute++;if(['queue','walking','ordering','preparing','ready'].includes(c.stage))c.wait++;
+  if(c.stage==='queue'&&c.stageMinute>c.queuePatience){leave(s,c,'満席の待ち時間');continue}
+  if(['ordering','preparing','ready'].includes(c.stage)&&c.wait>c.orderPatience){leave(s,c,'提供までの待ち時間');continue}
+  if(c.stage==='walking'){c.walkProgress++;const pos=atPath(c.path,c.walkProgress/c.walkTotal);c.x=pos.x;c.z=pos.z;if(c.walkProgress>=c.walkTotal){const seat=seatFor(s,c);c.x=seat.x;c.z=seat.z;label(c,'ordering')}}
+  if(c.stage==='eating'){c.eatRemaining--;if(c.eatRemaining<=0)label(c,'paying')}
+ }
+ for(const actor of s.staffActors){const task=actor.task;if(!task)continue;const c=s.customers.find(c=>c.id===task.customerId);if(!c){actor.task=null;continue}task.remaining-=1;const pos=atPath(task.path,task.travel?Math.min(1,(task.total-task.remaining)/task.travel):1);actor.x=pos.x;actor.z=pos.z;if(task.remaining<=0)completeTask(s,actor,c,task.kind)}
+ const occupied=new Set(s.customers.filter(c=>c.seatId&&c.stage!=='departed').map(c=>c.seatId));
+ for(const c of s.customers.filter(c=>c.stage==='queue')){const seat=s.floor.seatPositions.find(seat=>!occupied.has(seat.id));if(!seat)break;occupied.add(seat.id);c.seatId=seat.id;c.tableId=seat.tableId;c.targetX=seat.x;c.targetZ=seat.z;const waiting=Number.isInteger(c.queueSlot)?s.floor.queuePositions?.[c.queueSlot]:null;c.path=[{x:c.x,z:c.z},...(waiting?[...waiting.path].reverse():[]),...seat.entrancePath,{x:seat.x,z:seat.z}];c.queueSlot=null;c.walkTotal=Math.max(1,Math.ceil(pathLength(c.path)/(.8*60)));c.walkProgress=0;label(c,'walking')}
+ const waitingSlots=new Set(s.customers.filter(c=>c.stage==='queue'&&Number.isInteger(c.queueSlot)).map(c=>c.queueSlot));for(const c of s.customers.filter(c=>c.stage==='queue')){if(Number.isInteger(c.queueSlot)&&s.floor.queuePositions[c.queueSlot])continue;const index=s.floor.queuePositions.findIndex((point,index)=>!waitingSlots.has(index));if(index<0){leave(s,c,'待合スペースが満席');continue}const point=s.floor.queuePositions[index];c.queueSlot=index;waitingSlots.add(index);c.x=point.x;c.z=point.z;c.path=copy(point.path)}
+ assign(s);
+ const timing=getOperatingTiming(s);if(s.minute===timing.lastEntryOffset)log(s,`${formatTime(s.minute,timing.openingMinute)}、最終入店を締め切りました`);
+ if(s.minute===timing.duration)log(s,`${formatTime(s.minute,timing.openingMinute)}、閉店時刻です。お客さまの会計と片づけを終えてから精算します`);
+ if(s.minute>=timing.maxMinutes){for(const c of s.customers)if(!['departed','cleaning'].includes(c.stage)){if(c.stage==='paying'){const temporary={role:'service',task:null};completeTask(s,temporary,c,'checkout')}else leave(s,c,'閉店から2時間が経過したため')};for(const c of s.customers){if(c.stage==='cleaning')label(c,'departed');c.assignedTo=null}s.staffActors.forEach(a=>{a.task=null;a.taskLabel='勤務終了'});log(s,`${formatTime(s.minute,timing.openingMinute)}、延長営業を終了しました。残った席の片づけを含め精算します`)}
+ if((s.minute>=getOperatingTiming(s).duration||s.closingRequested)&&s.customers.every(c=>c.stage==='departed'))finish(s);
+}
+function finish(s){
+ expire(s);const wages=money(Object.entries(s.staff).reduce((n,[role,count])=>n+count*STAFF_ROLES[role].hourlyWage*Math.max(240,s.minute)/60,0)),rent=s.floor.dailyRent,storageCosts=getStorageDailyCosts(s).total,utilities=money(450+s.minute*.65)+storageCosts,fixed=wages+rent+utilities;recordCash(s,-wages,'wages','当日の人件費');recordCash(s,-rent,'rent','当日の家賃');recordCash(s,-utilities,'utilities','当日の光熱費');
+ const {depreciation,interest}=closeAccountingDay(s),loanDraw=s.finance.totals.loanDraw-(s.lastReport?.financeTotals?.loanDraw??0),loanRepayment=s.finance.totals.loanRepayment-(s.lastReport?.financeTotals?.loanRepayment??0);
+ const satisfaction=s.today.served?round(s.today.satisfactionTotal/s.today.served):0;s.satisfaction=satisfaction;s.reputation=round(clamp(s.reputation*.7+satisfaction*.3-(s.today.arrivals?s.today.lost/s.today.arrivals*12:0),0,100));
+ s.lastReport={day:s.day,storageCosts,depreciation,interest,loanDraw,loanRepayment,operatingSettings:getOperatingSettings(s),openingMinute:getOperatingSettings(s).openingMinute,promotionCosts:s.today.promotionCosts??0,revenue:s.today.revenue,costOfGoods:s.today.costOfGoods,wages,rent,utilities,spoilageCost:s.today.spoilageCost,stockPurchases:s.today.stockPurchases,profit:s.today.revenue-s.today.costOfGoods-fixed-depreciation-interest-(s.today.promotionCosts??0)-s.today.spoilageCost-(s.today.researchCosts??0)-(s.today.recruitmentCosts??0),cashFlow:s.today.revenue+loanDraw-loanRepayment-interest-fixed-(s.today.promotionCosts??0)-s.today.stockPurchases-(s.today.capitalInvestment??0)-(s.today.researchCosts??0)-(s.today.recruitmentCosts??0)-(s.today.equipmentInvestment??0),capitalInvestment:s.today.capitalInvestment??0,researchCosts:s.today.researchCosts??0,recruitmentCosts:s.today.recruitmentCosts??0,equipmentInvestment:s.today.equipmentInvestment??0,financeTotals:copy(s.finance.totals),served:s.today.served,lost:s.today.lost,arrivals:s.today.arrivals,stockouts:s.today.stockouts,satisfaction,averageWait:s.today.served?round(s.today.waitTotal/s.today.served):0,closingMinute:s.minute,paidMinutes:Math.max(240,s.minute),weather:s.weather.name,earlyClose:s.closingRequested,cash:s.cash};s.lastReport.operatingProfit=s.lastReport.profit+interest;s.lastReport.netProfit=s.lastReport.profit;s.lastReport.financialStatements=getFinancialStatements(s);s.history.push(copy(s.lastReport));if(s.history.length>30)s.history.shift();s.totalServed+=s.today.served;s.totalRevenue+=s.today.revenue;s.phase='closed';s.staffActors.forEach(a=>{a.task=null;a.taskLabel='勤務終了'});log(s,`${s.day}日目の営業が終了しました。売上 ¥${s.today.revenue.toLocaleString('ja-JP')} / 利益 ¥${s.lastReport.profit.toLocaleString('ja-JP')}`)
+}
+export function advanceTime(state,layout,minutes=1,manifest){assert(state.phase==='open','開店してから時間を進めてください');assert(int(minutes)&&minutes>=1&&minutes<=600,'進める時間は1〜600分にしてください');const s=copy(state);if(!Array.isArray(s.floor.queuePositions)){const stats=getCafeStats({...layout,growth:{...s.progression.expansions}},manifest);s.floor.queuePositions=stats.queuePositions;s.floor.queueCapacity=stats.queueCapacity;}for(let i=0;i<minutes&&s.phase==='open';i++)tick(s);return s}
+export const stepDay=advanceTime;
+export function requestClose(state){assert(state.phase==='open','営業していません');const s=copy(state);s.closingRequested=true;s.arrivalSchedule=s.arrivalSchedule.slice(0,s.arrivalIndex);log(s,'入店受付を終了しました。会計と片づけが済むと閉店します（人件費は最低4時間分）');if(s.customers.every(c=>c.stage==='departed'))finish(s);return s}
+export function closeDay(state){assert(state.phase==='open','営業していません');assert(state.minute>=getOperatingTiming(state).duration||state.closingRequested,`${formatTime(0,getOperatingSettings(state).closingMinute)}まで営業を続けるか、入店受付を終了してください`);assert(state.customers.every(c=>c.stage==='departed'),'お客さまの会計と片づけが終わるまで時間を進めてください');const s=copy(state);finish(s);return s}
+
+/** Save validation is deliberately strict: resume data may never invent free cash or unsafe task references. */
+export function validateManagement(s,{allowMissingAccounting=false}={}){
+ if(!s||typeof s!=='object'||s.version!==2)return '経営データの形式が不正です';
+ if(![1,2].includes(s.simulationVersion===undefined?1:s.simulationVersion))return '営業シミュレーションの形式が不正です';
+ const settingsError=validateOperatingSettings(s.settings);if(settingsError)return settingsError;
+ const storageError=validateStorage(s);if(storageError)return storageError;
+ if(!int(s.day)||s.day<1||s.day>100000||!['planning','open','closed'].includes(s.phase)||!int(s.minute)||s.minute<0||s.minute>600)return '営業日の情報が不正です';
+ if(!int(s.cash)||Math.abs(s.cash)>1e12||!finite(s.reputation)||s.reputation<0||s.reputation>100||!finite(s.satisfaction)||s.satisfaction<0||s.satisfaction>100)return '資金または評価の情報が不正です';
+ for(const k of Object.keys(STOCK_ITEMS)){if(!int(s.stock?.[k])||s.stock[k]<0||s.stock[k]>1000||!Array.isArray(s.batches?.[k])||s.batches[k].length>1000)return '食材の情報が不正です';let total=0;for(const b of s.batches[k]){if(!b||!int(b.quantity)||b.quantity<=0||!int(b.expiresDay)||b.expiresDay<s.day||b.expiresDay>s.day+10)return '食材の期限が不正です';total+=b.quantity}if(total!==s.stock[k])return '食材の在庫数が一致しません'}
+ for(const[k,m]of Object.entries(MENU))if(!int(s.prices?.[k])||s.prices[k]<m.minPrice||s.prices[k]>m.maxPrice)return 'メニュー価格が不正です';
+ if(typeof s.closingRequested!=='boolean'||Object.keys(MENU).some(k=>typeof s.menuEnabled?.[k]!=='boolean')||!['sunny','cloudy','rain'].includes(s.weather?.id)||typeof s.weather?.name!=='string'||!finite(s.weather?.demandFactor)||s.weather.demandFactor<=0||s.weather.demandFactor>2||typeof s.weather?.terraceOpen!=='boolean')return '営業設定が不正です';
+ if(getMenuStrategy(s).activeCount>MAX_ACTIVE_MENU)return '販売中メニューは最大24種類です';
+ const growthError=validateProgression(s);if(growthError)return growthError;const financeError=validateFinance(s);if(financeError)return financeError;
+ if(!allowMissingAccounting||Object.hasOwn(s,'accounting')){const accountingError=validateAccounting(s);if(accountingError)return accountingError;}
+ for(const k of Object.keys(STAFF_ROLES))if(!int(s.staff?.[k])||s.staff[k]<0||s.staff[k]>getStaffCapacity(s))return 'スタッフ数が不正です';
+ if(!int(s.seed)||s.seed<0||s.seed>4294967295||!int(s.planningSpend)||s.planningSpend<0||!int(s.totalServed)||s.totalServed<0||!int(s.totalRevenue)||s.totalRevenue<0)return '経営記録が不正です';
+ for(const k of Object.keys(freshToday()))if(!finite(s.today?.[k])||s.today[k]<0)return '本日の集計が不正です';
+ if((s.today.promotionCosts??0)>5000||(s.today.promotionCosts??0)>s.finance.totals.promotion||(s.phase==='open'&&(s.today.promotionCosts??0)!==s.settings.promotionBudget))return '当日の宣伝費が営業方針または会計台帳と一致しません';
+ for(const key of ['capitalInvestment','researchCosts','recruitmentCosts','equipmentInvestment','promotionCosts'])if(s.today[key]!==undefined&&(!int(s.today[key])||s.today[key]<0))return '本日の投資費用が不正です';
+ if(s.today.served+s.today.lost>s.today.arrivals||s.today.arrivals>MAX_DAILY_ARRIVALS||!['revenue','costOfGoods','served','lost','arrivals','stockouts','spoilageCost','stockPurchases','abandoned'].every(k=>int(s.today[k])))return '本日の件数または金額が不正です';
+ if(!Array.isArray(s.customers)||s.customers.length>MAX_DAILY_ARRIVALS||!Array.isArray(s.staffActors)||s.staffActors.length>getStaffCapacity(s)*2||!Array.isArray(s.arrivalSchedule)||s.arrivalSchedule.length>MAX_DAILY_ARRIVALS||!int(s.arrivalIndex)||s.arrivalIndex<0||s.arrivalIndex>s.arrivalSchedule.length)return '営業中のデータが不正です';
+ const ids=new Set();for(const c of s.customers){if(c?.segment!==undefined&&!CUSTOMER_SEGMENTS.some(segment=>segment.id===c.segment))return 'お客さまの好みが不正です';if(!c||typeof c.id!=='string'||ids.has(c.id)||!validKey(STAGE_LABELS,c.stage)||!Array.isArray(c.order)||!c.order.length||c.order.length>3||c.order.some(id=>!validKey(MENU,id)||!isRecipeUnlocked(s,id))||![c.x,c.z,c.targetX,c.targetZ,c.wait,c.bill,c.stageMinute,c.queuePatience,c.orderPatience,c.eatMinutes,c.satisfaction].every(finite)||c.wait<0||c.bill<0||!Array.isArray(c.path)||c.path.length>500||c.path.some(p=>!p||!finite(p.x)||!finite(p.z)))return 'お客さまの情報が不正です';if(typeof c.name!=='string'||c.name.length>60||typeof c.stageLabel!=='string'||c.stageLabel.length>40||typeof c.paid!=='boolean'||typeof c.ingredientsConsumed!=='boolean'||(c.assignedTo!==null&&typeof c.assignedTo!=='string')||!int(c.bill)||!c.orderPrices||c.order.some(id=>!int(c.orderPrices[id])||c.orderPrices[id]<MENU[id].minPrice||c.orderPrices[id]>MENU[id].maxPrice)||c.bill!==c.order.reduce((n,id)=>n+c.orderPrices[id],0)||!int(c.wait)||c.wait>600||c.satisfaction<0||c.satisfaction>100||c.queuePatience<1||c.queuePatience>60||c.orderPatience<1||c.orderPatience>120||c.eatMinutes<1||c.eatMinutes>120||!int(c.stageMinute)||c.stageMinute<0||c.stageMinute>600)return 'お客さまの営業記録が不正です';if(c.stage==='walking'&&(!int(c.walkProgress)||c.walkProgress<0||!int(c.walkTotal)||c.walkTotal<1||c.walkTotal>120||c.walkProgress>c.walkTotal||!c.path.length))return 'お客さまの移動時間が不正です';if(c.stage==='eating'&&(!int(c.eatRemaining)||c.eatRemaining<1||c.eatRemaining>120))return 'お客さまの飲食時間が不正です';if(['walking','ordering','preparing','ready','eating','paying','cleaning'].includes(c.stage)&&typeof c.seatId!=='string')return 'お客さまの座席が不正です';ids.add(c.id)}
+ if(s.arrivalSchedule.some((v,i)=>!int(v)||v<0||v>=(s.phase==='closed'?getOperatingTiming({settings:s.lastReport?.operatingSettings}).lastEntryOffset:getOperatingTiming(s).lastEntryOffset)||(i&&v<s.arrivalSchedule[i-1])))return '来店予定が不正です';
+ if(s.phase==='open'&&(!s.floor||!Array.isArray(s.floor.seatPositions)||s.floor.seatPositions.length<1||s.floor.seatPositions.length>300||!finite(s.floor.dailyRent)||!finite(s.floor.appeal)||!finite(s.floor.station?.x)||!finite(s.floor.station?.z)))return '営業フロアの情報が不正です';
+ if(s.floor){if(!finite(s.floor.dailyRent)||!int(s.floor.dailyRent)||s.floor.dailyRent<0||s.floor.dailyRent>100000||!finite(s.floor.appeal)||s.floor.appeal<0||s.floor.appeal>100||!int(s.floor.seats)||s.floor.seats!==s.floor.seatPositions?.length||!finite(s.floor.station?.x)||!finite(s.floor.station?.z)||!Array.isArray(s.floor.routeWarnings)||s.floor.routeWarnings.some(w=>typeof w!=='string'||w.length>200))return '営業フロアの数値が不正です';if(!Array.isArray(s.floor.seatPositions))return '座席情報が不正です';const seats=new Set();for(const seat of s.floor.seatPositions){if(!seat||typeof seat.id!=='string'||seats.has(seat.id)||!finite(seat.x)||!finite(seat.z)||!['indoor','terrace'].includes(seat.zone)||!['entrancePath','stationPath'].every(key=>Array.isArray(seat[key])&&seat[key].length<=500&&seat[key].every(p=>p&&finite(p.x)&&finite(p.z))))return '座席の経路が不正です';seats.add(seat.id)}for(const c of s.customers)if(c.seatId!==null&&!seats.has(c.seatId))return '座席の参照が不正です'}
+ if(s.floor?.queuePositions!==undefined){const points=s.floor.queuePositions;if(!Array.isArray(points)||points.length>MAX_WAITING_GUESTS||s.floor.queueCapacity!==points.length)return '待合スペースの情報が不正です';const b=getGrowthBounds(s).terrace;for(let i=0;i<points.length;i++){const p=points[i];if(!p||!finite(p.x)||!finite(p.z)||p.x<b.minX+WALKING_CLEARANCE_RADIUS||p.x>b.maxX-WALKING_CLEARANCE_RADIUS||p.z<b.minZ+WALKING_CLEARANCE_RADIUS||p.z>b.maxZ-WALKING_CLEARANCE_RADIUS||!Array.isArray(p.path)||!p.path.length||p.path.length>500||p.path.some(q=>!q||!finite(q.x)||!finite(q.z))||points.slice(0,i).some(q=>distance(p,q)<QUEUE_SPACING-1e-8))return '待合スペースの位置が不正です'}const used=new Set();for(const c of s.customers.filter(c=>c.stage==='queue')){if(!int(c.queueSlot)||!points[c.queueSlot]||used.has(c.queueSlot)||distance(c,points[c.queueSlot])>.001)return '待機客の位置が一致しません';used.add(c.queueSlot)}}
+ const actors=new Set();for(const a of s.staffActors){if(!a||typeof a.id!=='string'||actors.has(a.id)||!validKey(STAFF_ROLES,a.role)||!finite(a.x)||!finite(a.z))return 'スタッフの位置が不正です';actors.add(a.id);if(a.home!==undefined&&(!a.home||!finite(a.home.x)||!finite(a.home.z)||!Array.isArray(a.homePath)||!a.homePath.length||a.homePath.length>500||a.homePath.some(p=>!p||!finite(p.x)||!finite(p.z))))return 'スタッフの作業拠点が不正です';if(a.task&&(!['prepare','checkout','deliver','order','clean'].includes(a.task.kind)||!ids.has(a.task.customerId)||!finite(a.task.remaining)||a.task.remaining<=0||!finite(a.task.total)||a.task.total<=0||a.task.total>120||a.task.remaining>a.task.total||!finite(a.task.travel)||a.task.travel<0||a.task.travel>a.task.total||!Array.isArray(a.task.path)||a.task.path.length>1000||a.task.path.some(p=>!p||!finite(p.x)||!finite(p.z))))return 'スタッフの仕事が不正です'}
+ for(const c of s.customers)if(c.assignedTo!==null&&(!actors.has(c.assignedTo)||s.staffActors.find(a=>a.id===c.assignedTo)?.task?.customerId!==c.id))return '担当スタッフの参照が不正です';
+ for(const a of s.staffActors)if(a.task){const c=s.customers.find(c=>c.id===a.task.customerId),stage={prepare:'preparing',checkout:'paying',deliver:'ready',order:'ordering',clean:'cleaning'}[a.task.kind];if(c.assignedTo!==a.id||c.stage!==stage||(a.role==='barista')!==(a.task.kind==='prepare'))return 'スタッフの仕事と注文の対応が不正です'}
+ const occupied=new Set();for(const c of s.customers.filter(c=>c.seatId&&c.stage!=='departed')){if(occupied.has(c.seatId))return '座席が二重に使われています';occupied.add(c.seatId)}
+ if(typeof s.lastEvent!=='string'||s.lastEvent.length>1000||!Array.isArray(s.events)||s.events.length>30||s.events.some(e=>!e||!finite(e.minute)||typeof e.text!=='string'||e.text.length>1000)||!Array.isArray(s.history)||s.history.length>30)return '営業履歴が不正です';
+ const validReport=r=>r&&typeof r==='object'&&(r.financialStatements===undefined||!validateFinancialStatements(r.financialStatements)&&r.financialStatements.cashFlow.closingCash===r.cash)&&(r.netProfit===undefined||int(r.netProfit)&&r.netProfit===r.profit)&&(r.operatingProfit===undefined||int(r.operatingProfit)&&r.operatingProfit===r.profit+(r.interest??0))&&(r.promotionCosts===undefined||int(r.promotionCosts)&&r.promotionCosts>=0&&r.promotionCosts<=5000)&&(!r.operatingSettings||(r.openingMinute===r.operatingSettings.openingMinute&&(r.promotionCosts??0)===r.operatingSettings.promotionBudget))&&(r.operatingSettings===undefined||!validateOperatingSettings(r.operatingSettings))&&(r.openingMinute===undefined||int(r.openingMinute)&&r.openingMinute>=360&&r.openingMinute<=840&&r.openingMinute%30===0)&&['day','revenue','costOfGoods','wages','rent','utilities','spoilageCost','stockPurchases','profit','cashFlow','served','lost','arrivals','stockouts','closingMinute','paidMinutes','cash'].every(k=>int(r[k])&&Math.abs(r[k])<=1e12)&&finite(r.satisfaction)&&r.satisfaction>=0&&r.satisfaction<=100&&finite(r.averageWait)&&r.averageWait>=0&&r.averageWait<=600&&r.closingMinute>=0&&r.closingMinute<=600&&r.paidMinutes>=240&&r.paidMinutes<=600&&typeof r.earlyClose==='boolean'&&typeof r.weather==='string'&&r.weather.length<30&&['capitalInvestment','researchCosts','recruitmentCosts','equipmentInvestment','promotionCosts','depreciation','interest','loanDraw','loanRepayment','storageCosts'].every(k=>r[k]===undefined||int(r[k])&&r[k]>=0)&&(!r.financeTotals||Object.keys(createFinance().totals).every(k=>(['promotion','loanDraw','loanRepayment','interest'].includes(k)&&r.financeTotals[k]===undefined)||int(r.financeTotals[k])&&r.financeTotals[k]>=0));
+ if((s.lastReport!==null&&!validReport(s.lastReport))||s.history.some(r=>!validReport(r)))return '精算レポートが不正です';
+ if(s.phase==='open'&&(s.staff.service<1||s.staff.barista<1))return '営業に必要なスタッフがいません';
+ if(s.phase==='open'&&Object.keys(STAFF_ROLES).some(role=>s.staffActors.filter(a=>a.role===role).length!==s.staff[role]))return 'スタッフの人数が一致しません';
+ return null;
+}
+/** v1 migration does not alter any existing money, stock, orders, tasks or RNG state. */
+export function migrateManagementSave(value){
+ const s=copy(value);if(!s||typeof s!=='object')return s;
+ if(!Object.hasOwn(s,'simulationVersion'))s.simulationVersion=1;
+ if(s.version===2){const legacyIds=['coffee','latte','cake','tea','cocoa','soda','smoothie','matcha_latte','toast','sandwich','pancakes','omelet_rice','curry','pasta','parfait'];if(s.prices&&s.menuEnabled&&Object.keys(s.prices).length===15&&Object.keys(s.menuEnabled).length===15&&legacyIds.every(id=>Object.hasOwn(s.prices,id)&&Object.hasOwn(s.menuEnabled,id))){const oldStock=['beans','milk','cake','tea','cocoa','syrup','fruit','bread','eggs','flour','rice','vegetables','pasta'];if(s.stock&&s.batches&&Object.keys(s.stock).length===13&&Object.keys(s.batches).length===13&&oldStock.every(id=>Object.hasOwn(s.stock,id)&&Object.hasOwn(s.batches,id))){for(const id of Object.keys(STOCK_ITEMS))if(!Object.hasOwn(s.stock,id)){s.stock[id]=0;s.batches[id]=[];}}for(const [id,item]of Object.entries(MENU))if(!Object.hasOwn(s.prices,id)){s.prices[id]=item.basePrice;s.menuEnabled[id]=false;}}if(!Object.hasOwn(s,'storage'))s.storage=createStorage();if(!Object.hasOwn(s,'settings'))s.settings={...OPERATING_DEFAULTS};for(const category of ['promotion','loanDraw','loanRepayment','interest']){if(s.finance?.totals&&!Object.hasOwn(s.finance.totals,category))s.finance.totals[category]=0;for(const r of [s.lastReport,...(Array.isArray(s.history)?s.history:[])])if(r?.financeTotals&&!Object.hasOwn(r.financeTotals,category))r.financeTotals[category]=0;}return s;}
+ if(s.version!==1)return s;
+ // Old records can only contain the original menu/stock; the new fields are not a bypass.
+ if(Object.hasOwn(s,'progression')||Object.hasOwn(s,'finance'))throw Error('旧形式に未対応の経営データがあります');
+ for(const key of ['stock','batches','prices','menuEnabled'])if(!s[key]||typeof s[key]!=='object'||Array.isArray(s[key]))throw Error('旧形式の経営データが不正です');
+ if(!['beans','milk','cake'].every(k=>Object.hasOwn(s.stock,k)&&Object.hasOwn(s.batches,k))||!INITIAL_RECIPES.every(k=>Object.hasOwn(s.prices,k)&&Object.hasOwn(s.menuEnabled,k)))throw Error('旧形式の必須メニューまたは在庫がありません');
+ if(Object.keys(s.stock).some(k=>!['beans','milk','cake'].includes(k))||Object.keys(s.prices).some(k=>!INITIAL_RECIPES.includes(k)))throw Error('旧形式のメニューまたは在庫が不正です');
+ for(const [key,item]of Object.entries(STOCK_ITEMS))if(!Object.hasOwn(s.stock,key)){s.stock[key]=0;s.batches[key]=[]}
+ for(const [id,item]of Object.entries(MENU))if(!Object.hasOwn(s.prices,id)){s.prices[id]=item.basePrice;s.menuEnabled[id]=false}
+ if(Array.isArray(s.customers))for(const c of s.customers)if(c&&Array.isArray(c.order))c.orderPrices=Object.fromEntries(c.order.map(id=>[id,s.prices[id]]));
+ s.version=2;s.storage=createStorage();s.settings={...OPERATING_DEFAULTS};s.progression=createProgression();s.finance=createFinance(s.cash);return s;
+}
+export function parseManagementSave(text){assert(typeof text==='string'&&new TextEncoder().encode(text).length<=1000000,'経営データは1MB以下にしてください');let s;try{s=JSON.parse(text)}catch{throw Error('経営データのJSONを読み取れません')}s=migrateManagementSave(s);if(s&&typeof s==='object'&&!Object.hasOwn(s,'accounting')){const baseError=validateManagement(s,{allowMissingAccounting:true});if(baseError)throw Error(baseError);initializeAccounting(s,{migrated:true});}const error=validateManagement(s);if(error)throw Error(error);const clean={};for(const key of Object.keys(createManagement()))clean[key]=copy(s[key]);return clean}
