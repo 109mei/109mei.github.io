@@ -1,4 +1,4 @@
-import {MENU,STOCK_ITEMS,RESEARCH_PROJECTS} from './catalog.mjs';
+import {MENU,STOCK_ITEMS,RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa4';
 /** Read-only presentation model. These are condensed game processes, not food-safety
  * instructions. Quantities, task duration, FIFO consumption and research stay in
  * the original simulation. No stage creates inventory or charges for ingredients. */
@@ -110,8 +110,8 @@ export function getRecipePreview(state,productId){
 }
 export function getActivePreparation(state,actorOrId){
  const actor=typeof actorOrId==='string'?state?.staffActors?.find(a=>a.id===actorOrId):actorOrId,task=actor?.task;
- if(state?.phase!=='open'||actor?.role!=='barista'||task?.kind!=='prepare'||!Number.isFinite(task.total)||task.total<=0||!Number.isFinite(task.remaining)||task.remaining<=0||task.remaining>task.total)return null;
- const customer=state?.customers?.find(c=>c.id===task.customerId);if(customer?.stage!=='preparing'||customer.assignedTo!==actor.id||customer.ingredientsConsumed!==true||!customer?.order?.length||customer.order.some(id=>!own(MENU,id)))return null;
+ if(state?.phase!=='open'||!['barista','owner'].includes(actor?.role)||!['prepare','deliveryPrepare'].includes(task?.kind)||!Number.isFinite(task.total)||task.total<=0||!Number.isFinite(task.remaining)||task.remaining<=0||task.remaining>task.total)return null;
+ const customer=task.kind==='deliveryPrepare'?state?.delivery?.orders?.find(c=>c.id===task.deliveryOrderId):state?.customers?.find(c=>c.id===task.customerId);if(customer?.stage!=='preparing'||customer.assignedTo!==actor.id||customer.ingredientsConsumed!==true||!customer?.order?.length||customer.order.some(id=>!own(MENU,id)))return null;
  const totalBase=customer.order.reduce((n,id)=>n+MENU[id].prepMinutes,0),orderProgress=clamp((task.total-task.remaining)/task.total),elapsed=orderProgress*totalBase;
  let offset=0,productIndex=0;
  while(productIndex<customer.order.length-1&&elapsed>=offset+MENU[customer.order[productIndex]].prepMinutes){offset+=MENU[customer.order[productIndex]].prepMinutes;productIndex++}

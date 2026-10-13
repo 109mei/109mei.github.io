@@ -1,6 +1,6 @@
-import {recordAccountingCash} from './accounting.mjs';
-import {MENU,INITIAL_RECIPES,RESEARCH_PROJECTS,STAFF_ROLES} from './catalog.mjs';
-export {RESEARCH_PROJECTS} from './catalog.mjs';
+import {recordAccountingCash} from './accounting.mjs?v=20261013-qa4';
+import {MENU,INITIAL_RECIPES,RESEARCH_PROJECTS,STAFF_ROLES} from './catalog.mjs?v=20261013-qa4';
+export {RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa4';
 export const MAX_EXPANSION_LEVEL=6;
 export const MAX_DAILY_ARRIVALS=420;
 const clone=s=>JSON.parse(JSON.stringify(s));
@@ -10,7 +10,7 @@ const integer=n=>Number.isSafeInteger(n);
 const finite=n=>typeof n==='number'&&Number.isFinite(n);
 const planning=s=>assert(s.phase!=='open','営業中は変更できません。閉店後に調整してください');
 export function createProgression(){return {version:1,expansions:{indoor:0,terrace:0},unlockedRecipes:[...INITIAL_RECIPES],research:null,researchQueue:[],completedResearch:[],staffRecruited:{service:4,barista:4},investmentSpend:0,researchSpend:0,recruitmentSpend:0};}
-export function createFinance(cash=80000){return {version:1,openingBalance:cash,balanceForward:cash,entries:[],nextId:1,totals:{revenue:0,stock:0,wages:0,rent:0,utilities:0,expansion:0,research:0,recruitment:0,equipment:0,promotion:0,loanDraw:0,loanRepayment:0,interest:0}}}
+export function createFinance(cash=80000){return {version:1,openingBalance:cash,balanceForward:cash,entries:[],nextId:1,totals:{deliveryFees:0,revenue:0,stock:0,wages:0,rent:0,utilities:0,expansion:0,research:0,recruitment:0,equipment:0,promotion:0,loanDraw:0,loanRepayment:0,interest:0}}}
 /** Record one actual cash movement. Ingredient use/expiry is not a second cash charge. */
 export function recordCash(s,amount,category,description){
  assert(integer(amount)&&own(s.finance.totals,category),'会計区分または金額が不正です');recordAccountingCash(s,amount,category,description);s.cash+=amount;
@@ -70,10 +70,10 @@ export function validateProgression(s){
  for(const r of p.completedResearch)if(!RESEARCH_PROJECTS[r.recipeId].requirements.recipes.every(id=>p.unlockedRecipes.includes(id))||p.expansions.indoor<RESEARCH_PROJECTS[r.recipeId].requirements.indoor)return '開発の前提条件が不正です';
  if(p.research!==null){const r=p.research,project=r&&RESEARCH_PROJECTS[r.recipeId];if(!project||!own(RESEARCH_PROJECTS,r.recipeId)||p.unlockedRecipes.includes(r.recipeId)||!integer(r.progressMinutes)||r.progressMinutes<0||r.progressMinutes>=project.durationMinutes||r.durationMinutes!==project.durationMinutes||r.paidCost!==project.cost||!integer(r.startedDay)||r.startedDay<1||r.startedDay>s.day+1||!project.requirements.recipes.every(id=>p.unlockedRecipes.includes(id))||p.expansions.indoor<project.requirements.indoor)return '進行中のレシピ開発が不正です'}
  const queue=p.researchQueue===undefined?[]:p.researchQueue;if(!Array.isArray(queue)||queue.length>4||queue.length&&!p.research)return '予約開発の情報が不正です';const queued=new Set();for(const r of queue){const project=r&&RESEARCH_PROJECTS[r.recipeId];if(!project||!own(RESEARCH_PROJECTS,r.recipeId)||queued.has(r.recipeId)||r.recipeId===p.research?.recipeId||p.unlockedRecipes.includes(r.recipeId)||r.progressMinutes!==0||r.durationMinutes!==project.durationMinutes||r.paidCost!==project.cost||!integer(r.startedDay)||r.startedDay<1||r.startedDay>s.day+1||!project.requirements.recipes.every(id=>p.unlockedRecipes.includes(id))||p.expansions.indoor<project.requirements.indoor)return '予約開発の情報が不正です';queued.add(r.recipeId);}
- for(const role of Object.keys(STAFF_ROLES))if(!integer(p.staffRecruited?.[role])||p.staffRecruited[role]<4||p.staffRecruited[role]>getStaffCapacity(s)||s.staff?.[role]>p.staffRecruited[role])return '採用済みスタッフの情報が不正です';
+ for(const role of Object.keys(STAFF_ROLES))if(!integer(p.staffRecruited?.[role])||p.staffRecruited[role]<(s.ownerOperated?0:4)||p.staffRecruited[role]>getStaffCapacity(s)||s.staff?.[role]>p.staffRecruited[role])return '採用済みスタッフの情報が不正です';
  for(const key of ['investmentSpend','researchSpend','recruitmentSpend'])if(!integer(p[key])||p[key]<0||p[key]>1e12)return '投資支出の情報が不正です';
  const actualInvestment=Object.keys(costs).reduce((sum,zone)=>sum+costs[zone].slice(0,p.expansions[zone]).reduce((a,b)=>a+b,0),0);
- if(p.investmentSpend!==actualInvestment||p.researchSpend!==p.completedResearch.reduce((n,r)=>n+r.cost,0)+(p.research?.paidCost??0)+queue.reduce((n,r)=>n+r.paidCost,0)||p.recruitmentSpend!==Object.entries(STAFF_ROLES).reduce((n,[role,r])=>n+(p.staffRecruited[role]-4)*r.hiringCost,0))return '成長費用と進行の記録が一致しません';
+ if(p.investmentSpend!==actualInvestment||p.researchSpend!==p.completedResearch.reduce((n,r)=>n+r.cost,0)+(p.research?.paidCost??0)+queue.reduce((n,r)=>n+r.paidCost,0)||p.recruitmentSpend!==Object.entries(STAFF_ROLES).reduce((n,[role,r])=>n+(p.staffRecruited[role]-(s.ownerOperated?0:4))*r.hiringCost,0))return '成長費用と進行の記録が一致しません';
  if(Object.keys(MENU).some(id=>s.menuEnabled?.[id]&&!p.unlockedRecipes.includes(id)))return '未開発のメニューは販売できません';
  return null;
 }

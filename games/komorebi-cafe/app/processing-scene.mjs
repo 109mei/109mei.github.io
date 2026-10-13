@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {createIngredientFactory} from './ingredient-models.mjs';
-import {createFoodFactory} from './food.mjs';
-import {getRecipeProcessing} from './recipe-processing.mjs';
+import {createIngredientFactory} from './ingredient-models.mjs?v=20261013-qa4';
+import {createFoodFactory} from './food.mjs?v=20261013-qa4';
+import {getRecipeProcessing} from './recipe-processing.mjs?v=20261013-qa4';
 
 /** Original reusable countertop-scale equipment. No textures, remote assets or DOM. */
 export function createProcessingEquipment(){

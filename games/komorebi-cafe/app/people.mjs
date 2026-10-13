@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {createFoodFactory,FOOD_MODELS} from './food.mjs';
+import {createFoodFactory,FOOD_MODELS} from './food.mjs?v=20261013-qa4';
 
 const TAU=Math.PI*2;
 const SKIN=['#d9ab85','#bc805a','#94603f','#e5be9d','#a96f50'];
@@ -8,7 +8,7 @@ const HAIR=['#322b25','#5b4230','#785740','#232c2b'];
 const PANTS=['#3c4a49','#5c5b4a','#4c5668'];
 const ease=(value,target,rate,dt)=>THREE.MathUtils.lerp(value,target,1-Math.exp(-rate*dt));
 export function characterSeed(id){let value=2166136261;for(const c of String(id))value=Math.imul(value^c.charCodeAt(0),16777619);return value>>>0}
-export function characterMode(actor){if(actor.staff)return actor.task?.kind??'idle';return ['ordering','preparing','ready','paying'].includes(actor.stage)?'seated':actor.stage==='eating'?'drinking':actor.stage==='walking'?'walking':'idle'}
+export function characterMode(actor){if(actor.staff){const kind=actor.task?.kind??'idle';return {deliveryPrepare:'prepare',deliveryPack:'prepare',deliveryHandoff:'deliver'}[kind]??kind;}return ['ordering','preparing','ready','paying'].includes(actor.stage)?'seated':actor.stage==='eating'?'drinking':actor.stage==='walking'?'walking':'idle'}
 export function characterVisible(actor){return actor.staff||!['departed','cleaning'].includes(actor.stage)}
 
 /** Shared low-poly geometry and palette materials; each person has independent articulated joints. */
@@ -52,6 +52,13 @@ export function createCharacterFactory({foodFactory=null}={}){
    for(const x of[-.1,.1])mesh('apron_strap',torso,'box',apron,x,.394,.116,.028,.135,.022);
    const cap=mesh('staff_cap',head,'taper',apron,0,.167,-.004,.144,.06,.139);mesh('cap_brim',head,'sphere',apron,0,.141,.111,.144,.018,.09);
    mesh('name_badge',torso,'box',white,-.057,.29,.158,.06,.032,.007);
+  }
+  if(role==='courier'){
+   const bag=material('#b78251'),strap=material('#594c39');
+   mesh('courier_insulated_bag',torso,'box',bag,0,.23,-.255,.36,.43,.26);
+   mesh('courier_bag_lid',torso,'box',strap,0,.455,-.255,.38,.035,.28);
+   mesh('courier_bag_reflector',torso,'box',white,0,.24,-.391,.27,.035,.015);
+   for(const x of[-.125,.125])mesh('courier_shoulder_strap',torso,'box',strap,x,.27,.141,.033,.38,.022);
   }
   // Props remain attached to real hand or torso joints and only appear for the relevant task.
   const cup=group('cup',joints.handR,0,-.007,.055);mesh('cup_body',cup,'taper',white,0,.035,0,.043,.075,.043);mesh('coffee_surface',cup,'cylinder',coffee,0,.074,0,.036,.003,.036);const handle=mesh('cup_handle',cup,'ring',white,.049,.042,0,.032,.032,.024);handle.rotation.y=Math.PI/2;props.cup=cup;

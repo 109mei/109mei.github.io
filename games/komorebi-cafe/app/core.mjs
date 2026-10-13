@@ -1,4 +1,4 @@
-import {getGrowthBounds} from './progression.mjs';
+import {getGrowthBounds} from './progression.mjs?v=20261013-qa4';
 export const LABELS={table:'テーブル',chair:'チェア',counter:'カウンター',shelf:'シェルフ',pendant:'ペンダント',sofa:'ソファ',bench:'ベンチ',plant:'観葉植物',planter:'プランター',outdoor_table:'テラス・テーブル',outdoor_chair:'テラス・チェア',parasol:'パラソル',rug:'ラグ',menu_board:'メニューボード',lamp:'フロアランプ',pastry_case:'ケーキケース'};
 export const MAX_ITEMS=80,MAX_PENDANTS=12;
 export const ZONES=Object.freeze({indoor:Object.freeze({minX:-2.88,maxX:2.88,minZ:-2.63,maxZ:2.63}),terrace:Object.freeze({minX:-3.4,maxX:3.4,minZ:3.25,maxZ:6.55})});

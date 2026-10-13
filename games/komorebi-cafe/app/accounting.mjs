@@ -1,6 +1,6 @@
 /** Fictional game bookkeeping, not real accounting, lending, tax or business advice. */
-import {STOCK_ITEMS} from './catalog.mjs';
-import {recordCash} from './progression.mjs';
+import {STOCK_ITEMS} from './catalog.mjs?v=20261013-qa4';
+import {recordCash} from './progression.mjs?v=20261013-qa4';
 const clone=s=>JSON.parse(JSON.stringify(s));
 const assert=(ok,message)=>{if(!ok)throw Error(message)};
 const integer=Number.isSafeInteger;
@@ -8,8 +8,8 @@ const bounded=n=>integer(n)&&Math.abs(n)<=1e12;
 const nonnegative=n=>bounded(n)&&n>=0;
 export const LOAN_TERMS=Object.freeze({limit:100000,minimum:1000,step:1000,dailyInterestRate:.002});
 export const DEPRECIATION_DAYS=Object.freeze({expansion:120,equipment:60});
-const categories=['revenue','stock','wages','rent','utilities','expansion','research','recruitment','equipment','promotion','loanDraw','loanRepayment','interest'];
-const expenseCategories=['wages','rent','utilities','promotion','research','recruitment'];
+const categories=['deliveryFees','revenue','stock','wages','rent','utilities','expansion','research','recruitment','equipment','promotion','loanDraw','loanRepayment','interest'];
+const expenseCategories=['deliveryFees','wages','rent','utilities','promotion','research','recruitment'];
 export function inventoryValue(s){return Object.entries(STOCK_ITEMS).reduce((sum,[id,item])=>sum+(s.stock[id]??0)*item.unitCost,0)}
 function asset(kind,cost,day){return {kind,cost,acquiredDay:day,elapsedDays:0,accumulatedDepreciation:0,usefulLife:DEPRECIATION_DAYS[kind]}}
 /** Mutates only the supplied new/migrated state. Historical missing accruals are never invented. */
