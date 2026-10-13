@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {createTapHandlers} from './interactions.mjs';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {instantiate,tint,disposeMaterials,disposeResources,buildProceduralPrototype,applyAppearance,createFinishTexture} from './scene-data.mjs';
@@ -91,11 +92,11 @@ export async function create3D(host,manifest,select,lost){
  }
 
  function resize(){const w=host.clientWidth||600,h=host.clientHeight||490;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();fitCamera()}
- const obs=new ResizeObserver(resize);obs.observe(host);resize();const ray=new THREE.Raycaster(),point=new THREE.Vector2();let down;
- const onDown=e=>down=[e.clientX,e.clientY],onUp=e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;down=null;const r=renderer.domElement.getBoundingClientRect();point.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(point,camera);const hit=ray.intersectObjects([...instances.values()],true)[0];if(hit){let o=hit.object;while(o&&!o.userData.instanceId)o=o.parent;if(o)select(o.userData.instanceId)}};
- renderer.domElement.addEventListener('pointerdown',onDown);renderer.domElement.addEventListener('pointerup',onUp);
+ const obs=new ResizeObserver(resize);obs.observe(host);resize();const ray=new THREE.Raycaster(),point=new THREE.Vector2();
+ const tapHandlers=createTapHandlers(e=>{const r=renderer.domElement.getBoundingClientRect();point.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(point,camera);const hit=ray.intersectObjects([...instances.values()],true)[0];if(hit){let o=hit.object;while(o&&!o.userData.instanceId)o=o.parent;if(o)select(o.userData.instanceId)}});
+ for(const[type,handler]of Object.entries(tapHandlers))renderer.domElement.addEventListener(type,handler);
  let alive=true,frame=0;
- function dispose(){if(!alive)return;alive=false;cancelAnimationFrame(frame);obs.disconnect();controls.dispose();const retained=new THREE.Group();for(const map of new Set([...originalMaps.values(),...textureCache.values()]))if(map){const material=new THREE.MeshBasicMaterial({map});retained.add(new THREE.Mesh(new THREE.BufferGeometry(),material))}for(const actor of actors.values())scene.remove(actor.model.root);people.dispose();displayFood.clear();for(const food of servedFood.values())scene.remove(food);servedFood.clear();foodFactory.dispose();scene.remove(storageView.root);storageView.dispose();disposeResources([scene,furniture.scene,...Object.values(prototypes),retained]);sun.shadow.dispose();renderer.dispose();host.replaceChildren()}
+ function dispose(){if(!alive)return;alive=false;cancelAnimationFrame(frame);obs.disconnect();for(const[type,handler]of Object.entries(tapHandlers))renderer.domElement.removeEventListener(type,handler);controls.dispose();const retained=new THREE.Group();for(const map of new Set([...originalMaps.values(),...textureCache.values()]))if(map){const material=new THREE.MeshBasicMaterial({map});retained.add(new THREE.Mesh(new THREE.BufferGeometry(),material))}for(const actor of actors.values())scene.remove(actor.model.root);people.dispose();displayFood.clear();for(const food of servedFood.values())scene.remove(food);servedFood.clear();foodFactory.dispose();scene.remove(storageView.root);storageView.dispose();disposeResources([scene,furniture.scene,...Object.values(prototypes),retained]);sun.shadow.dispose();renderer.dispose();host.replaceChildren()}
  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();dispose();lost()},{once:true});
  let previous=performance.now();function loop(now=performance.now()){if(!alive)return;frame=requestAnimationFrame(loop);const dt=Math.min(.08,Math.max(0,(now-previous)/1000));previous=now;controls.update();animatePeople(dt,now/1000);if(!host.hidden)renderer.render(scene,camera)}loop();return{update,updateBusiness,resize,dispose,focusStorage,focusCafe};
 }
