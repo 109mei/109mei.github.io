@@ -1,6 +1,6 @@
-import {MENU,STOCK_ITEMS,RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa5';
-import {getRecipeProcessing} from './recipe-processing.mjs?v=20261013-qa5';
-import {getResearchOffer} from './progression.mjs?v=20261013-qa5';
+import {MENU,STOCK_ITEMS,RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa6';
+import {getRecipeProcessing} from './recipe-processing.mjs?v=20261013-qa6';
+import {getResearchOffer} from './progression.mjs?v=20261013-qa6';
 const names={coffee:'コーヒー',tea:'お茶',cocoa:'ココア',soda:'ソーダ',juice:'ジュース',smoothie:'スムージー',shake:'シェイク・ミルク',toast:'トースト',sandwich:'サンドイッチ',pancakes:'パンケーキ',waffle:'ワッフル',pasta:'パスタ',rice:'ごはん・グラタン',curry:'カレー',soup:'スープ',salad:'サラダ',pizza:'ピザ',cake:'ケーキ',tart:'タルト',pastry:'焼き菓子',pudding:'プリン・ゼリー',parfait:'パフェ',icecream:'アイス'};
 const groups=new Map();
 for(const id of Object.keys(MENU)){const family=getRecipeProcessing(id).family;if(!groups.has(family))groups.set(family,[]);groups.get(family).push(id)}

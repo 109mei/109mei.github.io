@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {STOCK_ITEMS, MENU} from './catalog.mjs?v=20261013-qa5';
+import {STOCK_ITEMS, MENU} from './catalog.mjs?v=20261013-qa6';
 
 /** Original, metre-scale pantry geometry. Shared lazy prototypes; dispose the factory, not instances. */
 const FORMS={beans:['powder'],milk:['poured'],cake:['sliced','batter'],tea:['powder'],cocoa:['powder'],syrup:['poured'],fruit:['sliced','chopped','puree'],bread:['sliced','chopped'],eggs:['cracked','beaten'],flour:['powder','batter'],rice:['cooked'],vegetables:['sliced','chopped','puree'],pasta:['cooked'],cheese:['sliced','grated'],cream:['whipped'],chocolate:['chopped','melted'],nuts:['chopped','powder'],honey:['poured'],spices:['powder'],gelatin:['powder','dissolved'],legumes:['puree'],oats:['powder','batter']};

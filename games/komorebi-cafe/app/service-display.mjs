@@ -1,5 +1,5 @@
-import {MENU} from './catalog.mjs?v=20261013-qa5';
-import {FOOD_MODELS} from './food.mjs?v=20261013-qa5';
+import {MENU} from './catalog.mjs?v=20261013-qa6';
+import {FOOD_MODELS} from './food.mjs?v=20261013-qa6';
 
 /** Case stock is a preview of meals that can actually be prepared now. */
 export function availableDisplayRecipes(business={}){

@@ -1,4 +1,4 @@
-import {streetMetrics} from './street-scene.mjs?v=20261013-qa5';
+import {streetMetrics} from './street-scene.mjs?v=20261013-qa6';
 const point=p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.z);
 export function cleanRoute(path){return (path??[]).filter(point).map(p=>({x:p.x,z:p.z})).filter((p,i,a)=>!i||Math.hypot(p.x-a[i-1].x,p.z-a[i-1].z)>.015)}
 export function streetSide(id){let n=0;for(const c of String(id))n=(n*31+c.charCodeAt(0))|0;return n&1?1:-1}

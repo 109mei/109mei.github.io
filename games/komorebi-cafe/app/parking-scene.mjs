@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {streetMetrics} from './street-scene.mjs?v=20261013-qa5';
+import {streetMetrics} from './street-scene.mjs?v=20261013-qa6';
 
 // Presentation only: reservations reference guest IDs, never business/economy state.
 export const PARKING_CAPACITY=3;

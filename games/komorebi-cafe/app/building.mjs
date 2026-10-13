@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {layoutBounds,growthLevels} from './core.mjs?v=20261013-qa5';
+import {layoutBounds,growthLevels} from './core.mjs?v=20261013-qa6';
 
 /** Dimensions are derived from the same purchased bounds as placement and pathfinding. */
 export function expansionMetrics(layout={}){

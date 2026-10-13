@@ -1,4 +1,4 @@
-import {MENU,STOCK_ITEMS,RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa5';
+import {MENU,STOCK_ITEMS,RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa6';
 /** Read-only presentation model. These are condensed game processes, not food-safety
  * instructions. Quantities, task duration, FIFO consumption and research stay in
  * the original simulation. No stage creates inventory or charges for ingredients. */

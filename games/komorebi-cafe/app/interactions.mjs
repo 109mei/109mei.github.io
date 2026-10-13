@@ -23,18 +23,20 @@ export function furnitureKey(event,id,{select,render,move,rotate,focus}){
  focus(id);return true;
 }
 export function createViewController({load,ready,show,status,onError}){
- let requested='2d',loading=null,cached=null;
+ let loading=null,cached=null,generation=0;
  return {
-  get requested(){return requested},
-  async request(mode){
-   requested=mode;
-   if(mode==='2d'){show('2d');status('2d');return}
+  get requested(){return '3d'},
+  async request(){
    if(cached){show('3d');status('3d');return}
    if(loading)return loading;
-   status('loading');
-   loading=(async()=>{try{cached=await Promise.resolve().then(load);ready(cached);show(requested);status(requested)}catch(error){const report=requested==='3d';requested='2d';show('2d');status(report?'error':'2d');onError?.(error)}finally{loading=null}})();
+   const token=++generation;show('loading');status('loading');
+   loading=(async()=>{let candidate;try{
+    candidate=await Promise.resolve().then(load);
+    if(token!==generation){candidate?.dispose?.();return}
+    ready(candidate);cached=candidate;show('3d');status('3d');
+   }catch(error){candidate?.dispose?.();cached=null;if(token===generation){show('error');status('error');onError?.(error)}}finally{if(token===generation)loading=null}})();
    return loading;
   },
-  invalidate(){cached=null;requested='2d';show('2d');status('lost')}
+  invalidate(){generation++;cached=null;loading=null;show('lost');status('lost')}
  };
 }

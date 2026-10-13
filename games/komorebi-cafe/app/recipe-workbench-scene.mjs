@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {createIngredientFactory} from './ingredient-models.mjs?v=20261013-qa5';
-import {getWorkbenchBase} from './recipe-workbench.mjs?v=20261013-qa5';
-import {STOCK_ITEMS} from './catalog.mjs?v=20261013-qa5';
+import {createIngredientFactory} from './ingredient-models.mjs?v=20261013-qa6';
+import {getWorkbenchBase} from './recipe-workbench.mjs?v=20261013-qa6';
+import {STOCK_ITEMS} from './catalog.mjs?v=20261013-qa6';
 /** Shares the existing processing renderer. No WebGL context or simulation state. */
 export function createWorkbenchScene(){
  const root=new THREE.Group(),factory=createIngredientFactory(),geometry=new THREE.CylinderGeometry(.155,.17,.025,24),idle=new THREE.MeshStandardMaterial({color:'#d6d4bc'}),selected=new THREE.MeshStandardMaterial({color:'#78a88b'});root.name='RECIPE_WORKBENCH';let key='',textures=[],labelMaterials=[];

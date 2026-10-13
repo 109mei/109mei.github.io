@@ -1,6 +1,6 @@
-import {restoreTutorial} from './tutorial.mjs?v=20261013-qa5';
-import {parseSave} from './core.mjs?v=20261013-qa5';
-import {parseManagementSave,validateManagement} from './management.mjs?v=20261013-qa5';
+import {restoreTutorial} from './tutorial.mjs?v=20261013-qa6';
+import {parseSave} from './core.mjs?v=20261013-qa6';
+import {parseManagementSave,validateManagement} from './management.mjs?v=20261013-qa6';
 export const SAVE_FORMAT='komorebi-cafe-game';
 export const SAVE_VERSION=2;
 export const MAX_GAME_SAVE_BYTES=1000000;

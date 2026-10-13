@@ -1,6 +1,6 @@
-import {recordAccountingCash} from './accounting.mjs?v=20261013-qa5';
-import {MENU,INITIAL_RECIPES,RESEARCH_PROJECTS,STAFF_ROLES} from './catalog.mjs?v=20261013-qa5';
-export {RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa5';
+import {recordAccountingCash} from './accounting.mjs?v=20261013-qa6';
+import {MENU,INITIAL_RECIPES,RESEARCH_PROJECTS,STAFF_ROLES} from './catalog.mjs?v=20261013-qa6';
+export {RESEARCH_PROJECTS} from './catalog.mjs?v=20261013-qa6';
 export const MAX_EXPANSION_LEVEL=6;
 export const MAX_DAILY_ARRIVALS=420;
 const clone=s=>JSON.parse(JSON.stringify(s));

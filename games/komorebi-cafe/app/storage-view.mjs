@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {getStorageSummary} from './storage.mjs?v=20261013-qa5';
+import {getStorageSummary} from './storage.mjs?v=20261013-qa6';
 
 /** A visual service annex only. It never extends buildable floor or navigation. */
 export const STORAGE_BOUNDS=Object.freeze({minX:4.2,maxX:9.8,minZ:-5.7,maxZ:-1.0});

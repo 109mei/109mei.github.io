@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import {expansionMetrics} from './building.mjs?v=20261013-qa5';
+import {expansionMetrics} from './building.mjs?v=20261013-qa6';
 
 /** Street is scenery, never purchased floor or simulation navigation. */
 export function streetMetrics(layout={}){

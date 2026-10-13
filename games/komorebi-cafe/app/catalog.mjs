@@ -1,4 +1,4 @@
-import {buildExpandedCatalog,MENU_COLLECTIONS} from './catalog-expansion.mjs?v=20261013-qa5';
+import {buildExpandedCatalog,MENU_COLLECTIONS} from './catalog-expansion.mjs?v=20261013-qa6';
 export {MENU_COLLECTIONS};
 /** Stable catalogue IDs shared by simulation, research, UI and serving models.
  * Prices and recipes are deliberately simplified game assumptions, in yen.
