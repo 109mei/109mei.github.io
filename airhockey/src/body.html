@@ -1,0 +1,98 @@
+<canvas id="game"></canvas>
+<button id="pause-btn" class="pause-btn hidden" aria-label="一時停止"><i></i><i></i></button>
+
+<section id="s-title" class="screen scroll">
+  <div class="title-wrap">
+    <div class="logo">
+      <div class="logo-puck"></div>
+      <h1><span>エア</span><span>ホッケー</span></h1>
+      <div class="logo-tag">12の必殺技 × 8つのステージ</div>
+    </div>
+    <div class="menu">
+      <button class="btn primary big" data-act="cpu">CPU戦</button>
+      <button class="btn secondary big" data-act="online">オンライン対戦</button>
+    </div>
+    <button class="btn ghost small" data-act="sound" id="btn-sound">音：オン</button>
+    <p class="hint">7点先取<br>画面に触れると指の少し上にマレットが出ます<br>下の角の三角形が必殺技ボタンです</p>
+  </div>
+</section>
+
+<section id="s-skill" class="screen">
+  <header class="bar"><button class="back" data-act="back">もどる</button><h2>必殺技をえらぶ</h2><span class="step" id="skill-step"></span></header>
+  <div class="cards skills scroll" id="skill-list"></div>
+  <footer class="foot"><button class="btn primary" data-act="skillOk">これで決定</button></footer>
+</section>
+
+<section id="s-stage" class="screen">
+  <header class="bar"><button class="back" data-act="back">もどる</button><h2>ステージをえらぶ</h2><span class="step" id="stage-step"></span></header>
+  <div class="cards stages scroll" id="stage-list"></div>
+  <footer class="foot"><button class="btn secondary" data-act="stageRandom">おまかせ</button><button class="btn primary" data-act="stageOk">これで決定</button></footer>
+</section>
+
+<section id="s-lobby" class="screen">
+  <header class="bar"><button class="back" data-act="leaveLobby">もどる</button><h2>オンライン対戦</h2></header>
+  <div class="lobby scroll">
+    <div id="lobby-menu" class="panel">
+      <button class="btn primary big" data-act="createRoom">部屋を作る</button>
+      <div class="or"><span>または</span></div>
+      <label class="lbl" for="code-in">友達の部屋コードを入力</label>
+      <div class="join">
+        <input id="code-in" maxlength="4" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD">
+        <button class="btn secondary" data-act="joinRoom">参加</button>
+      </div>
+    </div>
+    <div id="lobby-host" class="panel hidden">
+      <div class="lbl">部屋コード</div>
+      <div id="room-code" class="code">----</div>
+      <div class="lbl">招待リンク（開くとそのまま参加できます）</div>
+      <div id="invite-url" class="url"></div>
+      <div class="row">
+        <button class="btn secondary" data-act="copyInvite">リンクをコピー</button>
+        <button class="btn secondary" data-act="shareInvite" id="btn-share">共有</button>
+      </div>
+    </div>
+    <div id="lobby-status" class="status"></div>
+  </div>
+</section>
+
+<section id="s-wait" class="screen scroll">
+  <div class="wait">
+    <div class="spinner"><i></i><i></i><i></i></div>
+    <p id="wait-text">待っています…</p>
+    <button class="btn ghost small" data-act="leaveOnline">やめる</button>
+  </div>
+</section>
+
+<section id="s-result" class="screen scroll">
+  <div class="result">
+    <div id="result-title" class="result-title">勝ち！</div>
+    <div id="result-score" class="result-score">7 - 0</div>
+    <div id="result-note" class="note"></div>
+    <div class="menu">
+      <button class="btn primary big" data-act="rematch" id="btn-rematch">もう一度</button>
+      <button class="btn secondary" data-act="changeSkill" id="btn-change">技とステージを変える</button>
+      <button class="btn ghost" data-act="toTitle">タイトルへ</button>
+    </div>
+  </div>
+</section>
+
+<section id="s-pause" class="screen scroll">
+  <div class="result">
+    <div class="result-title small">一時停止</div>
+    <div id="pause-note" class="note"></div>
+    <div class="menu">
+      <button class="btn primary big" data-act="resume">続ける</button>
+      <button class="btn ghost" data-act="quit">やめてタイトルへ</button>
+    </div>
+  </div>
+</section>
+
+<section id="s-msg" class="screen scroll">
+  <div class="result">
+    <div id="msg-title" class="result-title small">お知らせ</div>
+    <p id="msg-text" class="note"></p>
+    <div class="menu"><button class="btn primary" data-act="toTitle">タイトルへ</button></div>
+  </div>
+</section>
+
+<div id="toast" class="toast"></div>
