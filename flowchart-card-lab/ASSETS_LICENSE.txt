@@ -1,0 +1,52 @@
+フローチャートカード ラボ：キャラと背景の絵のライセンス
+
+キャラ・物・背景の絵は、Kenney（www.kenney.nl）の次の素材を使っています。どちらも CC0 1.0（パブリックドメイン）です。
+- Platformer Pack Redux（キャラ・敵・宝石・コイン・トゲ・ブロック・草原や空の背景など）
+- Space Shooter Redux（いん石・宇宙の背景）
+取得元：https://github.com/ETdoFresh/kenney.nl（コミット 45df48c4d45f8716216b1a9e22df0b69cd9f5932。Kenney の素材を展開したミラー）
+絵の形は変えていません（余白を切り、WebP にして index.html に埋めこんでいます。スライムとハチは左右を反転。いん石は同じパックの公式ベクターから書き出し）。
+
+以下は、各パックに入っているライセンスの文です。
+
+======================================================================
+platformer-pack-redux-360-assets/License.txt
+======================================================================
+###############################################################################
+
+
+	Platformer Pack Redux
+	by Kenney Vleugels for Kenney (www.kenney.nl)
+
+			------------------------------
+
+	License (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	You may use these graphics in personal and commercial projects.
+	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
+
+			------------------------------
+
+	Donate:   http://donate.kenney.nl/
+	Request:  http://request.kenney.nl/
+
+
+###############################################################################
+
+======================================================================
+spaceshooter/license.txt
+======================================================================
+###############################################################################
+
+	Space Shooter (Redux, plus fonts and sounds) by Kenney Vleugels (www.kenney.nl)
+
+			------------------------------
+
+			        License (CC0)
+	       http://creativecommons.org/publicdomain/zero/1.0/
+
+	You may use these graphics in personal and commercial projects.
+	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
+
+###############################################################################
+
