@@ -1717,14 +1717,21 @@ function placeNew(ctx, id) {
   if (t.c === 1 && !ifRegions(rows)[t.r]) t.c = 0;
   if (rows[t.r][t.c]) rows.splice(t.r, 0, [null, null]);
   rows[t.r][t.c] = def.make(); B.sel = t; setRows(rows); changed(ctx);
-  // スマホなど幅のせまい画面では、置いたカードまで動かして見せる（書く欄は画面の下に出る）
-  if (window.matchMedia("(max-width: 760px)").matches) { const el = $(`.slot[data-r="${t.r}"][data-c="${t.c}"]`, ctx.m); if (el) el.scrollIntoView({ block: "center", behavior: reduceMotion() ? "auto" : "smooth" }); }
+  revealSel(ctx);
+}
+// スマホなど幅のせまい画面では、書く欄が画面の下に出るので、選んだカードがその上に見えるように動かす
+function revealSel(ctx) {
+  const B = S.build; if (!B.sel || !window.matchMedia("(max-width: 760px)").matches) return;
+  const el = $(`.slot[data-r="${B.sel.r}"][data-c="${B.sel.c}"]`, ctx.m); const ed = $("#b-editor", ctx.m); if (!el) return;
+  const r = el.getBoundingClientRect(); const limit = ed && !ed.hidden ? ed.getBoundingClientRect().top - 12 : window.innerHeight - 12;
+  let dy = 0; if (r.bottom > limit) dy = r.bottom - limit; if (r.top - dy < 12) dy = r.top - 12;
+  if (Math.abs(dy) > 2) window.scrollBy({ top: dy, behavior: reduceMotion() ? "auto" : "smooth" });
 }
 function onSlot(ctx, r, c) {
   const B = S.build; const rows = getRows(); while (rows.length <= r) rows.push([null, null]);
   const card = rows[r][c];
   if (B.moving && B.sel && rows[B.sel.r] && rows[B.sel.r][B.sel.c] && !card) { rows[r][c] = rows[B.sel.r][B.sel.c]; rows[B.sel.r][B.sel.c] = null; B.sel = { r, c }; B.moving = false; setRows(rows); changed(ctx); return; }
-  B.moving = false; B.sel = (B.sel && B.sel.r === r && B.sel.c === c) ? null : { r, c }; renderSheet(ctx);
+  B.moving = false; B.sel = (B.sel && B.sel.r === r && B.sel.c === c) ? null : { r, c }; renderSheet(ctx); revealSel(ctx);
 }
 function onDrop(ctx, data, r, c) {
   const B = S.build; const rows = getRows(); while (rows.length <= r) rows.push([null, null]);
@@ -1777,7 +1784,7 @@ function editAct(ctx, act) {
     if (c === 1 && !ifRegions(rows)[nr]) { toast("いいえの道のカードは、「もし」と「ここで道が1つにもどる」の間の行だけで動かせます。"); return; }
     const other = rows[nr][c]; rows[nr][c] = card; rows[r][c] = other; B.sel = { r: nr, c };
   }
-  setRows(rows); changed(ctx);
+  setRows(rows); changed(ctx); revealSel(ctx);
 }
 function clearRun(ctx) {
   stopAll(); ctx.step = null; const { m, board, p } = ctx;
