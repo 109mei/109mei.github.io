@@ -836,6 +836,7 @@ const LABDATA = (() => {
   }
 
   // ------------------------------------------------ 授業の流れ（模擬授業）
+  // 1回の進め方（授業案 v2.0 の 8.「1回の進め方（15〜16分）」）。合計15分。16分の回は「伝える・並べる」を8分にする（app4_more.js の stepsOf）
   const STEPS16 = [
     { name: "配る", sec: 30, who: "作る係は後ろを向く。お題の「配るカード」を班に渡す" },
     { name: "見る", sec: 60, who: "映像を2回続けて再生。見る係はメモを取らない" },
@@ -2088,6 +2089,14 @@ function viewCards(m) {
 let lessonTimer = null;
 function allLessons() { return [...D.LESSONS, ...Object.values(U.lessons)]; }
 function lessonOf(id) { return allLessons().find(l => l.id === id) || D.LESSONS[0]; }
+// 1回の進め方（授業案 v2.0 の 8.）。ふつうは15分。場面の時間が15分とちがうときは、差を「伝える・並べる」で調整する
+// （授業案どおり、16分の回〔3回目・4回目〕は 伝える・並べる が8分。ほかの段階の時間は変えない）
+function stepsOf(dur) {
+  const base = D.STEPS16.map(s => Object.assign({}, s)); const sum = base.reduce((x, s) => x + s.sec, 0);
+  const flex = base.find(s => s.name === "伝える・並べる");
+  if (flex && flex.sec + (dur - sum) >= 60) { flex.sec += dur - sum; return base; }
+  return base.map(s => Object.assign(s, { sec: Math.round(s.sec * dur / sum) }));
+}
 function viewLesson(m) {
   const L = lessonOf(S.lessonId); S.lessonId = L.id;
   const R = S.lesson && S.lesson.id === L.id ? S.lesson : (S.lesson = { id: L.id, i: 0, acc: 0, t0: null });
@@ -2109,7 +2118,7 @@ function viewLesson(m) {
     $("#l-clock", m) && ($("#l-clock", m).textContent = fmtClock(starts[R.i] * 60 + e));
     for (const d of $$("#l-tl div", m)) d.classList.toggle("now", +d.dataset.i === R.i);
     for (const d of $$(".phase", m)) d.classList.toggle("now", +d.dataset.i === R.i);
-    let sub = ""; if (p.steps) { let a = 0; const scale = dur / D.STEPS16.reduce((x, s) => x + s.sec, 0); sub = `<div class="substeps">${D.STEPS16.map(s => { const st = a; a += s.sec * scale; return `<span class="${e >= st && e < a ? "now" : ""}">${esc(s.name)} ${fmtClock(s.sec * scale)}</span>`; }).join("")}</div>`; }
+    let sub = ""; if (p.steps) { let a = 0; sub = `<div class="substeps">${stepsOf(dur).map(s => { const st = a; a += s.sec; return `<span class="${e >= st && e < a ? "now" : ""}">${esc(s.name)} ${fmtClock(s.sec)}</span>`; }).join("")}</div>`; }
     const nowEl = $("#l-now", m);
     if (nowEl) nowEl.innerHTML = `<div class="eyebrow">いまの場面（${R.i + 1}/${L.phases.length}）</div><h2 style="font-size:20px;margin:4px 0">${esc(p.name)}</h2>
       <div class="row" style="align-items:baseline">${e > dur ? `<span class="clock" style="color:var(--ng)">+${fmtClock(e - dur)}</span><span class="small"><b style="color:var(--ng)">時間をこえています</b>（${p.min}分の場面）</span>` : `<span class="clock">${fmtClock(dur - e)}</span><span class="muted small">のこり（${p.min}分の場面）</span>`}</div>
