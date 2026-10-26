@@ -6,7 +6,7 @@
    レイアウト：左に道具の棚（ナビ）、上に役と気づきメモ。作業台は「流れ図テンプレート定規」と方眼紙をモチーフにする。
    書体は BIZ UDPゴシック 1書体（印刷物とそろえる）。色は、カードの役割色（青＝キャラの動き、だいだい＝くり返し、緑＝もし、紫＝点数、赤＝ゲームオーバー、金＝クリア）を、そのまま画面の意味の色に使う。 */
 :root {
-  --paper: #f2f4f1; --grid: rgba(23,33,43,.045); --surface: #ffffff; --sunk: #e9ede8; --ink: #17212b; --muted: #57626e; --line: #d3d9d3; --line2: #bcc4bd;
+  --paper: #f2f4f1; --grid: rgba(23,33,43,.045); --surface: #ffffff; --sunk: #e9ede8; --ink: #17212b; --muted: #57626e; --line: #d3d9d3; --line2: #bcc4bd; --flow: #3d4854;
   --ui: #22384f; --ui-ink: #ffffff; --ui-soft: #e3e9f0; --hi: #ffd84a; --focus: #2f6fd6;
   --c-move: #1f5fd1; --c-loop: #c96200; --c-if: #137a3a; --c-score: #6d3fd0; --c-over: #c62828; --c-clear: #9a6a00; --c-start: #5b6676; --c-ref: #57626e;
   --t-move: #e8effc; --t-loop: #fdf0e3; --t-if: #e6f4eb; --t-score: #efe9fb; --t-over: #fbe9e9; --t-clear: #fff3cf; --t-ref: #f1f3f6;
@@ -15,13 +15,13 @@
   --r: 10px; --shadow: 0 1px 2px rgba(23,33,43,.06), 0 6px 18px rgba(23,33,43,.06);
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --paper: #0f1418; --grid: rgba(228,234,238,.04); --surface: #172027; --sunk: #121a20; --ink: #e4eaee; --muted: #9aa7b3; --line: #2a3640; --line2: #3a4854;
+  --paper: #0f1418; --grid: rgba(228,234,238,.04); --surface: #172027; --sunk: #121a20; --ink: #e4eaee; --muted: #9aa7b3; --line: #2a3640; --line2: #3a4854; --flow: #aebac4;
   --ui: #8fb4e3; --ui-ink: #0d1520; --ui-soft: #1d2a37; --hi: #ffd84a; --focus: #8fb4e3;
   --c-move: #7aa7f5; --c-loop: #f0a55a; --c-if: #6cc58e; --c-score: #b79bf2; --c-over: #f08080; --c-clear: #e8c35a; --c-start: #9ba7b6; --c-ref: #9aa7b3;
   --t-move: #1b2a44; --t-loop: #3a2a17; --t-if: #18321f; --t-score: #2a2141; --t-over: #3a1d1d; --t-clear: #3a3115; --t-ref: #1d252d;
   --ok: #6cc58e; --ng: #f08080; --warn: #e2b45a; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 22px rgba(0,0,0,.25); color-scheme: dark; } }
 :root[data-theme="dark"] {
-  --paper: #0f1418; --grid: rgba(228,234,238,.04); --surface: #172027; --sunk: #121a20; --ink: #e4eaee; --muted: #9aa7b3; --line: #2a3640; --line2: #3a4854;
+  --paper: #0f1418; --grid: rgba(228,234,238,.04); --surface: #172027; --sunk: #121a20; --ink: #e4eaee; --muted: #9aa7b3; --line: #2a3640; --line2: #3a4854; --flow: #aebac4;
   --ui: #8fb4e3; --ui-ink: #0d1520; --ui-soft: #1d2a37; --hi: #ffd84a; --focus: #8fb4e3;
   --c-move: #7aa7f5; --c-loop: #f0a55a; --c-if: #6cc58e; --c-score: #b79bf2; --c-over: #f08080; --c-clear: #e8c35a; --c-start: #9ba7b6; --c-ref: #9aa7b3;
   --t-move: #1b2a44; --t-loop: #3a2a17; --t-if: #18321f; --t-score: #2a2141; --t-over: #3a1d1d; --t-clear: #3a3115; --t-ref: #1d252d;
@@ -294,9 +294,27 @@ details.fold > div { padding: 4px 12px 12px; }
 .slot.unrun .card { opacity: .35; }
 .slot.over { background: var(--ui-soft); border-color: var(--ui); }
 .slot .tag2 { position: absolute; left: 8px; font-size: 11px; color: var(--c-if); font-weight: 700; }
+/* 流れ線：カードの上下の口と同じ位置（まん中）に、行と行のあいだもつなぐ。カードの後ろに引く */
+.slot { isolation: isolate; }
+.slot > .fl { position: absolute; z-index: -1; background: var(--flow); pointer-events: none; }
+.slot > .fl.v { left: calc(50% - 1px); width: 2px; }
+.slot > .fl.v.t { top: -7px; height: calc(50% + 7px); }
+.slot > .fl.v.b { top: 50%; bottom: -7px; }
+.slot > .fl.h { top: calc(50% - 1px); height: 2px; }
+.slot > .fl.h.l { left: -13px; width: calc(50% + 13px); }
+.end-term { justify-self: center; font-size: 12px; border: 2px solid var(--c-start); color: var(--c-start); border-radius: 999px; padding: 1px 16px; position: relative; margin-top: 8px; }
+.end-term.on::before { content: ""; position: absolute; left: calc(50% - 1px); bottom: calc(100% + 2px); width: 2px; height: 13px; background: var(--flow); }
 .connector { display: flex; align-items: center; gap: 8px; justify-content: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
 .connector i { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; font-style: normal; font-weight: 700; color: var(--ink); background: var(--surface); }
-.start-term { justify-self: center; font-size: 12px; border: 2px solid var(--c-start); color: var(--c-start); border-radius: 999px; padding: 1px 16px; }
+/* 紙をまたぐ結合子。丸を本線（いいえの道）のまん中に置き、線を丸までつなぐ */
+.conn-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 12px; color: var(--muted); text-align: center; line-height: 1.3; }
+.conn-cell.bot { padding-top: 4px; } .conn-cell.top { padding-bottom: 4px; }
+.conn-cell .cn { position: relative; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; font-style: normal; font-weight: 700; color: var(--ink); background: var(--surface); flex: none; }
+.conn-cell .cn.no { border-color: var(--c-if); color: var(--c-if); }
+.conn-cell.bot.on .cn::before { content: ""; position: absolute; left: calc(50% - 1px); bottom: 100%; width: 2px; height: 9px; background: var(--flow); }
+.conn-cell.top.on .cn::after { content: ""; position: absolute; left: calc(50% - 1px); top: 100%; width: 2px; height: 9px; background: var(--flow); }
+.start-term { justify-self: center; font-size: 12px; border: 2px solid var(--c-start); color: var(--c-start); border-radius: 999px; padding: 1px 16px; position: relative; }
+.start-term::after { content: ""; position: absolute; left: calc(50% - 1px); top: calc(100% + 2px); width: 2px; height: 9px; background: var(--flow); }
 .editor { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px; }
 .ed-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .ed-memo { display: none !important; }
@@ -1011,17 +1029,19 @@ function missingOf(card) {
   return need.filter(f => card[f] === null || card[f] === undefined || card[f] === "" || (Array.isArray(card[f]) && !card[f].length));
 }
 
-// カードの絵（SVG 260×64）。opts.mode：card なら「1手・0手」、frame なら「1コマ」を出す
+// カードの絵。カード全体の形を流れ図の記号にした（処理＝四角、もし＝ひし形、くり返しの始め・終わり＝角を切った形、
+// ゲームの終わり＝角の丸い形、道がもどる＝結合子の丸）。上と下のまん中に流れ線の口があり、カードを縦に並べると線がつながる。
+// もしは、下の角から「はい」、右の角から「いいえ」の線が出る。道がもどるには、右から いいえの道 の線が入る。
+// 大きさ：ふつうのカード 300×108（記号 84＋上下の線 12ずつ）、もし 300×160（ひし形 136）。opts.mode：card なら「1手・0手」、frame なら「1コマ」を出す
+const CARD_W = 300, CARD_STUB = 12, CARD_H = 108, IF_H = 160;
 function cardSVG(card, opts = {}) {
-  // カードの絵（300×84）。流れ図の形（処理＝四角、もし＝ひし形、くり返し＝角を切った形、おわり＝角の丸い形、合流＝丸）は変えずに、
-  // 字を大きくし、小さな説明は色つきの1行にまとめた。
   const def = defOf(card); const role = def.role || "move";
-  const col = `var(--c-${role})`, tint = `var(--t-${role})`;
-  const W = 300, H = 84; const k = card.k;
+  const col = `var(--c-${role})`, tint = `var(--t-${role})`, FL = "var(--flow)";
+  const W = CARD_W, H0 = 84; const k = card.k;
   const T = (x, y, s, size = 20, w = 700, anchor = "start", fill = "var(--ink)") => `<text x="${x}" y="${y}" text-anchor="${anchor}" style="font-size:${size}px;font-weight:${w};fill:${fill}">${esc(s)}</text>`;
-  const slot = (x, y, w, h, v) => {
+  const slot = (x, y, w, h, v, big = 21) => {
     const len = v ? [...v].length : 0;
-    const fs = !v ? 13 : len <= 2 ? 21 : len <= 3 ? 18 : len <= 4 ? 15 : 12;
+    const fs = !v ? 13 : len <= 2 ? big : len <= 3 ? Math.min(big, Math.floor((w - 6) / 3)) : len <= 4 ? Math.min(big, Math.floor((w - 6) / 4)) : Math.max(10, Math.floor((w - 6) / len));
     return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" style="fill:var(--surface);stroke:${col};stroke-width:2.4"/>` +
       (v ? T(x + w / 2, y + h / 2 + fs * .36, v, fs, 800, "middle") : T(x + w / 2, y + h / 2 + 4.5, "名前", 13, 400, "middle", "var(--muted)"));
   };
@@ -1032,60 +1052,90 @@ function cardSVG(card, opts = {}) {
     for (const m of marks || []) { if (!m || !E.POS[m]) continue; const [i, j] = E.POS[m]; g += `<circle cx="${gx + i * sz + sz / 2}" cy="${gy + j * sz + sz / 2}" r="${sz * .36}" style="fill:none;stroke:var(--ink);stroke-width:2.6"/>`; }
     return g;
   }
+  // 流れ線：上から入る口（矢じりつき）と、下へ出る口
+  const cx = W / 2;
+  const inTop = yTip => `<line x1="${cx}" y1="0" x2="${cx}" y2="${yTip - 7}" style="stroke:${FL};stroke-width:2.6"/><polygon points="${cx},${yTip} ${cx - 5.5},${yTip - 8.5} ${cx + 5.5},${yTip - 8.5}" style="fill:${FL}"/>`;
+  const outBot = (y0, y1) => `<line x1="${cx}" y1="${y0}" x2="${cx}" y2="${y1}" style="stroke:${FL};stroke-width:2.6"/>`;
   const IF = E.IFK.has(k);
-  let shape;
-  if (IF) shape = `<polygon points="4,42 52,4 100,42 52,80" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
-  else if (k === "合流") shape = `<circle cx="32" cy="44" r="22" style="fill:${tint};stroke:${col};stroke-width:3.2"/><line x1="32" y1="0" x2="32" y2="22" style="stroke:${col};stroke-width:2.4"/>`;
-  else if (k === "終わる") shape = `<rect x="3" y="4" width="${W - 6}" height="${H - 8}" rx="36" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
-  else if (k === "ここから" || k === "ずっと") shape = `<path d="M20,4 H${W - 20} L${W - 3},21 V${H - 4} H3 V21 Z" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
-  else if (k === "ここまで") shape = `<path d="M3,4 H${W - 3} V${H - 21} L${W - 20},${H - 4} H20 L3,${H - 21} Z" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
-  else shape = `<rect x="3" y="4" width="${W - 6}" height="${H - 8}" rx="8" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
   const verb = verbOf(def);
   const vfit = (w, base) => Math.max(13, Math.min(base, Math.floor(w / Math.max(1, [...verb].length))));
   const cap = (x, y, s, anchor = "start") => T(x, y, s, 13, 700, anchor, col);
-  let b = "";
-  if (["配置", "動かす", "矢印", "隠す", "表示"].includes(k)) b += slot(8, 25, 76, 36, card.c) + T(90, 50, "を", 19);
-  switch (k) {
-    case "配置": b += grid9(128, 22, 18, [card.p]) + T(190, 50, "に", 19) + T(W - 12, 64, verb, vfit(84, 28), 800, "end"); break;
-    case "動かす": {
-      const cx = 143, cy = 44, A = { "上": [0, -1], "下": [0, 1], "左": [-1, 0], "右": [1, 0] };
-      for (const [d, [dx, dy]] of Object.entries(A)) {
-        const sel = card.d === d, fc = sel ? "var(--ink)" : col;
-        b += `<line x1="${cx + dx * 7}" y1="${cy + dy * 7}" x2="${cx + dx * 22}" y2="${cy + dy * 22}" style="stroke:${fc};stroke-width:${sel ? 4.2 : 2.4}"/>`;
-        const hx = cx + dx * 30, hy = cy + dy * 30, px = -dy, py = dx;
-        b += `<polygon points="${hx},${hy} ${hx - dx * 9 + px * 6.5},${hy - dy * 9 + py * 6.5} ${hx - dx * 9 - px * 6.5},${hy - dy * 9 - py * 6.5}" style="fill:${fc}"/>`;
-        if (sel) b += `<circle cx="${cx + dx * 19}" cy="${cy + dy * 19}" r="12" style="fill:none;stroke:var(--ink);stroke-width:2.6"/>`;
+  let H, body = "", bx = null, by = null;
+
+  if (IF) {
+    // もし：カード全体をひし形にする。中心 (150,80)、左右の角は x=8 と 292、上下の角は y=12 と 148
+    H = IF_H; const cy = 80, top = CARD_STUB, bot = IF_H - CARD_STUB;
+    body += `<polygon points="8,${cy} ${cx},${top} 292,${cy} ${cx},${bot}" style="fill:${tint};stroke:${col};stroke-width:3.2;stroke-linejoin:round"/>`;
+    body += inTop(top) + outBot(bot, H) + `<line x1="292" y1="${cy}" x2="${W}" y2="${cy}" style="stroke:${FL};stroke-width:2.6"/>`;
+    body += T(cx + 9, H - 2, "はい", 12, 800, "start", col) + T(W - 2, cy - 22, "いいえ", 12, 800, "end", col);
+    body += T(cx, 42, verb, 20, 800, "middle", col);
+    switch (k) {
+      case "もし": body += slot(70, 51, 60, 32, card.a, 20) + T(141, 74, "と", 16, 700, "middle") + slot(152, 51, 60, 32, card.b, 20) + T(223, 74, "が", 16, 700, "middle") + T(cx, 106, "同じマスに いたら", 17, 700, "middle"); break;
+      case "もしキー": {
+        const ks = [["上", "↑", 27], ["下", "↓", 27], ["左", "←", 27], ["右", "→", 27], ["スペース", "スペース", 44]];
+        let x = cx - (27 * 4 + 44 + 4 * 4) / 2;
+        for (const [key, lab, w] of ks) {
+          const sel = card.key === key;
+          body += `<rect x="${x}" y="51" width="${w}" height="30" rx="6" style="fill:${sel ? "var(--hi)" : "var(--surface)"};stroke:${sel ? "var(--ink)" : col};stroke-width:${sel ? 3 : 1.8}"/>` + T(x + w / 2, key === "スペース" ? 70 : 72, lab, key === "スペース" ? 11 : 17, 800, "middle", sel ? "#17212b" : col);
+          x += w + 4;
+        }
+        body += T(cx, 108, "を押したら", 18, 700, "middle"); break;
       }
-      b += `<circle cx="${cx}" cy="${cy}" r="4" style="fill:var(--surface);stroke:${col};stroke-width:1.8"/>` + T(181, 50, "へ", 19) + T(W - 12, 38, "1マス", 16, 700, "end") + T(W - 12, 68, verb, vfit(72, 24), 800, "end");
-      break;
+      case "もし場所": body += slot(62, 58, 60, 32, card.c, 20) + T(133, 80, "が", 16, 700, "middle") + grid9(160, 56, 15, card.ps || [], true) + T(209, 84, "のマスに", 15, 700) + T(cx, 122, "いたら", 17, 700, "middle"); break;
+      case "もし点数": body += T(96, 77, "点数が", 20) + `<rect x="162" y="52" width="42" height="34" rx="5" style="fill:var(--surface);stroke:${col};stroke-width:2.4"/>` + T(183, 77, card.n ?? "", 22, 800, "middle") + T(cx, 112, "以上なら", 20, 700, "middle"); break;
     }
-    case "矢印": {
-      const key = (x, y, t) => `<rect x="${x}" y="${y}" width="22" height="20" rx="4" style="fill:var(--surface);stroke:${col};stroke-width:1.8"/>` + T(x + 11, y + 15, t, 13, 800, "middle", col);
-      b += key(136, 10, "↑") + key(112, 33, "←") + key(136, 33, "↓") + key(160, 33, "→") + cap(147, 71, "押した向きへ", "middle");
-      b += T(W - 12, 38, "1マス", 16, 700, "end") + T(W - 12, 68, verb, vfit(84, 24), 800, "end");
-      break;
-    }
-    case "隠す": b += T(112, 49, verb, vfit(150, 30), 800) + T(112, 71, "見えなくなる・場所はそのまま", 12, 700, "start", col); break;
-    case "表示": b += T(112, 49, verb, vfit(150, 30), 800) + cap(112, 71, "隠れた場所に また見える"); break;
-    case "点数": b = T(20, 54, "点数を", 22) + T(94, 56, verb, 32, 800, "start", col) + T(150, 54, "する", 22); break;
-    case "終わる": b = T(W / 2, 48, card.e === "クリア" ? `★ ${verb} ★` : verb, vfit(220, 28), 800, "middle", col) + T(W / 2, 69, "ここで ゲームが終わる", 13, 700, "middle"); break;
-    case "ここから": b = T(18, 56, "ここから", 20) + `<rect x="104" y="30" width="40" height="38" rx="5" style="fill:var(--surface);stroke:${col};stroke-width:2.4"/>` + T(124, 57, card.n ?? "", 24, 800, "middle") + T(152, 56, "回 " + verb, 20); break;
-    case "ずっと": b = T(18, 50, verb, vfit(220, 24), 800) + cap(18, 71, "ゲームが終わるまで"); break;
-    case "ここまで": b = T(18, 38, "ここまでを " + verb, 22, 800) + cap(18, 64, "「ここから」へ もどる") + `<path d="M172 59 H${W - 40} V26" style="fill:none;stroke:${col};stroke-width:3"/><polygon points="${W - 40},15 ${W - 47.5},28 ${W - 32.5},28" style="fill:${col}"/>`; break;
-    case "待つ": b = T(18, 56, "1コマ", 22) + T(84, 57, verb, vfit(150, 28), 800); break;
-    case "もし": b = T(52, 50, verb, 22, 800, "middle") + slot(110, 8, 66, 34, card.a) + T(181, 32, "と", 17) + slot(200, 8, 66, 34, card.b) + T(271, 32, "が", 17) + T(110, 72, "同じマスに いたら", 20); break;
-    case "もしキー": {
-      const ks = [["上", "↑", 110, 30], ["下", "↓", 144, 30], ["左", "←", 178, 30], ["右", "→", 212, 30], ["スペース", "スペース", 246, 48]];
-      b = T(52, 50, verb, 22, 800, "middle");
-      for (const [key, lab, x, w] of ks) {
-        const sel = card.key === key;
-        b += `<rect x="${x}" y="9" width="${w}" height="30" rx="6" style="fill:${sel ? "var(--hi)" : "var(--surface)"};stroke:${sel ? "var(--ink)" : col};stroke-width:${sel ? 3 : 1.8}"/>` + T(x + w / 2, key === "スペース" ? 29 : 31, lab, key === "スペース" ? 12 : 18, 800, "middle", sel ? "#17212b" : col);
+    bx = "R"; by = 16;
+  } else if (k === "合流") {
+    // 道がもどる：結合子の丸。上（はいの道）と右（いいえの道）から入り、下へ出る
+    H = CARD_H; const cy = H / 2, r = 20;
+    body += inTop(cy - r) + outBot(cy + r, H);
+    body += `<line x1="${W}" y1="${cy}" x2="${cx + r + 7}" y2="${cy}" style="stroke:${FL};stroke-width:2.6"/><polygon points="${cx + r},${cy} ${cx + r + 8.5},${cy - 5.5} ${cx + r + 8.5},${cy + 5.5}" style="fill:${FL}"/>`;
+    body += `<circle cx="${cx}" cy="${cy}" r="${r}" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
+    body += T(W - 4, cy - 8, "いいえの道", 12, 800, "end", col);
+    body += T(cx - r - 12, cy - 4, "ここで 道が", 19, 700, "end") + T(cx - r - 12, cy + 22, "1つに もどる", 19, 700, "end");
+    bx = "R"; by = 14;
+  } else {
+    // 処理・くり返しの始めと終わり・ゲームの終わり：記号 300×84 を上下の線のあいだに置く
+    H = CARD_H; const oy = CARD_STUB;
+    let shape;
+    if (k === "終わる") shape = `<rect x="3" y="4" width="${W - 6}" height="${H0 - 8}" rx="36" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
+    else if (k === "ここから" || k === "ずっと") shape = `<path d="M20,4 H${W - 20} L${W - 3},21 V${H0 - 4} H3 V21 Z" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
+    else if (k === "ここまで") shape = `<path d="M3,4 H${W - 3} V${H0 - 21} L${W - 20},${H0 - 4} H20 L3,${H0 - 21} Z" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
+    else shape = `<rect x="3" y="4" width="${W - 6}" height="${H0 - 8}" rx="8" style="fill:${tint};stroke:${col};stroke-width:3.2"/>`;
+    let b = "";
+    if (["配置", "動かす", "矢印", "隠す", "表示"].includes(k)) b += slot(8, 25, 76, 36, card.c) + T(90, 50, "を", 19);
+    switch (k) {
+      case "配置": b += grid9(128, 22, 18, [card.p]) + T(190, 50, "に", 19) + T(W - 12, 64, verb, vfit(84, 28), 800, "end"); break;
+      case "動かす": {
+        const ax = 143, ay = 44, A = { "上": [0, -1], "下": [0, 1], "左": [-1, 0], "右": [1, 0] };
+        for (const [d, [dx, dy]] of Object.entries(A)) {
+          const sel = card.d === d, fc = sel ? "var(--ink)" : col;
+          b += `<line x1="${ax + dx * 7}" y1="${ay + dy * 7}" x2="${ax + dx * 22}" y2="${ay + dy * 22}" style="stroke:${fc};stroke-width:${sel ? 4.2 : 2.4}"/>`;
+          const hx = ax + dx * 30, hy = ay + dy * 30, px = -dy, py = dx;
+          b += `<polygon points="${hx},${hy} ${hx - dx * 9 + px * 6.5},${hy - dy * 9 + py * 6.5} ${hx - dx * 9 - px * 6.5},${hy - dy * 9 - py * 6.5}" style="fill:${fc}"/>`;
+          if (sel) b += `<circle cx="${ax + dx * 19}" cy="${ay + dy * 19}" r="12" style="fill:none;stroke:var(--ink);stroke-width:2.6"/>`;
+        }
+        b += `<circle cx="${ax}" cy="${ay}" r="4" style="fill:var(--surface);stroke:${col};stroke-width:1.8"/>` + T(181, 50, "へ", 19) + T(W - 12, 38, "1マス", 16, 700, "end") + T(W - 12, 68, verb, vfit(72, 24), 800, "end");
+        break;
       }
-      b += T(110, 72, "を押したら", 20); break;
+      case "矢印": {
+        const key = (x, y, t) => `<rect x="${x}" y="${y}" width="22" height="20" rx="4" style="fill:var(--surface);stroke:${col};stroke-width:1.8"/>` + T(x + 11, y + 15, t, 13, 800, "middle", col);
+        b += key(136, 10, "↑") + key(112, 33, "←") + key(136, 33, "↓") + key(160, 33, "→") + cap(147, 71, "押した向きへ", "middle");
+        b += T(W - 12, 38, "1マス", 16, 700, "end") + T(W - 12, 68, verb, vfit(84, 24), 800, "end");
+        break;
+      }
+      case "隠す": b += T(112, 49, verb, vfit(150, 30), 800) + T(112, 71, "見えなくなる・場所はそのまま", 12, 700, "start", col); break;
+      case "表示": b += T(112, 49, verb, vfit(150, 30), 800) + cap(112, 71, "隠れた場所に また見える"); break;
+      case "点数": b = T(20, 54, "点数を", 22) + T(94, 56, verb, 32, 800, "start", col) + T(150, 54, "する", 22); break;
+      case "終わる": b = T(W / 2, 48, card.e === "クリア" ? `★ ${verb} ★` : verb, vfit(220, 28), 800, "middle", col) + T(W / 2, 69, "ここで ゲームが終わる", 13, 700, "middle"); break;
+      case "ここから": b = T(18, 56, "ここから", 20) + `<rect x="104" y="30" width="40" height="38" rx="5" style="fill:var(--surface);stroke:${col};stroke-width:2.4"/>` + T(124, 57, card.n ?? "", 24, 800, "middle") + T(152, 56, "回 " + verb, 20); break;
+      case "ずっと": b = T(18, 50, verb, vfit(220, 24), 800) + cap(18, 71, "ゲームが終わるまで"); break;
+      case "ここまで": b = T(18, 38, "ここまでを " + verb, 22, 800) + cap(18, 64, "「ここから」へ もどる") + `<path d="M172 59 H${W - 40} V26" style="fill:none;stroke:${col};stroke-width:3"/><polygon points="${W - 40},15 ${W - 47.5},28 ${W - 32.5},28" style="fill:${col}"/>`; break;
+      case "待つ": b = T(18, 56, "1コマ", 22) + T(84, 57, verb, vfit(150, 28), 800); break;
     }
-    case "もし場所": b = T(52, 50, verb, 22, 800, "middle") + slot(110, 8, 72, 34, card.c) + T(187, 32, "が", 17) + grid9(234, 16, 16, card.ps || [], true) + T(110, 74, "のマスに いたら", 16); break;
-    case "もし点数": b = T(52, 50, verb, 22, 800, "middle") + T(110, 36, "点数が", 20) + `<rect x="176" y="8" width="42" height="36" rx="5" style="fill:var(--surface);stroke:${col};stroke-width:2.4"/>` + T(197, 34, card.n ?? "", 22, 800, "middle") + T(110, 72, "以上なら", 20); break;
-    case "合流": b = T(66, 38, "ここで 道が", 21) + T(66, 66, "1つに もどる", 21); break;
+    // 上の線は記号の上の辺（y=4）まで、下の線は記号の下の辺（y=80）から。ゲームの終わりは下へ出ない
+    body += inTop(oy + 4) + (k === "終わる" ? "" : outBot(oy + H0 - 4, H)) + `<g transform="translate(0,${oy})">${shape}${b}</g>`;
+    if (k === "ここから" || k === "ずっと") { bx = W - 24; by = oy + 9; } else if (k === "終わる") { bx = W - 30; by = oy + 9; } else { bx = W - 8; by = oy + 8; }
   }
   let badge = "";
   if (opts.mode !== "none") {
@@ -1094,16 +1144,11 @@ function cardSVG(card, opts = {}) {
     else t = E.ACTK.has(k) ? "1手" : "0手";
     if (t) {
       const bw = [...t].length * 12 + 12;
-      let bx, by;
-      if (IF) { bx = 5; by = 5; }
-      else if (k === "合流") { bx = 202; by = 22; }
-      else if (k === "ここから" || k === "ずっと") { bx = W - 24 - bw; by = 9; }
-      else if (k === "終わる") { bx = W - 30 - bw; by = 9; }
-      else { bx = W - 8 - bw; by = 8; }
-      badge = `<rect x="${bx}" y="${by}" width="${bw}" height="17" rx="8.5" style="fill:var(--surface);stroke:${col};stroke-width:1.2"/><text x="${bx + bw / 2}" y="${by + 12.6}" text-anchor="middle" style="font-size:11.5px;font-weight:700;fill:${col}">${t}</text>`;
+      const x = bx === "R" ? W - 6 - bw : bx - bw;
+      badge = `<rect x="${x}" y="${by}" width="${bw}" height="17" rx="8.5" style="fill:var(--surface);stroke:${col};stroke-width:1.2"/><text x="${x + bw / 2}" y="${by + 12.6}" text-anchor="middle" style="font-size:11.5px;font-weight:700;fill:${col}">${t}</text>`;
     }
   }
-  return `<svg class="card" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cardText(card))}">${shape}${b}${badge}</svg>`;
+  return `<svg class="card${IF ? " is-if" : k === "合流" ? " is-join" : ""}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cardText(card))}">${body}${badge}</svg>`;
 }
 
 // ---------------------------------------------------------------- 盤
@@ -1289,6 +1334,25 @@ Live.cur = null;
 
 // ---------------------------------------------------------------- 並べシート（A3の紙と同じ6行ずつ）
 function ifRegions(rows) { const inside = []; let open = false; rows.forEach((row, i) => { const m = row[0]; if (m && m.k === "合流") { inside[i] = false; open = false; return; } inside[i] = open; if (m && E.IFK.has(m.k)) open = true; }); return inside; }
+// 並べシートの流れ線。はじめ → 本線の各行 → おわり と、もしの右の角 → いいえの道（右の列）→ 道がもどる の線。
+// 空いている行は線が通りぬける。ゲームの終わり（ゲームオーバー・クリア）の下には線を引かない。
+function flowLines(R) {
+  const main = [], right = []; let on = true, noOn = false, inIf = false;
+  R.forEach(([m, r], i) => {
+    const mk = m && m.k;
+    if (m) { main[i] = { t: on, b: mk !== "終わる" }; on = mk !== "終わる"; } else main[i] = { t: on, b: on };
+    if (inIf && mk === "合流") { right[i] = noOn ? "e" : ""; inIf = false; noOn = false; }
+    else if (inIf) { if (r) { right[i] = (noOn ? "t" : "") + (r.k !== "終わる" ? "b" : ""); noOn = r.k !== "終わる"; } else right[i] = noOn ? "tb" : ""; }
+    else if (mk && E.IFK.has(mk)) { right[i] = "s"; inIf = true; noOn = true; }
+    else right[i] = "";
+  });
+  return { main, right, end: on };
+}
+function flowHTML(f) {
+  if (!f) return "";
+  if (typeof f === "string") return (f === "s" ? `<i class="fl h l"></i><i class="fl v b"></i>` : f === "e" ? `<i class="fl v t"></i><i class="fl h l"></i>` : (f.includes("t") ? `<i class="fl v t"></i>` : "") + (f.includes("b") ? `<i class="fl v b"></i>` : ""));
+  return (f.t ? `<i class="fl v t"></i>` : "") + (f.b ? `<i class="fl v b"></i>` : "");
+}
 function lastFilled(rows) { let last = -1; rows.forEach((r, i) => { if (r[0] || r[1]) last = i; }); return last; }
 // opts: editable, sel{r,c}, now[r,c], unrun Set("r:c"), mode, onSlot(r,c), onDrop(data, r, c)
 function sheetHTML(rows, opts = {}) {
@@ -1296,12 +1360,14 @@ function sheetHTML(rows, opts = {}) {
   const empty = opts.editable && !rows.some(r => r && (r[0] || r[1]));
   const R = rows.slice(); while (R.length < n) R.push([null, null]);
   const inside = ifRegions(R);
+  const FLW = flowLines(R);
   const lanes = [];
   const paper = i => i === 0 ? "左の紙" : i === 1 ? "右の紙" : `${i + 1}枚目`;
   const cn = "ABCDEFG";
   for (let L = 0; L * 6 < n; L++) {
     let h = `<div class="lane"><div class="lane-head"><b>${paper(L)}</b><span>${L * 6 + 1}〜${L * 6 + 6}行</span></div><div class="sheet"><div></div><div class="hd">本線（はい の道）</div><div class="hd">いいえ の道</div>`;
-    h += L === 0 ? `<div></div><div class="start-term">はじめ</div><div></div>${empty ? `<div></div><div class="empty-hint">手もとのカードを押すと、1行目から順に置かれます。${opts.touch ? "" : "ドラッグでも置けます。"}</div>` : ""}` : `<div></div><div class="connector"><i>${cn[L - 1]}</i>${paper(L - 1)}から つづく</div><div></div>`;
+    h += L === 0 ? `${empty ? `<div></div><div class="empty-hint">手もとのカードを押すと、1行目から順に置かれます。${opts.touch ? "" : "ドラッグでも置けます。"}</div>` : ""}<div></div><div class="start-term">はじめ</div><div></div>` : (() => { const j = L * 6 - 1, mo = FLW.main[j] && FLW.main[j].b, no = /s|b/.test(FLW.right[j] || "");
+      return `<div></div><div class="conn-cell top${mo ? " on" : ""}"><span>${paper(L - 1)}から つづく</span><i class="cn">${cn[L - 1]}</i></div><div class="conn-cell top on">${no ? `<i class="cn no" aria-label="いいえの道">い</i>` : ""}</div>`; })();
     for (let i = L * 6; i < L * 6 + 6; i++) {
       const [m, r] = R[i];
       const cls = (card, c) => {
@@ -1313,13 +1379,17 @@ function sheetHTML(rows, opts = {}) {
         return a.join(" ");
       };
       const attrs = (card, c) => opts.editable ? ` data-r="${i}" data-c="${c}" tabindex="${c === 1 && !inside[i] ? -1 : 0}"${card ? ' draggable="true"' : ""}` : "";
-      const isIf = m && E.IFK.has(m.k);
       h += `<div class="rn">${i + 1}</div>`;
-      h += `<div class="${cls(m, 0)}"${attrs(m, 0)} aria-label="${i + 1}行目 本線 ${m ? esc(cardText(m)) : "空き"}">${m ? cardSVG(m, { mode: opts.mode }) : ""}</div>`;
-      h += `<div class="${cls(r, 1)}"${attrs(r, 1)} aria-label="${i + 1}行目 いいえの道 ${r ? esc(cardText(r)) : "空き"}">${r ? cardSVG(r, { mode: opts.mode }) : isIf ? `<span class="tag2">いいえ→この下の右の列</span>` : ""}</div>`;
+      h += `<div class="${cls(m, 0)}"${attrs(m, 0)} aria-label="${i + 1}行目 本線 ${m ? esc(cardText(m)) : "空き"}">${flowHTML(FLW.main[i])}${m ? cardSVG(m, { mode: opts.mode }) : ""}</div>`;
+      h += `<div class="${cls(r, 1)}"${attrs(r, 1)} aria-label="${i + 1}行目 いいえの道 ${r ? esc(cardText(r)) : "空き"}">${flowHTML(FLW.right[i])}${r ? cardSVG(r, { mode: opts.mode }) : ""}</div>`;
+    }
+    if ((L + 1) * 6 >= n) h += `<div></div><div class="end-term${FLW.end ? " on" : ""}">おわり</div><div></div>`;
+    else {
+      // 次の紙へ：本線は結合子（A・B…）、いいえの道が続くときは「い」の結合子でつなぐ
+      const j = L * 6 + 5, mo = FLW.main[j] && FLW.main[j].b, no = /s|b/.test(FLW.right[j] || "");
+      h += `<div></div><div class="conn-cell bot${mo ? " on" : ""}"><i class="cn">${cn[L]}</i><span>${paper(L + 1)}の上へ つづく</span></div><div class="conn-cell bot on">${no ? `<i class="cn no">い</i><span>いいえの道</span>` : ""}</div>`;
     }
     h += `</div>`;
-    if ((L + 1) * 6 < n) h += `<div class="connector"><i>${cn[L]}</i>${paper(L + 1)}の上へ つづく →</div>`;
     h += `</div>`;
     lanes.push(h);
   }
