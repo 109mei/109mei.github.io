@@ -1,0 +1,255 @@
+[
+ {
+  "role": "island",
+  "file": "models/lighthouse-island.glb",
+  "targetSize": 74,
+  "assetId": "lighthouse-island",
+  "license": "CC-BY-4.0",
+  "credit": "Lantern Rock lighthouse island by Scenario（Scenario 3D Collection, CC BY 4.0）",
+  "source": "https://huggingface.co/datasets/scenario-labs/3d-collection/resolve/main/assets/scenario_asset_JhRNbnnQugjaBnqe2Ng4Ym43/output.glb"
+ },
+ {
+  "role": "ship.rowboat",
+  "file": "models/faering-rowboat.glb",
+  "targetSize": 12,
+  "assetId": "faering-rowboat",
+  "license": "threejsassets-free",
+  "credit": "Faering Rowboat（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/faering-rowboat"
+ },
+ {
+  "role": "ship.jonboat",
+  "file": "models/jon-boat.glb",
+  "targetSize": 12,
+  "assetId": "jon-boat",
+  "license": "threejsassets-free",
+  "credit": "Jon Boat（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/jon-boat"
+ },
+ {
+  "role": "ship.tugboat",
+  "file": "models/tugboat.glb",
+  "targetSize": 22,
+  "assetId": "tugboat",
+  "license": "CC-BY-4.0",
+  "credit": "Tugboat by Scenario（Scenario 3D Collection, CC BY 4.0）",
+  "source": "https://huggingface.co/datasets/scenario-labs/3d-collection/resolve/main/assets/db0658339e7adc81/35bb5cce7d6c25cc.glb",
+  "yawDeg": 90
+ },
+ {
+  "role": "ship.longship",
+  "file": "models/longship-drakkar.glb",
+  "targetSize": 28,
+  "assetId": "longship-drakkar",
+  "license": "threejsassets-free",
+  "credit": "Longship Drakkar（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/longship-drakkar"
+ },
+ {
+  "role": "ship.steamboat",
+  "file": "models/steamboat.glb",
+  "targetSize": 32,
+  "assetId": "steamboat",
+  "license": "CC-BY-4.0",
+  "credit": "Steampunk steamboat by Scenario（Scenario 3D Collection, CC BY 4.0）",
+  "source": "https://huggingface.co/datasets/scenario-labs/3d-collection/resolve/main/assets/5463ca0c95d472a2/8f791771b64ce81e.glb",
+  "yawDeg": 90
+ },
+ {
+  "role": "ship.pirate",
+  "file": "models/pirate-ship.glb",
+  "targetSize": 34,
+  "assetId": "pirate-ship",
+  "license": "CC-BY-4.0",
+  "credit": "Pirate ship by Scenario（Scenario 3D Collection, CC BY 4.0）",
+  "source": "https://huggingface.co/datasets/scenario-labs/3d-collection/resolve/main/assets/scenario_asset_GZMGsnVMMneNe3HdyDrvZBKg/output.glb"
+ },
+ {
+  "role": "rock.a",
+  "file": "models/rock-cluster.glb",
+  "targetSize": 14,
+  "assetId": "rock-cluster",
+  "license": "threejsassets-free",
+  "credit": "Rock Cluster（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/rock-cluster"
+ },
+ {
+  "role": "rock.b",
+  "file": "models/fjord-cliff-rock.glb",
+  "targetSize": 14,
+  "assetId": "fjord-cliff-rock",
+  "license": "threejsassets-free",
+  "credit": "Fjord Cliff Rock（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/fjord-cliff-rock"
+ },
+ {
+  "role": "cliff",
+  "file": "models/fjord-cliff-rock.glb",
+  "targetSize": 60,
+  "assetId": "fjord-cliff-rock",
+  "license": "threejsassets-free",
+  "credit": "Fjord Cliff Rock（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/fjord-cliff-rock"
+ },
+ {
+  "role": "jetty",
+  "file": "models/jetty-pier.glb",
+  "targetSize": 14,
+  "assetId": "jetty-pier",
+  "license": "threejsassets-free",
+  "credit": "Jetty Pier（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/jetty-pier"
+ },
+ {
+  "role": "dock",
+  "file": "models/marina-dock-module.glb",
+  "targetSize": 14,
+  "assetId": "marina-dock-module",
+  "license": "threejsassets-free",
+  "credit": "Marina Dock Module（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/marina-dock-module"
+ },
+ {
+  "role": "piling",
+  "file": "models/mooring-piling-cluster.glb",
+  "targetSize": 6,
+  "assetId": "mooring-piling-cluster",
+  "license": "threejsassets-free",
+  "credit": "Mooring Piling Cluster（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/mooring-piling-cluster"
+ },
+ {
+  "role": "marker",
+  "file": "models/harbor-marker-post.glb",
+  "targetSize": 7,
+  "assetId": "harbor-marker-post",
+  "license": "threejsassets-free",
+  "credit": "Harbor Marker Post（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/harbor-marker-post"
+ },
+ {
+  "role": "lantern",
+  "file": "models/arctic-storm-lantern.glb",
+  "targetSize": 1.6,
+  "assetId": "arctic-storm-lantern",
+  "license": "threejsassets-free",
+  "credit": "Arctic Storm Lantern（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/arctic-storm-lantern"
+ },
+ {
+  "role": "cloud",
+  "file": "models/cloud-thunderhead.glb",
+  "targetSize": 120,
+  "assetId": "cloud-thunderhead",
+  "license": "threejsassets-free",
+  "credit": "Cloud Thunderhead（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/cloud-thunderhead"
+ },
+ {
+  "role": "house.bait",
+  "file": "models/bait-shack.glb",
+  "targetSize": 9,
+  "assetId": "bait-shack",
+  "license": "threejsassets-free",
+  "credit": "Bait Shack（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/bait-shack",
+  "heightSize": 8
+ },
+ {
+  "role": "house.stilt",
+  "file": "models/stilt-shack.glb",
+  "targetSize": 11,
+  "assetId": "stilt-shack",
+  "license": "threejsassets-free",
+  "credit": "Stilt Shack（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/stilt-shack",
+  "heightSize": 10
+ },
+ {
+  "role": "house.boat",
+  "file": "models/boat-house.glb",
+  "targetSize": 11,
+  "assetId": "boat-house",
+  "license": "threejsassets-free",
+  "credit": "Boat House（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/boat-house",
+  "heightSize": 9
+ },
+ {
+  "role": "house.store",
+  "file": "models/general-store.glb",
+  "targetSize": 12,
+  "assetId": "general-store",
+  "license": "threejsassets-free",
+  "credit": "General Store（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/general-store",
+  "heightSize": 10
+ },
+ {
+  "role": "house.cottage",
+  "file": "models/home-cottage-01.glb",
+  "targetSize": 9,
+  "assetId": "home-cottage-01",
+  "license": "threejsassets-free",
+  "credit": "Home Cottage 01（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/home-cottage-01",
+  "heightSize": 9
+ },
+ {
+  "role": "house.thatch",
+  "file": "models/home-thatched-house-01.glb",
+  "targetSize": 10,
+  "assetId": "home-thatched-house-01",
+  "license": "threejsassets-free",
+  "credit": "Home Thatched House 01（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/home-thatched-house-01",
+  "heightSize": 9
+ },
+ {
+  "role": "tree",
+  "file": "models/tree-oak-01.glb",
+  "targetSize": 12,
+  "assetId": "tree-oak-01",
+  "license": "threejsassets-free",
+  "credit": "Tree Oak 01（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/tree-oak-01",
+  "heightSize": 12
+ },
+ {
+  "role": "bush",
+  "file": "models/bush-round-01.glb",
+  "targetSize": 3.5,
+  "assetId": "bush-round-01",
+  "license": "threejsassets-free",
+  "credit": "Bush Round 01（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/bush-round-01"
+ },
+ {
+  "role": "lamp",
+  "file": "models/streetlamp-01.glb",
+  "targetSize": 5,
+  "assetId": "streetlamp-01",
+  "license": "threejsassets-free",
+  "credit": "Streetlamp 01（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/streetlamp-01",
+  "heightSize": 5
+ },
+ {
+  "role": "barrel",
+  "file": "models/barrel-01.glb",
+  "targetSize": 1.4,
+  "assetId": "barrel-01",
+  "license": "threejsassets-free",
+  "credit": "Barrel 01（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/barrel-01"
+ },
+ {
+  "role": "crate",
+  "file": "models/crate-01.glb",
+  "targetSize": 1.3,
+  "assetId": "crate-01",
+  "license": "threejsassets-free",
+  "credit": "Crate 01（threejsassets.com、無料素材）",
+  "source": "https://threejsassets.com/assets/crate-01"
+ }
+]
